@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -13,6 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< HEAD
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -52,3 +54,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+=======
+Route::resource('/siswa', SiswaController::class);
+>>>>>>> 1aa6835d71618a6812234e4c5a014a2970ec5540
