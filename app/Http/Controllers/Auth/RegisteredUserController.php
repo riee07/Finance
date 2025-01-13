@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'usertype' => ['required', 'string'], // Validasi usertype
+            'kelas' => ['nullable', 'string'],
         ]);
 
         $user = User::create([
@@ -41,12 +42,31 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'usertype' => $request->usertype, // Simpan usertype
+            'kelas' => $request->kelas,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        // Redirect sesuai role atau kelas
+        switch ($user->usertype) {
+            case 'kelas':
+                if ($user->kelas === 'kelas_x') {
+                    return redirect()->route('kelas.x.dashboard');
+                } elseif ($user->kelas === 'kelas_xi') {
+                    return redirect()->route('kelas.xi.dashboard');
+                } elseif ($user->kelas === 'kelas_xii') {
+                    return redirect()->route('kelas.c.dashboard');
+                }
+                break;
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+            case 'super_admin':
+                return redirect()->route('superadmin.dashboard');
+            default:
+                return redirect('/login');
+        }
     }
+
 }

@@ -15,13 +15,25 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-        
+
+        <!-- Role -->
         <div>
             <label for="usertype">User Type</label>
             <select name="usertype" id="usertype" class="form-control">
                 <option value="siswa">Siswa</option>
                 <option value="admin">Admin</option>
                 <option value="super_admin">Super Admin</option>
+            </select>
+        </div>
+
+        <!-- Kelas -->
+        <div>
+            <label for="kelas">Pilih Kelas</label>
+            <select name="kelas" id="kelas" class="form-control" required>
+                <option value="">Pilih Kelas</option>
+                <option value="kelas_x">Kelas X</option>
+                <option value="kelas_xi">Kelas XI</option>
+                <option value="kelas_xii">Kelas XII</option>
             </select>
         </div>
         

@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class RedirectBasedOnRole
 {
@@ -18,16 +17,26 @@ class RedirectBasedOnRole
     {
         if (Auth::check()) {
             $usertype = Auth::user()->usertype;
+            $kelas = Auth::user()->kelas;
 
             switch ($usertype) {
-                case 'siswa':
-                    return redirect()->route('siswa.dashboard');
+                case 'user':
+                    if ($kelas === 'kelas_x') {
+                        return redirect()->route('kelas.x.dashboard');
+                    } elseif ($kelas === 'kelas_xi') {
+                        return redirect()->route('kelas.xi.dashboard');
+                    } elseif ($kelas === 'kelas_xii') {
+                        return redirect()->route('kelas.xii.dashboard');
+                    } else {
+                        return redirect('/login'); // Jika kelas tidak valid
+                    }
+
                 case 'admin':
                     return redirect()->route('admin.dashboard');
                 case 'super_admin':
                     return redirect()->route('superadmin.dashboard');
                 default:
-                    return redirect('/login'); // Redirect jika usertype tidak valid
+                    return redirect('/login'); // Jika usertype tidak valid
             }
         }
 
