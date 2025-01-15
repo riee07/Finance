@@ -20,7 +20,7 @@ class RedirectBasedOnRole
             $kelas = Auth::user()->kelas;
 
             switch ($usertype) {
-                case 'user':
+                case 'siswa':
                     if ($kelas === 'kelas_x') {
                         return redirect()->route('kelas.x.dashboard');
                     } elseif ($kelas === 'kelas_xi') {
