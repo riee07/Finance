@@ -45,8 +45,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/superadmin/dasboard', [UserController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
 });
 
+Route::resource('siswa', SiswaController::class);
 
 
-
-
-Route::resource('/siswa', SiswaController::class);
