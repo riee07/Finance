@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-<<<<<<< HEAD
-    public function dashboard()
-    {
-        return view('siswa.dashboard');
-=======
     /**
      * Display a listing of the resource.
      */
@@ -65,6 +60,5 @@ class SiswaController extends Controller
     public function destroy(string $id)
     {
         //
->>>>>>> 1aa6835d71618a6812234e4c5a014a2970ec5540
     }
 }
