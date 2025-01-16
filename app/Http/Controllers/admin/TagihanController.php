@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
 
 class TagihanController extends Controller
 {
@@ -11,7 +12,7 @@ class TagihanController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.dashboard');
     }
 
     /**
@@ -19,7 +20,7 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tagihan.create');
     }
 
     /**
@@ -27,7 +28,17 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+        ]);
+
+        Admin::create([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Admin created successfully.');
     }
 
     /**
@@ -35,7 +46,8 @@ class TagihanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        return view('admin.dashboard', compact('admin'));
     }
 
     /**
@@ -43,7 +55,8 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        return view('admin.tagihan.edit', compact('admin'));
     }
 
     /**
@@ -51,7 +64,18 @@ class TagihanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required',
+        ]);
+
+        $admin = Admin::findOrFail($id);
+        $admin->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
     }
 
     /**
@@ -59,6 +83,8 @@ class TagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+        return redirect()->route('admin.index')->with('success', 'Admin deleted successfully.');
     }
 }

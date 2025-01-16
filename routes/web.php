@@ -6,6 +6,7 @@ use App\Http\Controllers\SiswaController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Middleware\RedirectBasedOnRole;
 
@@ -47,4 +48,4 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('siswa', SiswaController::class);
 
-
+Route::resource('tagihan', TagihanController::class);
