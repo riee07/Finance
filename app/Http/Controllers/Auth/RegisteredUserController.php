@@ -51,13 +51,13 @@ class RegisteredUserController extends Controller
 
         // Redirect sesuai role atau kelas
         switch ($user->usertype) {
-            case 'kelas':
+            case 'siswa':
                 if ($user->kelas === 'kelas_x') {
                     return redirect()->route('kelas.x.dashboard');
                 } elseif ($user->kelas === 'kelas_xi') {
                     return redirect()->route('kelas.xi.dashboard');
                 } elseif ($user->kelas === 'kelas_xii') {
-                    return redirect()->route('kelas.c.dashboard');
+                    return redirect()->route('kelas.xii.dashboard');
                 }
                 break;
             case 'admin':

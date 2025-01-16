@@ -25,27 +25,24 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return app(RedirectBasedOnRole::class)->handle(request(), function () {
-            return view('welcome');
-        });
-    })->name('dashboard'); // Untuk mengarahkan ke dashboard default
-    
-    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('siswa.dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'role:super_admin'])->group(function () {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 });
 
+
 Route::middleware(['auth'])->group(function () {
     // Dashboard user berdasarkan kelas
-    Route::get('/kelas-a/dashboard', [UserController::class, 'kelasADashboard'])->name('kelas.a.dashboard');
-    Route::get('/kelas-b/dashboard', [UserController::class, 'kelasBDashboard'])->name('kelas.b.dashboard');
-    Route::get('/kelas-c/dashboard', [UserController::class, 'kelasCDashboard'])->name('kelas.c.dashboard');
+    Route::get('/kelas-x/dashboard', [UserController::class, 'kelasXDashboard'])->name('siswa.X.tes');
+    Route::get('/kelas-xi/dashboard', [UserController::class, 'kelasXIDashboard'])->name('kelas.xi.dashboard');
+    Route::get('/kelas-xii/dashboard', [UserController::class, 'kelasXIIDashboard'])->name('kelas.xii.dashboard');
 
     // Admin & Super Admin
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
+    Route::get('/admin/dasboard', [UserController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/superadmin/dasboard', [UserController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
 });
 
 Route::resource('siswa', SiswaController::class);
