@@ -85,6 +85,6 @@ class TagihanController extends Controller
     {
         $admin = Admin::findOrFail($id);
         $admin->delete();
-        return redirect()->route('admin.index')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }
 }

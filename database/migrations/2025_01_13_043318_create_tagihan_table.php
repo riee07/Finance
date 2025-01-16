@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tagihan', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('nama');
             $table->float('harga');
             $table->timestamps();
         });
