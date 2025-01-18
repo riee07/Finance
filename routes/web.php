@@ -25,17 +25,17 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return app(RedirectBasedOnRole::class)->handle(request(), function () {
-//             return view('welcome');
-//         });
-//     })->name('dashboard'); // Untuk mengarahkan ke dashboard default
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return app(RedirectBasedOnRole::class)->handle(request(), function () {
+            return view('welcome');
+        });
+    })->name('dashboard'); // Untuk mengarahkan ke dashboard default
     
-//     Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('siswa.dashboard');
-//     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-//     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
-// });
+    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('siswa.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
+});
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard user berdasarkan kelas
@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 });
 
+Route::resource('siswa', SiswaController::class);
 
 
 
