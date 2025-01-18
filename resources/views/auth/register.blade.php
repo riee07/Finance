@@ -29,7 +29,7 @@
         <!-- Kelas -->
         <div>
             <label for="kelas">Pilih Kelas</label>
-            <select name="kelas" id="kelas" class="form-control" required>
+            <select name="kelas" id="kelas" class="form-control">
                 <option value="">Pilih Kelas</option>
                 <option value="kelas_x">Kelas X</option>
                 <option value="kelas_xi">Kelas XI</option>

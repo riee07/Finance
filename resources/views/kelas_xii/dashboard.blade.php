@@ -1,4 +1,4 @@
-<h1>Welcome to Kelas XI Dashboard</h1>
+<h1>Welcome to Kelas XII Dashboard</h1>
 
 <form method="POST" action="{{ route('logout') }}">
     @csrf

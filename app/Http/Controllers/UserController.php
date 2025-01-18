@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function kelasXDashboard()
     {
-        return view('kelas_x.dashboard');
+        return view('siswa.X.tes');
     }
 
     public function kelasXIDashboard()
@@ -19,5 +19,15 @@ class UserController extends Controller
     public function kelasXIIDashboard()
     {
         return view('kelas_xii.dashboard');
+    }
+
+    public function adminDashboard()
+    {
+        return view('admin.dashboard');
+    }
+
+    public function superAdminDashboard()
+    {
+        return view('superadmin.dashboard');
     }
 }
