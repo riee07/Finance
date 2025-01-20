@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use App\Models\Tagihan;
 
 class TagihanController extends Controller
 {
@@ -11,8 +11,9 @@ class TagihanController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('admin.dashboard');
+    {   
+        $admins = Tagihan::all();
+        return view('admin.dashboard', compact('admins'));
     }
 
     /**
@@ -31,11 +32,13 @@ class TagihanController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'harga' => 'required|numeric',
+            'kelas' => 'required|string|max:10'
         ]);
 
-        Admin::create([
+        Tagihan::create([
             'nama' => $request->nama,
             'harga' => $request->harga,
+            'kelas' => $request->kelas
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Admin created successfully.');
@@ -46,7 +49,7 @@ class TagihanController extends Controller
      */
     public function show(string $id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Tagihan::findOrFail($id);
         return view('admin.dashboard', compact('admin'));
     }
 
@@ -55,7 +58,7 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Tagihan::findOrFail($id);
         return view('admin.tagihan.edit', compact('admin'));
     }
 
@@ -67,12 +70,14 @@ class TagihanController extends Controller
         $request->validate([
             'nama' => 'required',
             'harga' => 'required',
+            'kelas' => 'required'
         ]);
 
-        $admin = Admin::findOrFail($id);
+        $admin = Tagihan::findOrFail($id);
         $admin->update([
             'nama' => $request->nama,
             'harga' => $request->harga,
+            'kelas' => $request->kelas
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
@@ -83,7 +88,7 @@ class TagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Tagihan::findOrFail($id);
         $admin->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }

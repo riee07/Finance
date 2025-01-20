@@ -30,10 +30,12 @@
             <tr>
                 <td>{{ $admin->nama }}</td>
                 <td>{{ $admin->harga }}</td>
+                <td>{{ $admin->kelas }}</td>
                 <td>
                 <a href="{{ route('admin.index', ['id' => $admin->id]) }}">View</a>
                     <a href="{{ route('admin.admins.edit', ['id' => $admin->id]) }}">Edit</a>
-                    <form action="{{ route('admin.admins.destroy', ['id' => $admin->id]) }}" method="POST" style="display:inline;">                        @csrf
+                    <form action="{{ route('admin.admins.destroy', ['id' => $admin->id]) }}" method="POST" style="display:inline;">                       
+                        @csrf
                         @method('DELETE')
                         <button type="submit">Delete</button>
                     </form>

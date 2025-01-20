@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class tagihan extends Model
 {
-    protected $fillable = ['title', 'harga'];
+    protected $fillable = ['nama', 'harga', 'kelas'];
 }

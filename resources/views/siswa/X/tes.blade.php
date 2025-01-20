@@ -13,23 +13,24 @@
 <body class="bg-gray-200">
     {{-- tah iye card tah --}}
     <div x-data="{open: false}">
+        <div x-data="sppData">
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
                 <h1 ><-- kembali</h1> 
                 <i class='bx bx-cart text-[3rem] text-green-700 cursor-pointer' ></i>
             </div>
             <div x-data="{openData: false};" class="grid  grid-cols-mamutsm sm:grid-cols-mamutmd md:grid-cols-mamutlg xl:grid-cols-mamutxl md:justify-center justify-center mt-16 gap-10 s">
-                <template x-for="i in 10">
+                <template x-for="item in items" :key="item.id">
                     <div class="grid grid-cols-2 rounded-xl p-5 bg-white ">
                         <div class="flex flex-col gap-y-[41px]">
                             <p></p>
-                            <h1 class="text-2xl">spp bulan januari</h1>
+                            <h1 class="text-2xl">spp bulan <span x-text="item.bulan"></span></h1>
                             <p>total biaya</p>
                         </div>
                         <div class="flex items-end flex-col gap-y-5">
                             <i class='bx bx-cart text-[2rem] text-green-700' ></i>
                             <div @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md"><i x-show="openData" class='bx bx-check text-[2rem]' ></i></div>
-                            <p>300.000</p>
+                            <p x-text="formatRupiah(item.harga)"></p>
                             <hr class="w-[100%] text-black">
                             
                             <p @click="open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer" >bayar</p>
@@ -69,9 +70,14 @@
                   </div>
             </div>
         </div>
+        </div>
     </div>
       <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script>
+        window.sppItems = @json($items); // Menyimpan data ke variabel global
+    </script>
+    <script src="assets/js/spp.js"></script>
 
 </body>
 </html>
