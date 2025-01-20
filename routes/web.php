@@ -48,6 +48,22 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('siswa', SiswaController::class);
 
+Route::resource('admin', AdminController::class);
+Route::get('admin/index/{id}', [AdminController::class, 'show'])->name('admin.index');
 
+// Define the route for admin.admins.show
+Route::get('admin/admins/{id}', [AdminController::class, 'show'])->name('admin.admins.show');
+
+// Define the route for admin.admins.edit
+Route::get('admin/admins/{id}/edit', [AdminController::class, 'edit'])->name('admin.admins.edit');
+
+// Define the route for admin.admins.update
+Route::put('admin/admins/{id}', [AdminController::class, 'update'])->name('admin.admins.update');
+
+// Define the route for admin.admins.destroy
+Route::delete('admin/admins/{id}', [AdminController::class, 'destroy'])->name('admin.admins.destroy');
+
+// Define the route for admin.admins.store
+Route::post('admin/admins', [AdminController::class, 'store'])->name('admin.admins.store');
 
 
