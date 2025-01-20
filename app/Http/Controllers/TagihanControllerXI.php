@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tagihan;
+use App\Models\TagihanX;
 
 class TagihanController extends Controller
 {
@@ -12,7 +12,7 @@ class TagihanController extends Controller
      */
     public function index()
     {   
-        $admins = Tagihan::all();
+        $admins = TagihanXI::all();
         return view('admin.dashboard', compact('admins'));
     }
 
@@ -30,13 +30,13 @@ class TagihanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'judul' => 'required|string|max:255',
             'harga' => 'required|numeric',
             'kelas' => 'required|string|max:10'
         ]);
 
-        Tagihan::create([
-            'nama' => $request->nama,
+        TagihanXI::create([
+            'judul' => $request->judul,
             'harga' => $request->harga,
             'kelas' => $request->kelas
         ]);
@@ -49,7 +49,7 @@ class TagihanController extends Controller
      */
     public function show(string $id)
     {
-        $admin = Tagihan::findOrFail($id);
+        $admin = TagihanXI::findOrFail($id);
         return view('admin.dashboard', compact('admin'));
     }
 
@@ -58,7 +58,7 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        $admin = Tagihan::findOrFail($id);
+        $admin = TagihanXI::findOrFail($id);
         return view('admin.tagihan.edit', compact('admin'));
     }
 
@@ -68,14 +68,14 @@ class TagihanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'judul' => 'required',
             'harga' => 'required',
             'kelas' => 'required'
         ]);
 
-        $admin = Tagihan::findOrFail($id);
+        $admin = TagihanXI::findOrFail($id);
         $admin->update([
-            'nama' => $request->nama,
+            'judul' => $request->judul,
             'harga' => $request->harga,
             'kelas' => $request->kelas
         ]);
@@ -88,7 +88,7 @@ class TagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        $admin = Tagihan::findOrFail($id);
+        $admin = TagihanXI::findOrFail($id);
         $admin->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }

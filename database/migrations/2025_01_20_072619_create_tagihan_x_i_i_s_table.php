@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihan', function (Blueprint $table) {
+        Schema::create('tagihan_x_i_i_s', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('judul');
             $table->float('harga');
             $table->string('kelas');
             $table->timestamps();
         });
-    }   
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tagihan');
+        Schema::dropIfExists('tagihan_x_i_i_s');
     }
 };
