@@ -27,46 +27,44 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'usertype' => ['required', 'string'], // Validasi usertype
-            'kelas' => ['nullable', 'string'],
+         // Validasi
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'required|in:siswa,admin,superadmin',
+            'password' => 'required|string|confirmed|min:8',
+            'kelas' => $request->role === 'siswa' ? 'required|in:x,xi,xii' : 'nullable',
+            'jurusan' => $request->role === 'siswa' ? 'required|in:pplg,tkj,an' : 'nullable',
+            'nisn' => $request->role === 'siswa' ? 'required|digits:10|unique:users,nisn' : 'nullable',
         ]);
 
+        // Simpan data
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'usertype' => $request->usertype, // Simpan usertype
-            'kelas' => $request->kelas,
+            'name' => $validated['name'],
+            'role' => $validated['role'],
+            'kelas' => $validated['kelas'] ?? null,
+            'jurusan' => $validated['jurusan'] ?? null,
+            'nisn' => $validated['nisn'] ?? null,
+            'password' => bcrypt($validated['password']),
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        // Redirect sesuai role atau kelas
-        switch ($user->usertype) {
-            case 'siswa':
-                if ($user->kelas === 'kelas_x') {
-                    return redirect()->route('kelas.x.dashboard');
-                } elseif ($user->kelas === 'kelas_xi') {
-                    return redirect()->route('kelas.xi.dashboard');
-                } elseif ($user->kelas === 'kelas_xii') {
-                    return redirect()->route('kelas.xii.dashboard');
-                }
-                break;
+        // return redirect(route('dashboard', absolute: false));
+
+        // Redirect berdasarkan role
+        switch ($user->role) {
             case 'admin':
-                return redirect()->route('admin.dashboard');
-            case 'super_admin':
-                return redirect()->route('superadmin.dashboard');
+                return redirect('admin/dashboard');
+            case 'superadmin':
+                return redirect('superadmin/dashboard');
+            case 'siswa':
+                return redirect('siswa/'. $request->user()->kelas .'/dashboard');
             default:
-                return redirect('/login');
+                return redirect('dashboard');
         }
     }
-
 }
