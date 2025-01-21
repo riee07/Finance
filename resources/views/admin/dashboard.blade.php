@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($admins as $admin)
+        {{-- @foreach ($admins as $admin)
             <tr>
                 <td>{{ $admin->nama }}</td>
                 <td>{{ $admin->harga }}</td>
@@ -41,6 +41,6 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+        @endforeach --}}
     </tbody>
 </table>

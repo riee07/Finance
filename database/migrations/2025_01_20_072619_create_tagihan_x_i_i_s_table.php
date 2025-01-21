@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('usertype')->default('siswa'); // Default user
+        Schema::create('tagihan_x_i_i_s', function (Blueprint $table) {
+            $table->id();
+            $table->string('judul');
+            $table->float('harga');
+            $table->string('kelas');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tagihan_x_i_i_s');
     }
 };

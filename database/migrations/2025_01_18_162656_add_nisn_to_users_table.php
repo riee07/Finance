@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihan', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->float('harga');
-            $table->string('kelas');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('nisn')->nullable()->unique();
         });
-    }   
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tagihan');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
