@@ -9,6 +9,15 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Email -->
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+            @error('email')
+                <span>{{ $message }}</span>
+            @enderror
+        </div>
+
          <!-- ROLE -->
          <div class="mt-4">
             <x-input-label for="role" :value="__('Role')" />
