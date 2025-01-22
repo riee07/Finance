@@ -40,7 +40,9 @@
                             <p x-text="formatRupiah(item.harga)"></p>
                             <hr class="w-[100%] text-black">
                             
-                            <p @click="$store.cart.add(item); open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer">
+                            {{-- tambahin ini kalo buat nnti langsung bayar --}}
+                            {{-- $store.cart.add(item); --}}
+                            <p @click="open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer">
                                 Bayar
                             </p>
                         </div>
@@ -89,18 +91,20 @@
                         <div class="flex flex-col pb-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
                             <template x-for="(item, index) in $store.cart.items" :key="index">
-                            <div class="flex items-start">
-                                <dd class="text-lg font-semibold mx-10" x-text="item.bulan"></dd>
-                                <dd class="text-lg font-semibold ml-5" x-text="item.harga"></dd>
-                                <button id="remove" class="ml-auto p-0 bg-transparent border-none flex items-center ">
-                                    <i class="bx bx-x right-0 absolute text-2xl"></i>
+                            <div class="grid grid-cols-3 gap-2">
+                                <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
+                                <dd class="text-lg font-semibold" x-text="item.harga"></dd>
+                                <button id="remove" class="p-0 bg-transparent border-none ">
+                                    <i class="bx bx-x text-2xl"></i>
                                 </button>
                             </div>  
                             </template>                                                      
                         </div>
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">total</dt>
+                            <template x-for="(item, index) in $store.cart.items" :key="index">
                             <dd class="text-lg font-semibold" x-text="formatRupiah(item.total)"></dd>
+                            </template>
                         </div>
                     
                     </dl>
