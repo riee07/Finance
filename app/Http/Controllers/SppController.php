@@ -13,6 +13,6 @@ class SppController extends Controller
         $items = Tesharga::select('id', 'bulan', 'harga')->get();
 
         // Kirim data ke view siswa.index
-        return view('siswa.X.tes', compact('items'));
+        return view('siswa.X.spp', compact('items'));
     }
 }

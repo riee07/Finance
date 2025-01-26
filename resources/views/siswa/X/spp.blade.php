@@ -94,7 +94,7 @@
                             <div class="grid grid-cols-3 gap-2">
                                 <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
                                 <dd class="text-lg font-semibold" x-text="item.harga"></dd>
-                                <button id="remove" class="p-0 bg-transparent border-none ">
+                                <button id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
                                     <i class="bx bx-x text-2xl"></i>
                                 </button>
                             </div>  
@@ -102,9 +102,9 @@
                         </div>
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">total</dt>
-                            <template x-for="(item, index) in $store.cart.items" :key="index">
-                            <dd class="text-lg font-semibold" x-text="formatRupiah(item.total)"></dd>
-                            </template>
+                            {{-- <template x-for="(item, index) in $store.cart.items" :key="index"> --}}
+                                <dd class="text-lg font-semibold" x-text="$store.cart.total ? formatRupiah($store.cart.total) : 'Rp 0'"></dd>
+                            {{-- </template> --}}
                         </div>
                     
                     </dl>

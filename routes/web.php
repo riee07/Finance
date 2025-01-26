@@ -54,7 +54,7 @@ Route::resource('admin', TagihanControllerXI::class);
 Route::resource('admin', TagihanControllerXII::class);
 
 //tes
-use App\Http\Controllers\SPpController;
+use App\Http\Controllers\SppController;
 
 Route::get('/siswa', [SppController::class, 'index']);
 
