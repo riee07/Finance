@@ -36,7 +36,7 @@
                         </div>
                         <div class="flex items-end flex-col gap-y-5">
                             <button><i @click="$store.cart.add(item);" class='bx bx-cart text-[2rem] text-green-700 cursor-pointer hover:bg-green-800'></i></button>
-                            <div @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md"><i x-show="openData" class='bx bx-check text-[2rem]' ></i></div>
+                            <div x-data="{ openData: false }" @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md"><i x-show="openData" class='bx bx-check text-[2rem]' ></i></div>
                             <p x-text="formatRupiah(item.harga)"></p>
                             <hr class="w-[100%] text-black">
                             
@@ -63,11 +63,11 @@
 
                         <div class="flex flex-col pb-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">nama</dt>
-                            <dd class="text-lg font-semibold">Mamut</dd>
+                            {{-- <dd class="text-lg font-semibold">{{ $user->name }}</dd> --}}
                         </div>
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">kelas</dt>
-                            <dd class="text-lg font-semibold">pplg3</dd>
+                            {{-- <dd class="text-lg font-semibold">{{ $user->kelas }}</dd> --}}
                         </div>
                         <div class="flex flex-col pt-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">no hp</dt>

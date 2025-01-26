@@ -32,6 +32,8 @@ class RegisteredUserController extends Controller
          // Validasi
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
             'role' => 'required|in:siswa,admin,superadmin',
             'password' => 'required|string|confirmed|min:8',
             'kelas' => $request->role === 'siswa' ? 'required|in:x,xi,xii' : 'nullable',
@@ -42,6 +44,8 @@ class RegisteredUserController extends Controller
         // Simpan data
         $user = User::create([
             'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
             'role' => $validated['role'],
             'kelas' => $validated['kelas'] ?? null,
             'jurusan' => $validated['jurusan'] ?? null,
