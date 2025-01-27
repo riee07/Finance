@@ -14,6 +14,14 @@
     {{-- tah iye card tah --}}
     <div x-data="{open: false, openChart: false}">
         <div x-data="sppData">
+            <!-- Notifikasi -->
+         <div 
+            x-show="$store.cart.notification" 
+            x-text="$store.cart.notification" 
+            class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-all"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:leave="transition ease-in duration-300">
+        </div>
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
                 <h1 ><-- kembali</h1> 
@@ -98,7 +106,8 @@
                                     <i class="bx bx-x text-2xl"></i>
                                 </button>
                             </div>  
-                            </template>                                                      
+                            </template>   
+                            {{-- <p class="text-lg font-n">Tidak ada item yang dipilih</p>                                                    --}}
                         </div>
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">total</dt>

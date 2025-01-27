@@ -10,78 +10,74 @@ document.addEventListener('alpine:init', () => {
     }));
 
     Alpine.store('cart', {
-        items: [], // Array untuk item dalam keranjang
-        total: 0,  // Total harga semua item
-        quantity: 0, // Total jumlah semua item
+    items: [], // Array untuk item dalam keranjang
+    total: 0,  // Total harga semua item
+    quantity: 0, // Total jumlah semua item
+    notification: '', // Pesan notifikasi
     
-        // Tambah item ke keranjang
-        add(newItem) {
-            if (!newItem || isNaN(parseFloat(newItem.harga))) {
-                console.error("Item tidak valid:", newItem);
-                return;
-            }
+    // Fungsi untuk memperbarui notifikasi
+    setNotification(message) {
+        this.notification = message;
+
+        // Hilangkan notifikasi setelah beberapa detik (opsional)
+        setTimeout(() => {
+            this.notification = '';
+        }, 3000); // 3 detik
+    },
+
+    // Tambah item ke keranjang
+    add(newItem) {
+        if (!newItem || isNaN(parseFloat(newItem.harga))) {
+            this.setNotification('Item tidak valid.');
+            return;
+        }
+        
+        // Periksa apakah item sudah ada di keranjang
+        const existingItem = this.items.find(item => item.id === newItem.id);
+        
+        if (existingItem) {
+            this.setNotification('Item sudah ada di keranjang.');
+            return; // Hentikan proses jika item sudah ada
+        }
+        
+        // Tambahkan item baru ke keranjang
+        this.items.push({
+            ...newItem,
+            quantity: newItem.quantity || 1, // Default quantity adalah 1
+        });
+        
+        // Perbarui total dan quantity
+        this.total += parseFloat(newItem.harga) * (newItem.quantity || 1);
+        this.quantity += newItem.quantity || 1;
+
+        this.setNotification('Item berhasil ditambahkan ke keranjang.');
+    },
+
+    // Hapus item dari keranjang
+    remove(id) {
+        const itemIndex = this.items.findIndex(item => item.id === id);
+        if (itemIndex === -1) {
+            this.setNotification(`Item dengan id ${id} tidak ditemukan.`);
+            return;
+        }
+
+        const cartItem = this.items[itemIndex];
+
+        // Kurangi quantity, atau hapus jika quantity <= 1
+        if (cartItem.quantity > 1) {
+            cartItem.quantity--;
+        } else {
+            this.items.splice(itemIndex, 1);
+        }
+
+        // Perbarui total dan quantity global
+        this.total -= cartItem.harga;
+        this.quantity--;
+
+        this.setNotification('Item berhasil dihapus dari keranjang.');
+    },
+});
     
-            const existingItem = this.items.find(item => item.id === newItem.id);
-    
-            if (existingItem) {
-                // Jika item sudah ada, tambahkan quantity
-                existingItem.quantity += newItem.quantity || 1;
-            } else {
-                // Jika item baru, tambahkan ke array
-                this.items.push({
-                    ...newItem,
-                    quantity: newItem.quantity || 1, // Default quantity adalah 1
-                });
-            }
-    
-            // Perbarui total dan quantity
-            this.total += parseFloat(newItem.harga) * (newItem.quantity || 1);
-            this.quantity += newItem.quantity || 1;
-    
-            console.log("Item berhasil ditambahkan:", newItem);
-            console.log("Total sekarang:", this.total);
-        },
-    
-        // Hapus item dari keranjang
-        remove(id) {
-            const itemIndex = this.items.findIndex(item => item.id === id);
-            if (itemIndex === -1) {
-                console.error(`Item dengan id ${id} tidak ditemukan`);
-                return;
-            }
-    
-            const cartItem = this.items[itemIndex];
-            const itemQuantity = cartItem.quantity;
-    
-            // Kurangi quantity, atau hapus jika quantity <= 1
-            if (cartItem.quantity > 1) {
-                cartItem.quantity--;
-            } else {
-                this.items.splice(itemIndex, 1);
-            }
-    
-            // Perbarui total dan quantity global
-            this.total -= cartItem.harga;
-            this.quantity--;
-    
-            console.log(`Item dengan id ${id} berhasil dihapus/dikurangi`);
-            console.log("Sisa items:", this.items);
-        },
-    
-        // Helper untuk mereset keranjang
-        // reset() {
-        //     this.items = [];
-        //     this.total = 0;
-        //     this.quantity = 0;
-        //     console.log("Keranjang telah direset");
-        // },
-    
-        // // Debugging: Lihat isi keranjang
-        // logCart() {
-        //     console.log("Isi keranjang:", this.items);
-        //     console.log("Total:", this.total, "Quantity:", this.quantity);
-        // },
-    });    
 });
 
 function formatRupiah(value) {
