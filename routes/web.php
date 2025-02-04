@@ -7,6 +7,8 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\TagihanXIController;
+
 
 
 
@@ -39,7 +41,7 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [TagihanController::class, 'dashboard'])->name('admin.dashboard');
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
@@ -49,6 +51,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
 Route::resource('siswa', SiswaController::class);
 
 Route::resource('admin', TagihanController::class);
+Route::get('/admin/dashboard', [TagihanController::class, 'index'])->name('admin.dashboard');
+
+Route::resource('admin', TagihanXIController::class);
 
 
 

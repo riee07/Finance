@@ -1,10 +1,10 @@
 
-<form action="{{ route('tagihan.update', $admin->id) }}" method="POST">
+<form action="{{ route('admin.update', $admin->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="{{ $admin->nama }}" required>
+            <label for="judul">judul:</label>
+            <input type="text" name="judul" id="judul" value="{{ $admin->judul }}" required>
         </div>
 
         <div>
