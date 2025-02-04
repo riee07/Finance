@@ -106,20 +106,22 @@
                     <form action="" id="checkoutForm">
                         <div class="flex flex-col pb-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
-                        {{-- <div class="grid grid-cols-3 gap-2 text-sm">
-                            <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 text-sm">
-                            <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 text-sm">
-                            <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
-                        </div> --}}
+                                <div x-show="$store.cart.items.length">
+                                    <div class="grid grid-cols-3 gap-2 text-sm">
+                                        <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-2 text-sm">
+                                        <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-2 text-sm">
+                                        <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
+                                    </div>
+                                </div>
                             <template x-for="(item, index) in $store.cart.items" :key="index">
                             <div class="grid grid-cols-3 gap-2">
                                 <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
                                 <dd class="text-lg font-semibold" x-text="item.harga"></dd>
-                                <button id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
+                                <button type="button" id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
                                     <i class="bx bx-x text-2xl"></i>
                                 </button>
                             </div>  
@@ -150,11 +152,11 @@
 
       <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-    
-    <script src="assets/js/spp.js"></script>
     <script>
         window.sppItems = @json($items); // Menyimpan data ke variabel global
     </script>
+    <script src="assets/js/spp.js"></script>
+    
 
 </body>
 </html>
