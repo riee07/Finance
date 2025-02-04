@@ -9,6 +9,22 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Email -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autofocus autocomplete="email" />
+            @error('email')
+                <span>{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- YO PHONE LINGING -->
+
+        <div>
+            <x-input-label for="phone_number" :value="__('Phone Number')" />
+            <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required autofocus autocomplete="phone_number" />
+        </div>
+
          <!-- ROLE -->
          <div class="mt-4">
             <x-input-label for="role" :value="__('Role')" />
