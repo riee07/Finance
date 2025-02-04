@@ -14,14 +14,6 @@
     {{-- tah iye card tah --}}
     <div x-data="{open: false, openChart: false}">
         <div x-data="sppData">
-            <!-- Notifikasi -->
-         <div 
-            x-show="$store.cart.notification" 
-            x-text="$store.cart.notification" 
-            class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-all"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:leave="transition ease-in duration-300">
-        </div>
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
                 <h1 ><-- kembali</h1> 
@@ -33,6 +25,14 @@
 
                 </div>
 
+            </div>
+            <!-- Notifikasi -->
+            <div 
+                x-show="$store.cart.notification" 
+                x-text="$store.cart.notification" 
+                class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-all"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:leave="transition ease-in duration-300">
             </div>
             <div x-data="{openData: false};" class="grid  grid-cols-mamutsm sm:grid-cols-mamutmd md:grid-cols-mamutlg xl:grid-cols-mamutxl md:justify-center justify-center mt-16 gap-10 s">
                 <template x-for="item in items" :key="item.id">
@@ -92,12 +92,29 @@
         <div  x-show="openChart" class="flex fixed w-full h-screen items-center justify-center bg-black bg-opacity-20 top-0">
             <div class="flex  justify-center flex-col bg-white p-10 rounded-xl text-2xl capitalize gap-2 relative">
                 <i @click="openChart = false" class="bx bx-x right-0 absolute top-0 text-2xl"></i>
+                
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 text-xl capitalize w-80">
                     <h3 class="text-lg font-bold text-center mt-2">Detail pembayaran</h3>
                     <dl class="max-w-md text-gray-900 divide-y divide-gray-200 p-5">
 
+                        {{-- Validasi user --}}
+                            {{-- <div>{{ Auth::user()->name }}</div> --}}
+                            {{-- <div>{{ Auth::user()->email }}</div> --}}
+                            {{-- <div>{{ Auth::user()->phone_number }}</div> --}}
+
+                        {{-- form Validasi --}}
+                    <form action="" id="checkoutForm">
                         <div class="flex flex-col pb-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
+                        <div class="grid grid-cols-3 gap-2 text-sm">
+                            <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-sm">
+                            <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-sm">
+                            <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
+                        </div>
                             <template x-for="(item, index) in $store.cart.items" :key="index">
                             <div class="grid grid-cols-3 gap-2">
                                 <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
@@ -107,12 +124,12 @@
                                 </button>
                             </div>  
                             </template>   
-                            {{-- <p class="text-lg font-n">Tidak ada item yang dipilih</p>                                                    --}}
-                        </div>
+                            <p class="text-lg" x-show="!$store.cart.items.length">Tidak ada item yang dipilih</p> 
+                        </div>                                   
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">total</dt>
                             {{-- <template x-for="(item, index) in $store.cart.items" :key="index"> --}}
-                                <dd class="text-lg font-semibold" x-text="$store.cart.total ? formatRupiah($store.cart.total) : 'Rp 0'"></dd>
+                                <dd class="text-lg font-semibold" x-show="$store.cart.items.length" x-text="$store.cart.total ? formatRupiah($store.cart.total) : 'Rp 0'"></dd>
                             {{-- </template> --}}
                         </div>
                     
@@ -122,6 +139,7 @@
                       <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                           <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">bayar</button>
                       </div>
+                    </form>
                   </div>
             </div>
         </div>
