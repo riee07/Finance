@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
-use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\TagihanControllerX;
 
 
 
@@ -46,20 +46,17 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 });
 
-Route::resource('siswa', SiswaController::class);
+// Route::resource('siswa', SiswaController::class);
 
-Route::resource('admin', TagihanController::class);
-
-
-
-
-
+// Route::resource('admin', TagihanControllerX::class);
 
 
 //tes
 use App\Http\Controllers\SppController;
 
 Route::get('/siswa', [SppController::class, 'index']);
+
+
 
 
 
