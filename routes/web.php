@@ -6,13 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
-<<<<<<< HEAD
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanXIController;
 
-=======
-use App\Http\Controllers\TagihanControllerX;
->>>>>>> a1845f876ed9ded7af25847bf23191a537d41c03
 
 
 
@@ -52,20 +48,18 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 });
 
-<<<<<<< HEAD
 Route::resource('siswa', SiswaController::class);
 
 Route::resource('admin', TagihanController::class);
-Route::get('/admin/dashboard', [TagihanController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [TagihanController::class, 'dashboard'])->name('admin.dashboard');
 
 Route::resource('admin', TagihanXIController::class);
+Route::get('/admin/dashboard', [TagihanXIController::class, 'dashboard'])->name('admin.dashboard');
 
 
 
 
-=======
-// Route::resource('siswa', SiswaController::class);
->>>>>>> a1845f876ed9ded7af25847bf23191a537d41c03
+
 
 // Route::resource('admin', TagihanControllerX::class);
 
