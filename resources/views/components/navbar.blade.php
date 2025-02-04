@@ -1,61 +1,96 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-    </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-          <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
-        </button>
-        <!-- Dropdown menu -->
-        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-          <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-          </div>
-          <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-            </li>
-          </ul>
-        </div>
-        <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
+<nav class="text-primary bg-transparent navbar w-full fixed top-0 z-40 overflow-hidden nav-parent duration-500">
+  <div class="absolute flex justify-center left-0 w-full overflow-hidden -z-50">
+    <div class="hidden animate-none anim-bg-navbar bg-primary w-1 h-32"></div>
+  </div>
+  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="flex items-center justify-center ">
+      <img src="assets/images/logo.png" alt="" class="h-14 mr-2">
+      <p>SMK AMALIAH 1&2 CIAWI</p>
     </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-        </li>
-      </ul>
+    <button  class="flex w-10 md:hidden text-[2rem]" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+      <i class='bx bx-menu-alt-right' ></i>
+    </button>
+    <div class="items-center justify-center gap-5 hidden md:flex">
+      <p class="cursor-pointer border-primary hover:opacity-50 border-b-2 " id="nav-btn">home</p>
+      <p class="cursor-pointer border-primary hover:opacity-50" id="nav-btn">about</p>
+      <p class="cursor-pointer border-primary hover:opacity-50" id="nav-btn">help</p>
+      @if (Route::has('login'))
+      @auth
+          <a class="block " href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . '/dashboard') }}">Dashboard</a>
+      @else
+          <a class="lr block bg-primary border-[1px] py-1 px-3 rounded-[4px] border-primary text-secondary" href="{{ route('login') }}">Log in</a>
+          @if (Route::has('register'))
+              <a class="lr block border-[1px] py-1 px-3 rounded-[4px] border-primary" href="{{ route('register') }}">Register</a>
+          @endif
+      @endauth
+      @endif
     </div>
-    </div>
-  </nav>
+  </div>
+</nav>
+
   
+{{-- // iyee navbar buat ukuran hape ke tablet // --}}
+<div id="drawer-navigation" class="fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition-transform -translate-x-full  w-64 bg-primary text-secondary" tabindex="-1" aria-labelledby="drawer-navigation-label">
+   <h5 id="drawer-navigation-label" class="text-base font-semibold  uppercase">Menu</h5>
+   <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class=" bg-transparent hover:bg-opacity-50 rounded-lg w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center" >
+    x
+     <span class="sr-only">Close menu</span>
+  </button>
+ <div class="py-4 overflow-y-auto">
+
+  @if (Route::has('login'))
+  @auth
+  <ul class="space-y-2 font-medium">
+    <li>
+       <a href="#" class="flex items-center p-2 hover:bg-secondary hover:text-primary rounded-sm focus:bg-secondary focus:text-primary">
+          <span class="ms-3">Dashboard</span>
+       </a>
+    </li>
+    <li>
+       <button type="button" class="flex items-center w-full p-2  transition duration-75 group hover:bg-secondary hover:text-primary rounded-sm focus:bg-secondary focus:text-primary" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+       </button>
+       <ul id="dropdown-example" class="hidden py-2 space-y-2">
+             <li>
+                <a href="#" class="flex items-center w-full p-2 hover:bg-secondary hover:text-primary fo">Products</a>
+             </li>
+             <li>
+                <a href="#" class="flex items-center w-full p-2 hover:bg-secondary hover:text-primary">Billing</a>
+             </li>
+             <li>
+                <a href="#" class="flex items-center w-full p-2 hover:bg-secondary hover:text-primary">Invoice</a>
+             </li>
+       </ul>
+    </li>
+ </ul>
+      <li class=""><a class="" href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . '/dashboard') }}">Dashboard</a></li>
+  @else
+  <div id="nav-btn" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="flex items-center p-2 hover:bg-secondary hover:text-primary rounded-sm focus:bg-secondary focus:text-primary">
+    <span class="ms-3">home</span>
+  </div>
+ <div id="nav-btn" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="flex items-center p-2 hover:bg-secondary hover:text-primary rounded-sm focus:bg-secondary focus:text-primary">
+  <span class="ms-3">about</span>
+ </div>
+<div id="nav-btn" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="flex items-center p-2 hover:bg-secondary hover:text-primary rounded-sm focus:bg-secondary focus:text-primary">
+  <span class="ms-3">help</span>
+</div>
+  <div class="flex items-center justify-center flex-col w-full mt-10 gap-3">
+
+    <i class='bx bx-info-circle text-[4rem] text-secondary'></i>
+    <p>Anda belum login atau register</p>
+    <div class="flex items-center justify-center w-full">
+      <a class="" href="{{ route('login') }}">
+        <button type="button" class="font-medium rounded-md px-5 py-2.5 me-2 mb-2 bg-secondary text-primary">login</button>
+      </a>
+        @if (Route::has('register'))
+      <a class="" href="{{ route('register') }}">
+        <button type="button" class="font-medium rounded-md px-5 py-2.5 me-2 mb-2 bg-opacity-10 bg-secondary text-secondary">register</button>
+      </a>
+    </div>
+  </div>
+  @endif
+  @endauth
+@endif
+
+  </div>
+</div>
+
