@@ -54,7 +54,7 @@ Route::resource('admin', TagihanController::class);
 Route::get('/admin/dashboard', [TagihanController::class, 'dashboard'])->name('admin.dashboard');
 
 Route::resource('admin', TagihanXIController::class);
-Route::get('/admin/dashboard', [TagihanXIController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [TagihanXIController::class, 'index'])->name('admin.dashboard');
 
 
 
