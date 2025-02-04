@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
-<<<<<<< HEAD
 use App\Http\Controllers\TagihanControllerX;
-=======
-use App\Http\Controllers\TagihanController;
->>>>>>> 84c0cc7d30bff86ea1dbb488d3c467149700f8c0
 
 
 
@@ -54,16 +50,6 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
 
 // Route::resource('admin', TagihanControllerX::class);
 
-<<<<<<< HEAD
-=======
-Route::resource('admin', TagihanController::class);
-
-
-
-
-
-
->>>>>>> 84c0cc7d30bff86ea1dbb488d3c467149700f8c0
 
 //tes
 use App\Http\Controllers\SppController;

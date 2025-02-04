@@ -77,9 +77,6 @@ document.addEventListener('alpine:init', () => {
         this.setNotification('Item berhasil dihapus dari keranjang.');
     },
 });
-<<<<<<< HEAD
-
-=======
     
 });
 
@@ -89,4 +86,3 @@ function formatRupiah(value) {
         currency: 'IDR',
     }).format(value || 0);
 }
->>>>>>> be2100beb92eccf70c1887f69c6daa833207547e
