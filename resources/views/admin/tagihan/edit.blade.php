@@ -1,5 +1,5 @@
 
-<form action="{{ route('admin.update', $admin->id) }}" method="POST">
+<form action="{{ route('tagihan.update', $admin->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>

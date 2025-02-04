@@ -20,27 +20,25 @@
 <table>
     <thead>
         <tr>
-            <th>Nama</th>
+            <th>Judul</th>
             <th>Harga</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        {{-- @foreach ($admins as $admin)
+         @foreach ($admins as $admin)
             <tr>
-                <td>{{ $admin->nama }}</td>
+                <td>{{ $admin->judul }}</td>
                 <td>{{ $admin->harga }}</td>
                 <td>{{ $admin->kelas }}</td>
                 <td>
-                <a href="{{ route('admin.index', ['id' => $admin->id]) }}">View</a>
-                    <a href="{{ route('admin.admins.edit', ['id' => $admin->id]) }}">Edit</a>
-                    <form action="{{ route('admin.admins.destroy', ['id' => $admin->id]) }}" method="POST" style="display:inline;">                       
+                    <a href="{{ route('admin.edit', $admin->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                    <form action="{{ route('admin.destroy', $admin->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                     </form>
-                </td>
             </tr>
-        @endforeach --}}
+        @endforeach 
     </tbody>
 </table>

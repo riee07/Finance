@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
-use App\Http\Controllers\TagihanControllerX;
-use App\Http\Controllers\TagihanControllerXI;
-use App\Http\Controllers\TagihanControllerXII;
+use App\Http\Controllers\TagihanController;
+
 
 
 Route::get('/', function () {
@@ -49,9 +48,13 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
 
 Route::resource('siswa', SiswaController::class);
 
-Route::resource('admin', TagihanControllerX::class);
-Route::resource('admin', TagihanControllerXI::class);
-Route::resource('admin', TagihanControllerXII::class);
+Route::resource('admin', TagihanController::class);
+
+
+
+
+
+
 
 //tes
 use App\Http\Controllers\SppController;
