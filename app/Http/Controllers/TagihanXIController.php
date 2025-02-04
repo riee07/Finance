@@ -93,5 +93,3 @@ class TagihanXIController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }
 }
-
-
