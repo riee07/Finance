@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class TagihanXI extends Model
 {
     protected $fillable = ['judul', 'harga', 'kelas'];
+
+    protected $table = ['tagihan_x'];
 }
