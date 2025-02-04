@@ -3,8 +3,8 @@
     <form action="{{ route('admin.store') }}" method="POST">
         @csrf
         <div>
-            <label for="nama">Nama:</label>
-            <input type="text" name="nama" id="nama" required>
+            <label for="judul">Judul:</label>
+            <input type="text" name="judul" id="judul" required>
         </div>
 
         <div>
