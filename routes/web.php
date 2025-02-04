@@ -11,7 +11,7 @@ use App\Http\Controllers\TagihanController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('siswa/x/index');
 });
 
 Route::get('/dashboard', function () {
