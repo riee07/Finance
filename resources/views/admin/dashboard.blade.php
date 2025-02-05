@@ -71,8 +71,8 @@
                 <td>{{ $xi->harga_XI }}</td>
                 <td>{{ $xi->kelas_XI }}</td>
                 <td>
-                    <a href="{{ route('admin.edit', $xi->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
-                    <form action="{{ route('admin.destroy', $xi->id) }}" method="POST">
+                    <a href="{{ route('xi.edit', $xi->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                    <form action="{{ route('xi.destroy', $xi->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>

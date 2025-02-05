@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tagihan;
+use App\Models\Tagihanxi;
 
 class TagihanController extends Controller
 {
@@ -13,7 +14,8 @@ class TagihanController extends Controller
     public function index()
     {   
         $admins = Tagihan::all();
-        return view('admin.dashboard', compact('admins'));
+        $XI = Tagihanxi::all();
+        return view('admin.dashboard', compact('admins', 'XI'));
     }
 
     /**
@@ -34,7 +36,7 @@ class TagihanController extends Controller
             'harga' => 'required|numeric',
             'kelas' => 'required|string|max:10'
         ]);
-
+        
         Tagihan::create([
             'judul' => $request->judul,
             'harga' => $request->harga,
@@ -68,10 +70,10 @@ class TagihanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul' => 'required',
-            'harga' => 'required',
-            'kelas' => 'required'
-        ]);
+        'judul' => 'required',
+        'harga' => 'required',
+        'kelas' => 'required'
+    ]);
 
         $admin = Tagihan::findOrFail($id);
         $admin->update([

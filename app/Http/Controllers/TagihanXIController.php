@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TagihanXI;
+use App\Models\Tagihanxi;
 
 class TagihanXIController extends Controller
 {
@@ -28,14 +28,14 @@ class TagihanXIController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    { 
         $request->validate([
             'judul_XI' => 'required|string|max:255',
             'harga_XI' => 'required|numeric',
             'kelas_XI' => 'required|string|max:10'
         ]);
 
-        TagihanXI::create([
+        Tagihanxi::create([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
             'kelas_XI' => $request->kelas_XI
@@ -49,7 +49,7 @@ class TagihanXIController extends Controller
      */
     public function show(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
+        $xi = Tagihanxi::findOrFail($id);
         return view('admin.dashboard', compact('xi'));
     }
 
@@ -58,7 +58,7 @@ class TagihanXIController extends Controller
      */
     public function edit(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
+        $xi = Tagihanxi::findOrFail($id);
         return view('admin.tagihan.XI.edit', compact('xi'));
     }
 
@@ -73,7 +73,7 @@ class TagihanXIController extends Controller
             'kelas_XI' => 'required'
         ]);
 
-        $xi = TagihanXI::findOrFail($id);
+        $xi = Tagihanxi::findOrFail($id);
         $xi->update([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
@@ -88,7 +88,7 @@ class TagihanXIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
+        $xi = Tagihanxi::findOrFail($id);
         $xi->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }
