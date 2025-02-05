@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tagihanxi;
+use App\Models\Tagihanxii;
 
-class TagihanXIController extends Controller
+class TagihanXIIController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $XI = Tagihanxi::all();
-        return view('admin.dashboard', compact('XI'));
+    {
+        $XII = Tagihanxii::all();
+        return view('admin.dashboard', compact('XII'));
     }
 
     /**
@@ -21,7 +21,7 @@ class TagihanXIController extends Controller
      */
     public function create()
     {
-        return view('admin.tagihan.XI.create');
+        return view('admin.tagihan.XII.create');
     }
 
     /**
@@ -30,15 +30,15 @@ class TagihanXIController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul_XI' => 'required|string|max:255',
-            'harga_XI' => 'required|numeric',
-            'kelas_XI' => 'required|string|max:10'
+            'judul_XII' => 'required|string|max:255',
+            'harga_XII' => 'required|numeric',
+            'kelas_XII' => 'required|string|max:10'
         ]);
 
-        TagihanXI::create([
-            'judul_XI' => $request->judul_XI,
-            'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
+        Tagihanxii::create([
+            'judul_XII' => $request->judul_XII,
+            'harga_XII' => $request->harga_XII,
+            'kelas_XII' => $request->kelas_XII
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Admin created successfully.');
@@ -49,8 +49,8 @@ class TagihanXIController extends Controller
      */
     public function show(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
-        return view('admin.dashboard', compact('xi'));
+        $xii = Tagihanxii::findOrFail($id);
+        return view('admin.dashboard', compact('xii'));
     }
 
     /**
@@ -58,7 +58,7 @@ class TagihanXIController extends Controller
      */
     public function edit(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
+        $xii = Tagihanxii::findOrFail($id);
         return view('admin.tagihan.XI.edit', compact('xi'));
     }
 
@@ -68,16 +68,16 @@ class TagihanXIController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul_XI' => 'required',
-            'harga_XI' => 'required',
-            'kelas_XI' => 'required'
+            'judul_XII' => 'required',
+            'harga_XII' => 'required',
+            'kelas_XII' => 'required'
         ]);
 
-        $xi = TagihanXI::findOrFail($id);
-        $xi->update([
-            'judul_XI' => $request->judul_XI,
-            'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
+        $xii = Tagihanxii::findOrFail($id);
+        $xii->update([
+            'judul_XII' => $request->judul_XII,
+            'harga_XII' => $request->harga_XII,
+            'kelas_XII' => $request->kelas_XII
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
@@ -88,8 +88,8 @@ class TagihanXIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xi = TagihanXI::findOrFail($id);
-        $xi->delete();
+        $xii = TagihanXI::findOrFail($id);
+        $xii->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
     }
 }

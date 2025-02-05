@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tagihan;
+use App\Models\TagihanXI;
+use App\Models\Tagihanxii;
+
+
 
 class TagihanController extends Controller
 {
@@ -13,7 +17,9 @@ class TagihanController extends Controller
     public function index()
     {   
         $admins = Tagihan::all();
-        return view('admin.dashboard', compact('admins'));
+        $XI = Tagihanxi::all();
+        $XII = Tagihanxii::all();
+        return view('admin.dashboard', compact('admins', 'XI', 'XII'));
     }
 
     /**
