@@ -11,7 +11,7 @@ use App\Http\Controllers\TagihanControllerX;
 
 
 Route::get('/', function () {
-    return view('siswa/X/index');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -54,6 +54,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
 //tes
 use App\Http\Controllers\SppController;
 
+
+Route::get('/siswa/X/', [SppController::class, 'show']);
 Route::get('/siswa', [SppController::class, 'index']);
 
 

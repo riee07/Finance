@@ -16,7 +16,7 @@
         <div x-data="sppData">
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
-                <h1 ><-- kembali</h1> 
+                <a href="/siswa/X/" ><-- kembali</a> 
                 <div class="">
                     <div id="notif-bayar" style="transform: translateX(40px) translateY(2px)" class=" text-[.5rem] w-4 h-4 absolute rounded-full bg-red-500" x-show="$store.cart.quantity"><p style="transform: translateY(-10px)" class="text-[10px] text-white" x-text="$store.cart.quantity"></p></div>
 
@@ -89,11 +89,12 @@
                   </div>
             </div>
         </div>
+        
         <div  x-show="openChart" class="flex fixed w-full h-screen items-center justify-center bg-black bg-opacity-20 top-0">
-            <div class="flex  justify-center flex-col bg-white p-10 rounded-xl text-2xl capitalize gap-2 relative">
+            <div class="flex  justify-center flex-col bg-white p-10  rounded-xl text-2xl capitalize gap-2 relative">
                 <i @click="openChart = false" class="bx bx-x right-0 absolute top-0 text-2xl"></i>
                 
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 text-xl capitalize w-80">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 text-xl capitalize w-[800px] h-[450px]">
                     <h3 class="text-lg font-bold text-center mt-2">Detail pembayaran</h3>
                     <dl class="max-w-md text-gray-900 divide-y divide-gray-200 p-5">
 
@@ -102,11 +103,9 @@
                             {{-- <div>{{ Auth::user()->email }}</div> --}}
                             {{-- <div>{{ Auth::user()->phone_number }}</div> --}}
 
-                        {{-- form Validasi --}}
-                    <form action="" id="checkoutForm">
                         <div class="flex flex-col pb-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
-                                <div x-show="$store.cart.items.length">
+                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Bulan</dt>
+                                {{-- <div x-show="$store.cart.items.length">
                                     <div class="grid grid-cols-3 gap-2 text-sm">
                                         <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
                                     </div>
@@ -116,7 +115,7 @@
                                     <div class="grid grid-cols-3 gap-2 text-sm">
                                         <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
                                     </div>
-                                </div>
+                                </div> --}}
                             <template x-for="(item, index) in $store.cart.items" :key="index">
                             <div class="grid grid-cols-3 gap-2">
                                 <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
@@ -134,14 +133,39 @@
                                 <dd class="text-lg font-semibold" x-show="$store.cart.items.length" x-text="$store.cart.total ? formatRupiah($store.cart.total) : 'Rp 0'"></dd>
                             {{-- </template> --}}
                         </div>
+                        {{-- form Validasi --}}
+                        <div class="flex flex-col py-3">
+                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
+                                <form action="" id="checkoutForm">
+                                    <div x-show="$store.cart.items.length">
+                                        <div class="grid grid-cols-3 gap-2 text-sm">
+                                            <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
+                                            <input type="hidden" name="nama" id="" value="{{ Auth::user()->name }}">
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2 text-sm">
+                                             <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
+                                            <input type="hidden" name="email" id="" value="{{ Auth::user()->email }}">
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2 text-sm">
+                                            <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
+                                            <input type="hidden" name="phone" id="" value="{{ Auth::user()->phone_number }}">
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2 text-sm">
+                                            <input type="hidden" name="items" id="" x-model="JSON.stringify($store.cart.items)">
+                                            <input type="hidden" name="total" id="" x-model="$store.cart.total">
+                                        </div>
+                                    </div>
+                                
+                        </div>
                     
                     </dl>
                     
                     
-                      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
+                      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b" id="checkoutButton">
                           <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">bayar</button>
                       </div>
                     </form>
+                    
                   </div>
             </div>
         </div>
@@ -155,7 +179,7 @@
     <script>
         window.sppItems = @json($items); // Menyimpan data ke variabel global
     </script>
-    <script src="assets/js/spp.js"></script>
+    <script src="assets/js/spp_X.js"></script>
     
 
 </body>

@@ -22,7 +22,7 @@ document.addEventListener("alpine:init", () => {
             // Hilangkan notifikasi setelah beberapa detik (opsional)
             setTimeout(() => {
                 this.notification = "";
-            }, 3000); // 3 detik
+            }, 2000); // 3 detik
         },
 
         // Tambah item ke keranjang
@@ -81,9 +81,42 @@ document.addEventListener("alpine:init", () => {
     });
 });
 
-function formatRupiah(value) {
-    return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-    }).format(value || 0);
-}
+const form = document.querySelector('#checkoutForm');
+const checkoutButton = document.querySelector('#checkoutButton'); // Pastikan tombol dikaitkan
+
+// Kirim Data ketika form disubmit
+checkoutButton.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries()); // Mengubah FormData menjadi objek
+
+    const message = formatMessage(data);
+    window.open('https://wa.me/6282213994858?text=' + encodeURIComponent(message));
+    // console.log(data); // Pastikan struktur data benar
+});
+
+// Format pesan WhatsApp 
+const formatMessage = (obj) => {
+    return `Data Customer:
+    Nama: ${obj.nama || "Tidak Diketahui"}
+    Email: ${obj.email || "Tidak Diketahui"}
+    No Hp: ${obj.phone || "Tidak Diketahui"}
+
+    Data Pesanan:
+    ${JSON.parse(obj.items).map((item) => `${item.bulan} (${item.quantity} x ${rupiah(item.harga)}) \n`)}
+
+    Total: ${rupiah(obj.total || 0)}
+
+    Terima Kasih`;
+    };
+
+
+
+// Fungsi untuk format Rupiah
+const rupiah = (angka) => {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR'
+    }).format(angka);
+};

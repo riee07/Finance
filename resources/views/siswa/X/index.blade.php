@@ -34,7 +34,7 @@
         <div class="justify-between items-center">
           <button class="bg-primary text-secondary py-1 px-3 rounded-sm text-sm" onclick="showDetail()">Detail →</button><br>
           <hr class="mt-20">
-          <a href="/spp" class="text-lg font-medium hover: hover:opacity-50">Bayar Sekarang →</a>
+          <a href="/siswa" class="text-lg font-medium hover: hover:opacity-50">Bayar Sekarang →</a>
         </div>
       </div>
 

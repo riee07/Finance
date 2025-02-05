@@ -9,6 +9,10 @@ use App\Models\User;
 
 class SppController extends Controller
 {
+    public function show()
+    {
+        return view('siswa.X.index');
+    }
     public function index()
     {
         // Ambil data bulan dan harga
@@ -20,4 +24,5 @@ class SppController extends Controller
         // Kirim data ke view siswa.index
         return view('siswa.X.spp', compact('items'));
     }
+    
 }
