@@ -57,12 +57,6 @@ Route::resource('siswa', SiswaController::class);
 
 
 
-
-
-
-
-
-
 // Route::resource('admin', TagihanControllerX::class);
 
 
