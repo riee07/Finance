@@ -119,7 +119,7 @@
                             <div class="grid grid-cols-3 gap-2">
                                 <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
                                 <dd class="text-lg font-semibold" x-text="item.harga"></dd>
-                                <button id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
+                                <button type="button" id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
                                     <i class="bx bx-x text-2xl"></i>
                                 </button>
                             </div>  

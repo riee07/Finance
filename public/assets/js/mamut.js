@@ -12,11 +12,11 @@ window.addEventListener("scroll", function () {
 
 function navbarFn() {
     if (window.scrollY >= 0) {
-        navbarButton[0].classList.add("border-b-2");
+        navbarButton[0].classList.replace("border-none", "border-b-2");
     }
     if (window.scrollY >= document.getElementById("aboutTo").offsetTop - 150) {
         navbarButton[0].classList.replace("border-b-2", "border-none");
-        navbarButton[1].classList.add("border-b-2");
+        navbarButton[1].classList.replace("border-none", "border-b-2");
     } else if (
         window.scrollY <=
         document.getElementById("aboutTo").offsetTop - 150
@@ -25,8 +25,7 @@ function navbarFn() {
     }
     if (window.scrollY >= document.getElementById("helpTo").offsetTop - 150) {
         navbarButton[1].classList.replace("border-b-2", "border-none");
-
-        navbarButton[2].classList.add("border-b-2");
+        navbarButton[2].classList.replace("border-none", "border-b-2");
     } else if (
         window.scrollY <=
         document.getElementById("helpTo").offsetTop - 150
@@ -38,7 +37,6 @@ function navbarFn() {
     navbar.classList.replace("text-secondary", "text-primary");
     lR[0].classList.replace("bg-secondary", "bg-primary");
     lR[0].classList.replace("text-primary", "text-secondary");
-    lR[1].classList.replace("border-secondary", "border-primary");
     navbarButton.forEach((e) =>
         e.classList.replace("border-secondary", "border-primary")
     );
@@ -51,7 +49,6 @@ function navbarFn() {
             animBgNavbar.classList.replace("bg-transparent", "bg-primary");
             animBgNavbar.classList.replace("animate-none", "animate-wiggle");
             animBgNavbar.classList.replace("hidden", "block");
-
             setTimeout(() => {
                 navbarButton.forEach((e) =>
                     e.classList.replace("border-primary", "border-secondary")
@@ -59,7 +56,6 @@ function navbarFn() {
                 navbar.classList.replace("text-primary", "text-secondary");
                 lR[0].classList.replace("bg-primary", "bg-secondary");
                 lR[0].classList.replace("text-secondary", "text-primary");
-                lR[1].classList.replace("border-primary", "border-secondary");
             }, 200);
         }
     }, 500);

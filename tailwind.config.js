@@ -11,6 +11,9 @@ export default {
 
     theme: {
         extend: {
+            screens: {
+                xs: "475px",
+            },
             animation: {
                 wiggle: "wiggle .5s forwards",
                 borderanim: "borderanim .5s forwards",
@@ -37,8 +40,8 @@ export default {
                 },
             },
             colors: {
-                primary: "#3A4D39",
-                secondary: "#ECE3CE",
+                primary: "#31473A",
+                secondary: "#fff ",
             },
             gridTemplateColumns: {
                 mamutsm: "repeat(1, minmax(0, 300px))",
