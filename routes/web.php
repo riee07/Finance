@@ -15,7 +15,7 @@ use App\Http\Controllers\TagihanXIIController;
 
 
 Route::get('/', function () {
-    return view('siswa/x/index');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -75,7 +75,10 @@ Route::resource('siswa', SiswaController::class);
 //tes
 use App\Http\Controllers\SppController;
 
+
+Route::get('/siswa/X/', [SppController::class, 'show']);
 Route::get('/siswa', [SppController::class, 'index']);
+
 
 
 

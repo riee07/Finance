@@ -40,7 +40,7 @@ class TagihanController extends Controller
             'harga' => 'required|numeric',
             'kelas' => 'required|string|max:10'
         ]);
-
+        
         Tagihan::create([
             'judul' => $request->judul,
             'harga' => $request->harga,
@@ -74,10 +74,10 @@ class TagihanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul' => 'required',
-            'harga' => 'required',
-            'kelas' => 'required'
-        ]);
+        'judul' => 'required',
+        'harga' => 'required',
+        'kelas' => 'required'
+    ]);
 
         $admin = Tagihan::findOrFail($id);
         $admin->update([

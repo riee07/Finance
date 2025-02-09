@@ -9,4 +9,6 @@ class Tagihan extends Model
     protected $table = 'tagihans';
 
     protected $fillable = ['judul', 'harga', 'kelas'];
+
+    protected $table = ['tagihan_x'];
 }
