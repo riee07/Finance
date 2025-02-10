@@ -7,7 +7,6 @@
             <tr>
                 <th>Judul</th>
                 <th>Harga</th>
-                <th>Kelas</th>
                 <th>Action</th>
             </tr>
         </thead>
