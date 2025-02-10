@@ -27,3 +27,11 @@
         @endforeach 
     </tbody>
 </table>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+<button><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></button>
