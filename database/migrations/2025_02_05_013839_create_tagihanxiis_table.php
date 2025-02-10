@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tagihanxiis', function (Blueprint $table) {
             $table->id();
             $table->string('judul_XII');
-            $table->float('harga_XII');
+            $table->integer('harga_XII');
             $table->string('kelas_XII');
             $table->timestamps();
         });

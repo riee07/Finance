@@ -19,7 +19,7 @@
                 <td>{{ $x->kelas }}</td>
                 <td>
                     <a href="{{ route('x.edit', $x->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
-                    <form action="{{ route('x.destroy', $x->id) }}" method="POST">
+                    <br><form action="{{ route('x.destroy', $x->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>

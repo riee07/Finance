@@ -19,6 +19,7 @@
                 <td>{{ $xii->kelas_XII }}</td>
                 <td>
                     <a href="{{ route('xii.edit', $xii->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                    <br>
                     <form action="{{ route('xii.destroy', $xii->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

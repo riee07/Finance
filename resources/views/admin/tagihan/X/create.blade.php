@@ -1,6 +1,6 @@
 <h1>Buat Tagihan Baru</h1>
 
-    <form action="{{ route('admin.store') }}" method="POST">
+    <form action="{{ route('x.store') }}" method="POST">
         @csrf
         <div>
             <label for="judul">Judul:</label>

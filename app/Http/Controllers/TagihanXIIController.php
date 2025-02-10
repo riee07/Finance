@@ -59,7 +59,7 @@ class TagihanXIIController extends Controller
     public function edit(string $id)
     {
         $xii = Tagihanxii::findOrFail($id);
-        return view('admin.tagihan.XI.edit', compact('xi'));
+        return view('admin.tagihan.XII.edit', compact('xii'));
     }
 
     /**
@@ -88,7 +88,7 @@ class TagihanXIIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xii = TagihanXI::findOrFail($id);
+        $xii = TagihanXII::findOrFail($id);
         $xii->delete();
         return redirect()->route('admin.tagihan.XII.index')->with('success', 'Admin deleted successfully.');
     }
