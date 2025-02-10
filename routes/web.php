@@ -43,13 +43,10 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [TagihanController::class, 'index'])->name('admin.dashboard');
-    Route::resource('admin', TagihanController::class);
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('x', TagihanController::class);
     Route::resource('xi', TagihanXIController::class);
     Route::resource('xii', TagihanXIIController::class);
-
-
-
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
@@ -65,7 +62,9 @@ Route::resource('siswa', SiswaController::class);
 // Route::get('/admin/dashboard', [TagihanXIController::class, 'dashboard'])->name('admin.dashboard');
 
 
-
+//1. Berikan pendapat Anda apa itu stress dalam belajar
+//2. Ceritakan pengalaman Anda ketika mengalami stress dalam belajar(Ceritakan penyebabnya. kapan terjadinya, dan apa yang dirasakan)
+//3. Apa yang dapat Anda lakukan untuk bertahan disituasi pada point 2 tersebut
 
 
 

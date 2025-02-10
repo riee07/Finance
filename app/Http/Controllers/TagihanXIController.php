@@ -13,7 +13,7 @@ class TagihanXIController extends Controller
     public function index()
     {   
         $XI = Tagihanxi::all();
-        return view('admin.dashboard', compact('XI'));
+        return view('admin.tagihan.XI.index', compact('XI'));
     }
 
     /**
@@ -41,7 +41,7 @@ class TagihanXIController extends Controller
             'kelas_XI' => $request->kelas_XI
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Admin created successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin created successfully.');
     }
 
     /**
@@ -50,7 +50,7 @@ class TagihanXIController extends Controller
     public function show(string $id)
     {
         $xi = Tagihanxi::findOrFail($id);
-        return view('admin.dashboard', compact('xi'));
+        return view('admin.tagihan.XI.index', compact('xi'));
     }
 
     /**
@@ -80,7 +80,7 @@ class TagihanXIController extends Controller
             'kelas_XI' => $request->kelas_XI
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin updated successfully.');
     }
 
     /**
@@ -90,6 +90,6 @@ class TagihanXIController extends Controller
     {
         $xi = Tagihanxi::findOrFail($id);
         $xi->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin deleted successfully.');
     }
 }

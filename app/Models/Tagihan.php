@@ -10,5 +10,4 @@ class Tagihan extends Model
 
     protected $fillable = ['judul', 'harga', 'kelas'];
 
-    protected $table = ['tagihan_x'];
 }
