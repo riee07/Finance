@@ -34,13 +34,11 @@ class TagihanController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'harga' => 'required|numeric',
-            'kelas' => 'required|string|max:10'
         ]);
         
         Tagihan::create([
             'judul' => $request->judul,
             'harga' => $request->harga,
-            'kelas' => $request->kelas
         ]);
 
         return redirect()->route('admin.tagihan.X.index')->with('success', 'Admin created successfully.');
@@ -72,14 +70,12 @@ class TagihanController extends Controller
         $request->validate([
         'judul' => 'required',
         'harga' => 'required',
-        'kelas' => 'required'
     ]);
 
         $x = Tagihan::findOrFail($id);
         $x->update([
             'judul' => $request->judul,
             'harga' => $request->harga,
-            'kelas' => $request->kelas
         ]);
 
         return redirect()->route('admin.tagihan.X.index')->with('success', 'Admin updated successfully.');

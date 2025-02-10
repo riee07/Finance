@@ -16,7 +16,6 @@
                 <tr>
                 <td>{{ $xi->judul_XI }}</td>
                 <td>{{ $xi->harga_XI }}</td>
-                <td>{{ $xi->kelas_XI }}</td>
                 <td>
                     <a href="{{ route('xi.edit', $xi->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                     <br><form action="{{ route('xi.destroy', $xi->id) }}" method="POST">

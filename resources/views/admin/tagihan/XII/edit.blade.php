@@ -12,10 +12,6 @@
             <input type="number" name="harga_xii" id="harga_XII" value="{{ $xii->harga_XII }}" required>
         </div>
 
-        <div>
-            <label for="kelas_xii">kelas:</label>
-            <input type="text" name="kelas_xii" id="kelas_XII" value="{{ $xii->kelas_XII }}" required>
-        </div>
 
         <button type="submit">Submit</button>
     </form>

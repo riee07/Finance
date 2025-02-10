@@ -16,7 +16,6 @@
                 <tr>
                 <td>{{ $xii->judul_XII }}</td>
                 <td>{{ $xii->harga_XII }}</td>
-                <td>{{ $xii->kelas_XII }}</td>
                 <td>
                     <a href="{{ route('xii.edit', $xii->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                     <br>

@@ -12,11 +12,6 @@
             <input type="number" name="harga_XII" id="harga_XII" required>
         </div>
 
-        <div>
-            <label for="kelas_XII">Kelas:</label>
-            <input type="number" name="kelas_XII" id="kelas_XII" required>
-        </div>
-
         <button type="submit">Submit</button>
 </form>
     

@@ -8,6 +8,6 @@ class Tagihan extends Model
 {
     protected $table = 'tagihans';
 
-    protected $fillable = ['judul', 'harga', 'kelas'];
+    protected $fillable = ['judul', 'harga'];
 
 }

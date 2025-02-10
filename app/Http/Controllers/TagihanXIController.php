@@ -32,13 +32,11 @@ class TagihanXIController extends Controller
         $request->validate([
             'judul_XI' => 'required|string|max:255',
             'harga_XI' => 'required|numeric',
-            'kelas_XI' => 'required|string|max:10'
         ]);
 
         Tagihanxi::create([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
         ]);
 
         return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin created successfully.');
@@ -70,14 +68,12 @@ class TagihanXIController extends Controller
         $request->validate([
             'judul_XI' => 'required',
             'harga_XI' => 'required',
-            'kelas_XI' => 'required'
         ]);
 
         $xi = Tagihanxi::findOrFail($id);
         $xi->update([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
         ]);
 
         return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin updated successfully.');
