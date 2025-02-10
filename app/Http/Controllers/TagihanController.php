@@ -43,7 +43,7 @@ class TagihanController extends Controller
             'kelas' => $request->kelas
         ]);
 
-        return redirect()->route('admin.tagihan.X.index')->with('success', 'Admin created successfully.');
+        return redirect()->route('x.index')->with('success', 'Admin created successfully.');
     }
 
     /**
@@ -82,7 +82,7 @@ class TagihanController extends Controller
             'kelas' => $request->kelas
         ]);
 
-        return redirect()->route('admin.tagihan.X.index')->with('success', 'Admin updated successfully.');
+        return redirect()->route('x.index')->with('success', 'Admin updated successfully.');
     }
 
     /**
@@ -92,7 +92,7 @@ class TagihanController extends Controller
     {
         $x = Tagihan::findOrFail($id);
         $x->delete();
-        return redirect()->route('admin.tagihan.X.index')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('x.index')->with('success', 'Admin deleted successfully.');
     }
 }
 

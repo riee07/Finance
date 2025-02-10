@@ -43,13 +43,13 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::resource('x', TagihanController::class);
-    Route::get('/admin/tagihan/X/index', [TagihanController::class, 'index'])->name('admin.tagihan.X.index');
-    Route::resource('xi', TagihanXIController::class);
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
     Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
-    Route::resource('xii', TagihanXIIController::class);
     Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
+    Route::resource('x', TagihanController::class);
+    Route::resource('xi', TagihanXIController::class);
+    Route::resource('xii', TagihanXIIController::class);
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {

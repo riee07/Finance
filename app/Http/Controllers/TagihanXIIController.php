@@ -88,7 +88,7 @@ class TagihanXIIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xii = TagihanXII::findOrFail($id);
+        $xii = Tagihanxii::findOrFail($id);
         $xii->delete();
         return redirect()->route('admin.tagihan.XII.index')->with('success', 'Admin deleted successfully.');
     }
