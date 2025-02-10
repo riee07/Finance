@@ -1,7 +1,7 @@
 <table border="1" cellpadding="10">
         <thead>
             <tr>
-                <th>Kelas X</th>
+                <th>Kelas XI</th>
                 <th><a href="{{ route('xi.create') }}" class="bg-gray-500 hover:bg-gray-600 ml-5 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">Add New Harga</a></th>
             </tr>
             <tr>

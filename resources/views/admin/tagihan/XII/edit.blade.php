@@ -4,12 +4,12 @@
         @method('PUT')
         <div>
             <label for="judul_xii">judul:</label>
-            <input type="text" name="judul_xii" id="judul_XII" value="{{ $xii->judul_XII }}" required>
+            <input type="text" name="judul_XII" id="judul_XII" value="{{ $xii->judul_XII }}" required>
         </div>
 
         <div>
             <label for="harga_xii">harga:</label>
-            <input type="number" name="harga_xii" id="harga_XII" value="{{ $xii->harga_XII }}" required>
+            <input type="number" name="harga_XII" id="harga_XII" value="{{ $xii->harga_XII }}" required>
         </div>
 
 
