@@ -45,7 +45,7 @@
         <tbody>
         @foreach ($SPPXII as $sppxii)
                 <tr>
-                <td>{{ $sppxii->judul }}</td>
+                <td>{{ $sppxii->bulan }}</td>
                 <td>{{ $sppxii->harga }}</td>
                 <td>
                     <a href="{{ route('sppxii.edit', $sppxii->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tagihanxi;
+use App\Models\Sppxi;
 
 class TagihanXIController extends Controller
 {
@@ -13,7 +14,8 @@ class TagihanXIController extends Controller
     public function index()
     {   
         $XI = Tagihanxi::all();
-        return view('admin.XI.index', compact('XI'));
+        $SPPXI = sppxi::all();
+        return view('admin.XI.index', compact('XI', 'SPPXI'));
     }
 
     /**

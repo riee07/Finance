@@ -46,7 +46,7 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/X/index', [AdminController::class, 'index'])->name('admin.X.index');
+    Route::get('/admin/X/index', [TagihanController::class, 'index'])->name('admin.X.index');
     Route::get('/admin/XI/index', [TagihanXIController::class, 'index'])->name('admin.XI.index');
     Route::get('/admin/XII/index', [TagihanXIIController::class, 'index'])->name('admin.XII.index');
     Route::resource('x', TagihanController::class);

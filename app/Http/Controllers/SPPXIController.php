@@ -35,8 +35,8 @@ class SPPXIController extends Controller
         ]);
 
         Sppxi::create([
-            'bulan_XI' => $request->bulan,
-            'harga_XI' => $request->harga,
+            'bulan_XI' => $request->bulan_XI,
+            'harga_XI' => $request->harga_XI,
         ]);
 
         return redirect()->route('admin.XI.index')->with('success', 'Admin created successfully.');
@@ -72,8 +72,8 @@ class SPPXIController extends Controller
 
         $sppxi = Sppxi::findOrFail($id);
         $sppxi->update([
-            'bulan_XI' => $request->bulan,
-            'harga_XI' => $request->harga,
+            'bulan_XI' => $request->bulan_XI,
+            'harga_XI' => $request->harga_XI,
         ]);
 
         return redirect()->route('admin.XI.index')->with('success', 'Admin updated successfully.');

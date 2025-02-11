@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tagihanxii;
+use App\Models\Sppxii;
 
 class TagihanXIIController extends Controller
 {
@@ -13,7 +14,8 @@ class TagihanXIIController extends Controller
     public function index()
     {
         $XII = Tagihanxii::all();
-        return view('admin.XII.index', compact('XII'));
+        $SPPXII = Sppxii::all();
+        return view('admin.XII.index', compact('XII', 'SPPXII'));
     }
 
     /**
@@ -30,12 +32,12 @@ class TagihanXIIController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul_XII' => 'required|string|max:255',
+            'bulan_XII' => 'required|string|max:255',
             'harga_XII' => 'required|numeric',
         ]);
 
         Tagihanxii::create([
-            'judul_XII' => $request->judul_XII,
+            'bulan_XII' => $request->bulan_XII,
             'harga_XII' => $request->harga_XII,
         ]);
 
@@ -66,13 +68,13 @@ class TagihanXIIController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul_XII' => 'required',
+            'bulan_XII' => 'required',
             'harga_XII' => 'required',
         ]);
 
         $xii = Tagihanxii::findOrFail($id);
         $xii->update([
-            'judul_XII' => $request->judul_XII,
+            'bulan_XII' => $request->bulan_XII,
             'harga_XII' => $request->harga_XII,
         ]);
 
