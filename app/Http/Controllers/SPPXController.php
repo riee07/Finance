@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tagihan;
+use App\Models\Sppx;
 
-
-
-class TagihanController extends Controller
+class SPPXController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $X = Tagihan::all();
-        return view('admin.X.index', compact('X'));
+    {
+        $SPPX = Sppx::all();
+        return view('admin.X.index', compact('SPPX'));
     }
 
     /**
@@ -23,7 +21,7 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        return view('admin.X.tagihan.create');
+        return view('admin.X.spp.create');
     }
 
     /**
@@ -32,16 +30,16 @@ class TagihanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
+            'bulan' => 'required|string|max:255',
             'harga' => 'required|numeric',
         ]);
-        
-        Tagihan::create([
-            'judul' => $request->judul,
+
+        Sppx::create([
+            'bulan' => $request->bulan,
             'harga' => $request->harga,
         ]);
 
-        return redirect()->route('x.index')->with('success', 'Admin created successfully.');
+        return redirect()->route('admin.X.index')->with('success', 'Admin created successfully.');
     }
 
     /**
@@ -49,8 +47,8 @@ class TagihanController extends Controller
      */
     public function show(string $id)
     {
-        $x = Tagihan::findOrFail($id);
-        return view('admin.X.index', compact('x'));
+        $sppx = Sppx::findOrFail($id);
+        return view('admin.X.index', compact('sppx'));
     }
 
     /**
@@ -58,8 +56,8 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        $x = Tagihan::findOrFail($id);
-        return view('admin.X.tagihan.edit', compact('x'));
+        $sppx = Sppx::findOrFail($id);
+        return view('admin.X.spp.edit', compact('sppx'));
     }
 
     /**
@@ -68,17 +66,17 @@ class TagihanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-        'judul' => 'required',
-        'harga' => 'required',
-    ]);
+            'bulan' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+        ]);
 
-        $x = Tagihan::findOrFail($id);
-        $x->update([
-            'judul' => $request->judul,
+        $sppx = Sppx::findOrFail($id);
+        $sppx->update([
+            'bulan' => $request->bulan,
             'harga' => $request->harga,
         ]);
 
-        return redirect()->route('x.index')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admin.X.index')->with('success', 'Admin updated successfully.');
     }
 
     /**
@@ -86,10 +84,8 @@ class TagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        $x = Tagihan::findOrFail($id);
-        $x->delete();
-        return redirect()->route('x.index')->with('success', 'Admin deleted successfully.');
+        $sppx = Sppx::findOrFail($id);
+        $sppx->delete();
+        return redirect()->route('admin.X.index')->with('success', 'Admin deleted successfully.');
     }
 }
-
-

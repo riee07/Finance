@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sppxis', function (Blueprint $table) {
             $table->id();
-            $table->string('bulan');
-            $table->integer('harga');
+            $table->string('bulan_XI');
+            $table->integer('harga_XI');
             $table->timestamps();
         });
     }

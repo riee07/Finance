@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tagihanxii;
+use App\Models\Sppxii;
 
-class TagihanXIIController extends Controller
+class SPPXIIController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $XII = Tagihanxii::all();
-        return view('admin.XII.index', compact('XII'));
+        $SPPXII = Sppxii::all();
+        return view('admin.XII.index', compact('SPPXII'));
     }
 
     /**
@@ -21,7 +21,7 @@ class TagihanXIIController extends Controller
      */
     public function create()
     {
-        return view('admin.XII.tagihan.create');
+        return view('admin.XII.spp.create');
     }
 
     /**
@@ -30,12 +30,12 @@ class TagihanXIIController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul_XII' => 'required|string|max:255',
+            'bulan_XII' => 'required|string|max:255',
             'harga_XII' => 'required|numeric',
         ]);
 
-        Tagihanxii::create([
-            'judul_XII' => $request->judul_XII,
+        Sppxii::create([
+            'bulan_XII' => $request->bulan_XII,
             'harga_XII' => $request->harga_XII,
         ]);
 
@@ -47,8 +47,8 @@ class TagihanXIIController extends Controller
      */
     public function show(string $id)
     {
-        $xii = Tagihanxii::findOrFail($id);
-        return view('admin.XII.index', compact('xii'));
+        $sppxii = Sppxii::findOrFail($id);
+        return view('admin.XII.index', compact('sppxii'));
     }
 
     /**
@@ -56,8 +56,8 @@ class TagihanXIIController extends Controller
      */
     public function edit(string $id)
     {
-        $xii = Tagihanxii::findOrFail($id);
-        return view('admin.XII.tagihan.edit', compact('xii'));
+        $sppxii = Sppxi::findOrFail($id);
+        return view('admin.XII.spp.edit', compact('sppxi'));
     }
 
     /**
@@ -66,13 +66,13 @@ class TagihanXIIController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul_XII' => 'required',
-            'harga_XII' => 'required',
+            'bulan_XII' => 'required|string|max:255',
+            'harga_XII' => 'required|numeric',
         ]);
 
-        $xii = Tagihanxii::findOrFail($id);
-        $xii->update([
-            'judul_XII' => $request->judul_XII,
+        $sppxi = Sppxi::findOrFail($id);
+        $sppxi->update([
+            'bulan_XII' => $request->bulan_XII,
             'harga_XII' => $request->harga_XII,
         ]);
 
@@ -84,8 +84,8 @@ class TagihanXIIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xii = Tagihanxii::findOrFail($id);
-        $xii->delete();
+        $sppxi = Sppxi::findOrFail($id);
+        $sppxi->delete();
         return redirect()->route('admin.XII.index')->with('success', 'Admin deleted successfully.');
     }
 }

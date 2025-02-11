@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tagihanxi;
+use App\Models\Sppxi;
 
-class TagihanXIController extends Controller
+class SPPXIController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $XI = Tagihanxi::all();
-        return view('admin.XI.index', compact('XI'));
+    {
+        $SPPXI = Sppxi::all();
+        return view('admin.XI.index', compact('SPPXI'));
     }
 
     /**
@@ -21,22 +21,22 @@ class TagihanXIController extends Controller
      */
     public function create()
     {
-        return view('admin.XI.tagihan.create');
+        return view('admin.XI.spp.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         $request->validate([
-            'judul_XI' => 'required|string|max:255',
+            'bulan_XI' => 'required|string|max:255',
             'harga_XI' => 'required|numeric',
         ]);
 
-        Tagihanxi::create([
-            'judul_XI' => $request->judul_XI,
-            'harga_XI' => $request->harga_XI,
+        Sppxi::create([
+            'bulan_XI' => $request->bulan,
+            'harga_XI' => $request->harga,
         ]);
 
         return redirect()->route('admin.XI.index')->with('success', 'Admin created successfully.');
@@ -47,8 +47,8 @@ class TagihanXIController extends Controller
      */
     public function show(string $id)
     {
-        $xi = Tagihanxi::findOrFail($id);
-        return view('admin.XI.index', compact('xi'));
+        $sppxi = Sppxi::findOrFail($id);
+        return view('admin.XI.index', compact('sppxi'));
     }
 
     /**
@@ -56,8 +56,8 @@ class TagihanXIController extends Controller
      */
     public function edit(string $id)
     {
-        $xi = Tagihanxi::findOrFail($id);
-        return view('admin.XI.tagihan.edit', compact('xi'));
+        $sppxi = Sppxi::findOrFail($id);
+        return view('admin.XI.spp.edit', compact('sppxi'));
     }
 
     /**
@@ -66,14 +66,14 @@ class TagihanXIController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'judul_XI' => 'required',
-            'harga_XI' => 'required',
+            'bulan_XI' => 'required|string|max:255',
+            'harga_XI' => 'required|numeric',
         ]);
 
-        $xi = Tagihanxi::findOrFail($id);
-        $xi->update([
-            'judul_XI' => $request->judul_XI,
-            'harga_XI' => $request->harga_XI,
+        $sppxi = Sppxi::findOrFail($id);
+        $sppxi->update([
+            'bulan_XI' => $request->bulan,
+            'harga_XI' => $request->harga,
         ]);
 
         return redirect()->route('admin.XI.index')->with('success', 'Admin updated successfully.');
@@ -84,8 +84,8 @@ class TagihanXIController extends Controller
      */
     public function destroy(string $id)
     {
-        $xi = Tagihanxi::findOrFail($id);
-        $xi->delete();
+        $sppxi = Sppxi::findOrFail($id);
+        $sppxi->delete();
         return redirect()->route('admin.XI.index')->with('success', 'Admin deleted successfully.');
     }
 }

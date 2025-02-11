@@ -9,7 +9,9 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanXIController;
 use App\Http\Controllers\TagihanXIIController;
-
+use App\Http\Controllers\SPPXController;
+use App\Http\Controllers\SPPXIController;
+use App\Http\Controllers\SPPXIIController;
 
 
 
@@ -44,12 +46,17 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
-    Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
-    Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
+    Route::get('/admin/X/index', [AdminController::class, 'index'])->name('admin.X.index');
+    Route::get('/admin/XI/index', [TagihanXIController::class, 'index'])->name('admin.XI.index');
+    Route::get('/admin/XII/index', [TagihanXIIController::class, 'index'])->name('admin.XII.index');
     Route::resource('x', TagihanController::class);
     Route::resource('xi', TagihanXIController::class);
     Route::resource('xii', TagihanXIIController::class);
+
+    Route::resource('sppx', SPPXController::class);
+    Route::resource('sppxi', SPPXIController::class);
+    Route::resource('sppxii', SPPXIIController::class);
+
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
