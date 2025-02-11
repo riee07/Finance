@@ -1,4 +1,4 @@
-<nav class="text-tirddary bg-transparent navbar w-full fixed top-0 z-40 overflow-hidden nav-parent duration-500">
+<nav class="text-tirddary bg-transparent navbar w-full fixed top-0 overflow-hidden nav-parent duration-500">
     <div class="absolute flex justify-center left-0 w-full overflow-hidden -z-50">
       <div class="hidden animate-none anim-bg-navbar bg-primary w-1 h-32"></div>
     </div>
@@ -10,11 +10,26 @@
       <button  class="flex w-10 md:hidden text-[2rem]" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
         <i class='bx bx-menu-alt-right' ></i>
       </button>
+      
+      <form class="max-w-md">   
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input type="search" id="default-search" class="block w-[28rem] p-4 ps-10 text-sm text-primary border border-gray-300 rounded-lg placeholder-primary focus:ring-primary focus:border-primary" placeholder="Search Mockups, Logos..." required />
+            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
+        </div>
+      </form>
+
       <div class="items-center justify-center gap-5 hidden md:flex">
         @if (Route::has('login'))
         @auth
             <a class="block " href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . '/dashboard') }}">Dashboard</a>
         @else
+            <i @click="openCart = !openCart" class="bx bx-cart text-[2rem]"></i>
             <a class="lr block bg-primary border-[1px] p-3 rounded-full border-primary text-secondary" href="{{ route('login') }}"><i class="bx bx-user"></i></a>
         @endauth
         @endif

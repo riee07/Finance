@@ -13,7 +13,7 @@ use App\Http\Controllers\TagihanXIController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/siswa/x/index');
 });
 
 Route::get('/dashboard', function () {
@@ -70,7 +70,7 @@ Route::resource('siswa', SiswaController::class);
 use App\Http\Controllers\SppController;
 
 
-Route::get('/siswa/X/', [SppController::class, 'show']);
+Route::get('siswa/X', [SppController::class, 'show']);
 Route::get('/siswa', [SppController::class, 'index']);
 
 
