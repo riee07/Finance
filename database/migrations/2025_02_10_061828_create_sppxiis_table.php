@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihans', function (Blueprint $table) {
+        Schema::create('sppxiis', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
+            $table->string('bulan');
             $table->integer('harga');
             $table->timestamps();
         });
-    }   
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tagihan');
+        Schema::dropIfExists('sppxiis');
     }
 };

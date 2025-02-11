@@ -8,12 +8,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanXIController;
+use App\Http\Controllers\TagihanXIIController;
+
 
 
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/siswa/x/index');
 });
 
 Route::get('/dashboard', function () {
@@ -41,9 +43,13 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [TagihanController::class, 'index'])->name('admin.dashboard');
-    Route::resource('admin', TagihanController::class);
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
+    Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
+    Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
+    Route::resource('x', TagihanController::class);
     Route::resource('xi', TagihanXIController::class);
+    Route::resource('xii', TagihanXIIController::class);
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
@@ -52,8 +58,16 @@ Route::middleware(['auth', 'role:superadmin'])->group(function() {
 
 Route::resource('siswa', SiswaController::class);
 
+// Route::resource('admin', TagihanController::class);
+// Route::get('/admin/dashboard', [TagihanController::class, 'dashboard'])->name('admin.dashboard');
+
+// Route::resource('admin', TagihanXIController::class);
+// Route::get('/admin/dashboard', [TagihanXIController::class, 'dashboard'])->name('admin.dashboard');
 
 
+//1. Berikan pendapat Anda apa itu stress dalam belajar
+//2. Ceritakan pengalaman Anda ketika mengalami stress dalam belajar(Ceritakan penyebabnya. kapan terjadinya, dan apa yang dirasakan)
+//3. Apa yang dapat Anda lakukan untuk bertahan disituasi pada point 2 tersebut
 
 
 
