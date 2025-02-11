@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SPPX extends Model
+class Sppx extends Model
 {
+    protected $table = 'sppxes';
     protected $fillable = ['bulan', 'harga'];
 }

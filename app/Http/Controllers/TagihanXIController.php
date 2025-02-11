@@ -13,7 +13,7 @@ class TagihanXIController extends Controller
     public function index()
     {   
         $XI = Tagihanxi::all();
-        return view('admin.dashboard', compact('XI'));
+        return view('admin.tagihan.XI.index', compact('XI'));
     }
 
     /**
@@ -32,16 +32,14 @@ class TagihanXIController extends Controller
         $request->validate([
             'judul_XI' => 'required|string|max:255',
             'harga_XI' => 'required|numeric',
-            'kelas_XI' => 'required|string|max:10'
         ]);
 
         Tagihanxi::create([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Admin created successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin created successfully.');
     }
 
     /**
@@ -50,7 +48,7 @@ class TagihanXIController extends Controller
     public function show(string $id)
     {
         $xi = Tagihanxi::findOrFail($id);
-        return view('admin.dashboard', compact('xi'));
+        return view('admin.tagihan.XI.index', compact('xi'));
     }
 
     /**
@@ -70,17 +68,15 @@ class TagihanXIController extends Controller
         $request->validate([
             'judul_XI' => 'required',
             'harga_XI' => 'required',
-            'kelas_XI' => 'required'
         ]);
 
         $xi = Tagihanxi::findOrFail($id);
         $xi->update([
             'judul_XI' => $request->judul_XI,
             'harga_XI' => $request->harga_XI,
-            'kelas_XI' => $request->kelas_XI
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin updated successfully.');
     }
 
     /**
@@ -90,6 +86,6 @@ class TagihanXIController extends Controller
     {
         $xi = Tagihanxi::findOrFail($id);
         $xi->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('admin.tagihan.XI.index')->with('success', 'Admin deleted successfully.');
     }
 }
