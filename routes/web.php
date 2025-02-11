@@ -64,8 +64,9 @@ Route::resource('siswa', SiswaController::class);
 use App\Http\Controllers\SppController;
 
 
-Route::get('/siswa/X/', [SppController::class, 'show']);
+Route::get('/siswa/x/index', [SppController::class, 'show']);
 Route::get('/siswa', [SppController::class, 'index']);
+
 
 
 

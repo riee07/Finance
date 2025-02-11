@@ -13,8 +13,8 @@
 
 <div class="max-w-screen-2xl mx-auto my-44 p-5">
   <div class="mt-8 mx-auto">
-    <h1 class="text-3xl font-bold">Selamat Datang, $siswa</h1>
-    <p class="text-gray-600 mt-1">4829173650</p>
+    <h1 class="text-3xl font-bold">Selamat Datang {{ Auth::user()->name }}</h1>
+    <p class="text-gray-600 mt-1">{{ Auth::user()->nisn }}</p>
   </div>
   <br><br>
   
@@ -52,7 +52,7 @@
           <div class="justify-between items-center">
             <button class="bg-gray-100 py-1 px-3 rounded-sm text-sm" onclick="showDetail()">Detail →</button><br>
             <hr class="mt-20">
-            <a href="/spp" class="text-lg font-medium hover:text-primary hover:opacity-50">Bayar Sekarang →</a>
+            <a href="/siswa" class="text-lg font-medium hover:text-primary hover:opacity-50">Bayar Sekarang →</a>
           </div>
         </div>
   
