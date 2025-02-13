@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sppxi;
+use App\Models\Tagihanxi;
 
 class SPPXIController extends Controller
 {
@@ -13,7 +14,8 @@ class SPPXIController extends Controller
     public function index()
     {
         $SPPXI = Sppxi::all();
-        return view('admin.XI.index', compact('SPPXI'));
+        $XI = Tagihanxi::all();
+        return view('admin.XI.index', compact('SPPXI', 'XI'));
     }
 
     /**
@@ -29,6 +31,8 @@ class SPPXIController extends Controller
      */
     public function store(Request $request)
     {
+        // Redirect to index after successful creation
+
         $request->validate([
             'bulan_XI' => 'required|string|max:255',
             'harga_XI' => 'required|numeric',

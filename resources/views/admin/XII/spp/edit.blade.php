@@ -1,5 +1,5 @@
 
-<form action="{{ route('sppxii.update', $sppxi->id) }}" method="POST">
+<form action="{{ route('sppxii.update', $sppxii->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>

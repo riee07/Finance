@@ -44,8 +44,8 @@
         <tbody>
         @foreach ($SPPXI as $sppxi)
                 <tr>
-                <td>{{ $sppxi->bulan }}</td>
-                <td>{{ $sppxi->harga }}</td>
+                <td>{{ $sppxi->bulan_XI }}</td>
+                <td>{{ $sppxi->harga_XI }}</td>
                 <td>
                     <a href="{{ route('sppxi.edit', $sppxi->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                     <br><form action="{{ route('sppxi.destroy', $sppxi->id) }}" method="POST">

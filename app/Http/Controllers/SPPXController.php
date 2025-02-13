@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sppx;
+use App\Models\Tagihan;
 
 class SPPXController extends Controller
 {
@@ -13,7 +14,8 @@ class SPPXController extends Controller
     public function index()
     {
         $SPPX = Sppx::all();
-        return view('admin.X.index', compact('SPPX'));
+        $X = Tagihan::all();
+        return view('admin.X.index', compact('SPPX', 'X'));
     }
 
     /**

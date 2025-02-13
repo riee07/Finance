@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sppxii;
+use App\Models\Tagihanxii;
 
 class SPPXIIController extends Controller
 {
@@ -13,7 +14,8 @@ class SPPXIIController extends Controller
     public function index()
     {
         $SPPXII = Sppxii::all();
-        return view('admin.XII.index', compact('SPPXII'));
+        $XII = Tagihanxii::all();
+        return view('admin.XII.index', compact('SPPXII', 'XII'));
     }
 
     /**
@@ -56,8 +58,8 @@ class SPPXIIController extends Controller
      */
     public function edit(string $id)
     {
-        $sppxii = Sppxi::findOrFail($id);
-        return view('admin.XII.spp.edit', compact('sppxi'));
+        $sppxii = Sppxii::findOrFail($id);
+        return view('admin.XII.spp.edit', compact('sppxii'));
     }
 
     /**
@@ -70,8 +72,8 @@ class SPPXIIController extends Controller
             'harga_XII' => 'required|numeric',
         ]);
 
-        $sppxi = Sppxi::findOrFail($id);
-        $sppxi->update([
+        $sppxii = Sppxii::findOrFail($id);
+        $sppxii->update([
             'bulan_XII' => $request->bulan_XII,
             'harga_XII' => $request->harga_XII,
         ]);
@@ -84,8 +86,8 @@ class SPPXIIController extends Controller
      */
     public function destroy(string $id)
     {
-        $sppxi = Sppxi::findOrFail($id);
-        $sppxi->delete();
+        $sppxii = Sppxii::findOrFail($id);
+        $sppxii->delete();
         return redirect()->route('admin.XII.index')->with('success', 'Admin deleted successfully.');
     }
 }
