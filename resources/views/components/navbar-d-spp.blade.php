@@ -24,13 +24,15 @@
         </div>
       </form>
 
+
+
       <div class="items-center justify-center gap-5 hidden md:flex">
         @if (Route::has('login'))
         @auth
-            <a class="block " href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . '/dashboard') }}">Dashboard</a>
-        @else
             <i @click="openCart = !openCart" class="bx bx-cart text-[2rem]"></i>
-            <a class="lr block bg-primary border-[1px] p-3 rounded-full border-primary text-secondary" href="{{ route('login') }}"><i class="bx bx-user"></i></a>
+            <a class="lr block bg-primary border-[1px] p-3 rounded-full border-primary text-secondary" href="#"><i class="bx bx-user"></i></a>
+        @else
+            <a class="lr  block bg-primary border-[1px] py-1 px-3 rounded-[4px] border-primary text-secondary " href="{{ route('login') }}">Log in</a>
         @endauth
         @endif
       </div>
