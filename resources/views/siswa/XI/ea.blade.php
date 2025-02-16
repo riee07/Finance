@@ -9,7 +9,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-a4KHawnvhdZdC1_B"></script>
 </head>
 <body class="bg-gray-200">
     {{-- tah iye card tah --}}
@@ -17,7 +16,7 @@
         <div x-data="sppData">
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
-                <a href="/siswa/x/index" ><-- kembali</a> 
+                <a href="/siswa/X/" ><-- kembali</a> 
                 <div class="">
                     <div id="notif-bayar" style="transform: translateX(40px) translateY(2px)" class=" text-[.5rem] w-4 h-4 absolute rounded-full bg-red-500" x-show="$store.cart.quantity"><p style="transform: translateY(-10px)" class="text-[10px] text-white" x-text="$store.cart.quantity"></p></div>
 
@@ -180,7 +179,7 @@
     <script>
         window.sppItems = @json($items); // Menyimpan data ke variabel global
     </script>
-    <script src="assets/js/spp_X.js"></script>
+    <script src="assets/js/spp_XI.js"></script>
     
 
 </body>

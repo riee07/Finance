@@ -1,4 +1,4 @@
-<h1>Buat Tagihan Baru</h1>
+<h1>Buat Tagihan Kelas X Baru</h1>
 
     <form action="{{ route('x.store') }}" method="POST">
         @csrf
