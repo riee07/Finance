@@ -24,6 +24,8 @@
         </div>
       </form>
 
+
+
       <div class="items-center justify-center gap-5 hidden md:flex">
         @if (Route::has('login'))
         @auth
