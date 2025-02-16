@@ -9,13 +9,16 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TagihanXIController;
 use App\Http\Controllers\TagihanXIIController;
+use App\Http\Controllers\Tagihan2Controller;
+use App\Http\Controllers\CartIndekXController;
+use App\Http\Controllers\SppController;
 
 
 
 
 
 Route::get('/', function () {
-    return view('/siswa/x/index');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -75,14 +78,13 @@ Route::resource('siswa', SiswaController::class);
 
 
 //tes
-use App\Http\Controllers\SppController;
 
 
-Route::get('/siswa/x/index', [SppController::class, 'show']);
 Route::get('/siswa', [SppController::class, 'index']);
 
-
-
+Route::get('/siswa/x/index', [Tagihan2Controller::class, 'index'])->name('cart.index');
+Route::post('/siswa/x/index', [Tagihan2Controller::class, 'add'])->name('cart.add');
+Route::delete('/siswa/remove/{id}', [Tagihan2Controller::class, 'remove'])->name('cart.remove');
 
 
 
