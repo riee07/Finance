@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sppx extends Model
 {
-    protected $table = ['s_p_p_x_e_s'];
+    protected $table = 'sppxes';
 
     protected $fillable = ['id','bulan', 'harga'];
 }

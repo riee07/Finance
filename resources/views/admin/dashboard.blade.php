@@ -20,13 +20,13 @@
 <br><br>
 
 <!-- <a href="{{ url('admin/tagihan/X/index') }}">Halaman X</a> -->
-<a href="{{ route('x.index') }}">Halaman X</a>
+<a href="{{ route('admin.x.dashboard') }}">/ADMIN/DASHBOARD/X</a>
 
 <br><br>
-<a href="{{ route('xi.index') }}">Halaman XI</a>
+<a href="{{ route('admin.xi.dashboard') }}">/ADMIN/DASHBOARD/XI</a>
 
 
 <br><br>
-<a href="{{ route('xii.index') }}">Halaman XII</a>
+<a href="{{ route('admin.xii.dashboard') }}">/ADMIN/DASHBOARD/XII</a>
 
 

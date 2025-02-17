@@ -12,8 +12,8 @@ class TagihanXIIController extends Controller
      */
     public function index()
     {
-        $XII = Tagihanxii::all();
-        return view('admin.tagihan.XII.index', compact('XII'));
+        $tagihans = Tagihanxii::all();
+        return view('admin.xii.tagihan.dashboard', compact('tagihans'));
     }
 
     /**

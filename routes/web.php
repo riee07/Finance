@@ -7,11 +7,17 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
-use App\Http\Controllers\TagihanXIController;
-use App\Http\Controllers\TagihanXIIController;
 use App\Http\Controllers\Tagihan2Controller;
 use App\Http\Controllers\CartIndekXController;
 use App\Http\Controllers\SppController;
+
+use App\Http\Controllers\SPPXController;
+use App\Http\Controllers\SPPXIController;
+use App\Http\Controllers\SPPXIIController;
+
+use App\Http\Controllers\TagihanXController;
+use App\Http\Controllers\TagihanXIController;
+use App\Http\Controllers\TagihanXIIController;
 
 
 
@@ -47,6 +53,18 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/x/dashboard', [AdminController::class, 'xIndex'])->name('admin.x.dashboard');
+    Route::get('/admin/xi/dashboard', [AdminController::class, 'xiIndex'])->name('admin.xi.dashboard');
+    Route::get('/admin/xii/dashboard', [AdminController::class, 'xiiIndex'])->name('admin.xii.dashboard');
+
+    Route::get('/admin/x/spp/dashboard', [SPPXController::class, 'index'])->name('admin.x.spp.dashboard');
+    Route::get('/admin/xi/spp/dashboard', [SPPXIController::class, 'index'])->name('admin.xI.spp.dashboard');
+    Route::get('/admin/xii/spp/dashboard', [SPPXIIController::class, 'index'])->name('admin.xII.spp.dashboard');
+
+    Route::get('/admin/x/tagihan/dashboard', [TagihanXController::class, 'index'])->name('admin.x.tagihan.dashboard');
+    Route::get('/admin/xi/tagihan/dashboard', [TagihanXIController::class, 'index'])->name('admin.xi.tagihan.dashboard');
+    Route::get('/admin/xii/tagihan/dashboard', [TagihanXIIController::class, 'index'])->name('admin.xii.tagihan.dashboard');
+
     Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
     Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
     Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
