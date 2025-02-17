@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\SiswaController' => $baseDir . '/app/Http/Controllers/SiswaController.php',
     'App\\Http\\Controllers\\SppController' => $baseDir . '/app/Http/Controllers/SppController.php',
     'App\\Http\\Controllers\\SuperAdminController' => $baseDir . '/app/Http/Controllers/SuperAdminController.php',
+    'App\\Http\\Controllers\\Tagihan2Controller' => $baseDir . '/app/Http/Controllers/Tagihan2Controller.php',
     'App\\Http\\Controllers\\TagihanController' => $baseDir . '/app/Http/Controllers/TagihanController.php',
     'App\\Http\\Controllers\\TagihanXIController' => $baseDir . '/app/Http/Controllers/TagihanXIController.php',
     'App\\Http\\Controllers\\TagihanXIIController' => $baseDir . '/app/Http/Controllers/TagihanXIIController.php',
@@ -33,8 +34,11 @@ return array(
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
+<<<<<<< HEAD
     'App\\Models\\Sppxi' => $baseDir . '/app/Models/Sppxi.php',
     'App\\Models\\Sppxii' => $baseDir . '/app/Models/Sppxii.php',
+=======
+>>>>>>> 3f0c0c4c744e68aed9033dc8a9d5f4e6744db8b4
     'App\\Models\\Tagihan' => $baseDir . '/app/Models/Tagihan.php',
     'App\\Models\\Tagihanxi' => $baseDir . '/app/Models/Tagihanxi.php',
     'App\\Models\\Tagihanxii' => $baseDir . '/app/Models/Tagihanxii.php',
