@@ -20,13 +20,13 @@
 <br><br>
 
 <!-- <a href="{{ url('admin/tagihan/X/index') }}">Halaman X</a> -->
-<a href="{{ route('admin.x.dashboard') }}">/ADMIN/DASHBOARD/X</a>
+<a href="{{ route('admin.x.dashboard') }}">MASUK DASHBOARD KELAS 10</a>
 
 <br><br>
-<a href="{{ route('admin.xi.dashboard') }}">/ADMIN/DASHBOARD/XI</a>
+<a href="{{ route('admin.xi.dashboard') }}">MASUK DASHBOARD KELAS 11</a>
 
 
 <br><br>
-<a href="{{ route('admin.xii.dashboard') }}">/ADMIN/DASHBOARD/XII</a>
+<a href="{{ route('admin.xii.dashboard') }}">MASUK DASHBOARD KELAS 12</a>
 
 

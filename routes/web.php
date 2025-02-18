@@ -18,10 +18,7 @@ use App\Http\Controllers\SPPXIIController;
 use App\Http\Controllers\TagihanXController;
 use App\Http\Controllers\TagihanXIController;
 use App\Http\Controllers\TagihanXIIController;
-
-
-
-
+use App\Models\Tagihanx;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,27 +48,29 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
     })->name('siswa.xii.dashboard');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/x/dashboard', [AdminController::class, 'xIndex'])->name('admin.x.dashboard');
-    Route::get('/admin/xi/dashboard', [AdminController::class, 'xiIndex'])->name('admin.xi.dashboard');
-    Route::get('/admin/xii/dashboard', [AdminController::class, 'xiiIndex'])->name('admin.xii.dashboard');
+// Route Admin Start
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function() {
+    Route::prefix('x')->name('x.')->group(function() {
+        Route::resource('spp', SPPXController::class);
+        Route::resource('tagihan', TagihanxController::class);
+    });
 
-    Route::get('/admin/x/spp/dashboard', [SPPXController::class, 'index'])->name('admin.x.spp.dashboard');
-    Route::get('/admin/xi/spp/dashboard', [SPPXIController::class, 'index'])->name('admin.xI.spp.dashboard');
-    Route::get('/admin/xii/spp/dashboard', [SPPXIIController::class, 'index'])->name('admin.xII.spp.dashboard');
+    Route::prefix('xi')->name('xi.')->group(function() {
+        Route::resource('spp', SPPXIController::class);
+        Route::resource('tagihan', TagihanxiController::class);
+    });
 
-    Route::get('/admin/x/tagihan/dashboard', [TagihanXController::class, 'index'])->name('admin.x.tagihan.dashboard');
-    Route::get('/admin/xi/tagihan/dashboard', [TagihanXIController::class, 'index'])->name('admin.xi.tagihan.dashboard');
-    Route::get('/admin/xii/tagihan/dashboard', [TagihanXIIController::class, 'index'])->name('admin.xii.tagihan.dashboard');
+    Route::prefix('xii')->name('xii.')->group(function() {
+        Route::resource('spp', SPPXIIController::class);
+        Route::resource('tagihan', TagihanxiiController::class);
+    });
 
-    Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
-    Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
-    Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
-    Route::resource('x', TagihanController::class);
-    Route::resource('xi', TagihanXIController::class);
-    Route::resource('xii', TagihanXIIController::class);
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/x/dashboard', [AdminController::class, 'xIndex'])->name('x.dashboard');
+    Route::get('/xi/dashboard', [AdminController::class, 'xiIndex'])->name('xi.dashboard');
+    Route::get('/xii/dashboard', [AdminController::class, 'xiiIndex'])->name('xii.dashboard');
 });
+// Route Admin End
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
