@@ -7,14 +7,14 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TagihanController;
-use App\Http\Controllers\TagihanXIController;
-use App\Http\Controllers\TagihanXIIController;
 use App\Http\Controllers\SPPXController;
 use App\Http\Controllers\SPPXIController;
 use App\Http\Controllers\SPPXIIController;
 
-
-
+use App\Http\Controllers\TagihanXController;
+use App\Http\Controllers\TagihanXIController;
+use App\Http\Controllers\TagihanXIIController;
+use App\Models\Tagihanx;
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,6 +58,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::resource('sppxii', SPPXIIController::class);
 
 });
+// Route Admin End
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
