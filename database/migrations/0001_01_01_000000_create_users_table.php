@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('nisn')->nullable()->unique();
+            $table->enum('kelas',['x', 'xi', 'xii'])->nullable();
+            $table->string('phone_number')->nullable()->after('email');
+            $table->enum('jurusan',['pplg', 'tkj', 'an'])->nullable();
+            $table->enum('role',['siswa','admin','superadmin'])->default('siswa');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
