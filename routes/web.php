@@ -52,25 +52,6 @@ Route::middleware(['auth', 'role:siswa'])->group(function() {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/x/dashboard', [AdminController::class, 'xIndex'])->name('admin.x.dashboard');
-    Route::get('/admin/xi/dashboard', [AdminController::class, 'xiIndex'])->name('admin.xi.dashboard');
-    Route::get('/admin/xii/dashboard', [AdminController::class, 'xiiIndex'])->name('admin.xii.dashboard');
-
-    Route::get('/admin/x/spp/dashboard', [SPPXController::class, 'index'])->name('admin.x.spp.dashboard');
-    Route::get('/admin/xi/spp/dashboard', [SPPXIController::class, 'index'])->name('admin.xI.spp.dashboard');
-    Route::get('/admin/xii/spp/dashboard', [SPPXIIController::class, 'index'])->name('admin.xII.spp.dashboard');
-
-    Route::get('/admin/x/tagihan/dashboard', [TagihanXController::class, 'index'])->name('admin.x.tagihan.dashboard');
-    Route::get('/admin/xi/tagihan/dashboard', [TagihanXIController::class, 'index'])->name('admin.xi.tagihan.dashboard');
-    Route::get('/admin/xii/tagihan/dashboard', [TagihanXIIController::class, 'index'])->name('admin.xii.tagihan.dashboard');
-
-    Route::get('/admin/tagihan/X/index', [AdminController::class, 'index'])->name('admin.tagihan.X.index');
-    Route::get('/admin/tagihan/XI/index', [TagihanXIController::class, 'index'])->name('admin.tagihan.XI.index');
-    Route::get('/admin/tagihan/XII/index', [TagihanXIIController::class, 'index'])->name('admin.tagihan.XII.index');
-    Route::resource('x', TagihanController::class);
-    Route::resource('xi', TagihanXIController::class);
-    Route::resource('xii', TagihanXIIController::class);
 });
 
 Route::middleware(['auth', 'role:superadmin'])->group(function() {
@@ -92,17 +73,7 @@ Route::resource('siswa', SiswaController::class);
 
 
 
-// Route::resource('admin', TagihanControllerX::class);
-
-
-//tes
-
-
-Route::get('/siswa', [SppController::class, 'index']);
-
-Route::get('/siswa/x/index', [Tagihan2Controller::class, 'index'])->name('cart.index');
-Route::post('/siswa/x/index', [Tagihan2Controller::class, 'add'])->name('cart.add');
-Route::delete('/siswa/remove/{id}', [Tagihan2Controller::class, 'remove'])->name('cart.remove');
+// Route::resource('admin', TagihanControllerX::class)
 
 
 
