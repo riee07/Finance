@@ -3,62 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use App\Models\TahunAjaran;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('siswa.X.tes');
+        $siswas = Siswa::with('tahunAjaran')->get();
+        return view('siswa.index', compact('siswas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $tahun_ajarans = TahunAjaran::all();
+        return view('siswa.create', compact('tahun_ajarans'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string',
+            'nis' => 'required|numeric|unique:siswas',
+            'kelas' => 'required|string',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
+            'status_aktif' => 'required|in:aktif,non-aktif',
+        ]);
+
+        Siswa::create($request->all());
+
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+        $tahun_ajarans = TahunAjaran::all();
+        return view('siswa.edit', compact('siswa', 'tahun_ajarans'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'nis' => 'required|numeric|unique:siswas,nis,'.$id.',id_siswa',
+            'kelas' => 'required|string',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
+            'status_aktif' => 'required|in:aktif,non-aktif',
+        ]);
+
+        $siswa->update($request->all());
+
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $siswa = Siswa::findOrFail($id);
+        $siswa->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
     }
 }

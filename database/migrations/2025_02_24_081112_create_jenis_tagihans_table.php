@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('jenis_tagihans', function (Blueprint $table) {
             $table->id('id_jenis_tagihan');
-            $table->string('nama_jenis_tagihan'); // SPP, Buku, Seragam, dll.
+            $table->string('jenis_tagihan'); // SPP, Buku, Seragam, dll.
             $table->timestamps();
         });
     }

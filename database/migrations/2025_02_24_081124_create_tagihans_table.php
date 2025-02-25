@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id('id_tagihan');
-            $table->foreignId('siswa_id')->constrained('siswas')->onDelete('cascade');
-            $table->foreignId('tahun_ajaran_id')->constrained('tahun_ajarans')->onDelete('cascade');
+            $table->unsignedBigInteger('siswa_id')->nullable(); // FK harus dideklarasikan manual
+            $table->foreign('siswa_id')->references('id_siswa')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('tahun_ajaran_id')->nullable(); // FK harus dideklarasikan manual
+            $table->foreign('tahun_ajaran_id')->references('id_tahun_ajaran')->on('tahun_ajarans')->onDelete('cascade')->onUpdate('cascade');
             $table->decimal('total_tagihan', 10, 2);
             $table->enum('status_pembayaran', ['belum lunas', 'lunas'])->default('belum lunas');
             $table->timestamps();

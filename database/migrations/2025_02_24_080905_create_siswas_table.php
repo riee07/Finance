@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nis')->unique();
             $table->string('kelas');
-            $table->foreignId('tahun_ajaran_id')->constrained('tahun_ajarans')->onDelete('cascade');
+            $table->unsignedBigInteger('tahun_ajaran_id')->nullable(); // FK harus dideklarasikan manual
+            $table->foreign('tahun_ajaran_id')->references('id_tahun_ajaran')->on('tahun_ajarans')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status_aktif', ['aktif', 'non-aktif'])->default('aktif');
             $table->timestamps();
         });

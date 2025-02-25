@@ -1,27 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\TarifTagihanController;
 use App\Http\Controllers\TagihanController;
-use App\Http\Controllers\Tagihan2Controller;
-use App\Http\Controllers\CartIndekXController;
-use App\Http\Controllers\SppController;
-
-use App\Http\Controllers\SPPXController;
-use App\Http\Controllers\SPPXIController;
-use App\Http\Controllers\SPPXIIController;
-
-use App\Http\Controllers\TagihanXController;
-use App\Http\Controllers\TagihanXIController;
-use App\Http\Controllers\TagihanXIIController;
-
-
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,45 +23,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:siswa'])->group(function() {
-    Route::get('/siswa/x/dashboard', function() {
-        return view('siswa/x/dashboard');
-    })->name('siswa.x.dashboard');
-
-    Route::get('/siswa/xi/dashboard', function() {
-        return view('siswa/xi/dashboard');
-    })->name('siswa.xi.dashboard');
-
-    Route::get('/siswa/xii/dashboard', function() {
-        return view('siswa/xii/dashboard');
-    })->name('siswa.xii.dashboard');
-});
-
-Route::middleware(['auth', 'role:admin'])->group(function() {
-});
-
-Route::middleware(['auth', 'role:superadmin'])->group(function() {
-    Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
-});
-
 Route::resource('siswa', SiswaController::class);
+Route::resource('admin', AdminController::class);
+Route::resource('tahun-ajaran', TahunAjaranController::class);
+Route::resource('tarif-tagihan', TarifTagihanController::class);
+Route::resource('tagihan', TagihanController::class);
 
-// Route::resource('admin', TagihanController::class);
-// Route::get('/admin/dashboard', [TagihanController::class, 'dashboard'])->name('admin.dashboard');
+// Route::middleware(['auth', 'role:siswa'])->group(function() {
+// });
 
-// Route::resource('admin', TagihanXIController::class);
-// Route::get('/admin/dashboard', [TagihanXIController::class, 'dashboard'])->name('admin.dashboard');
+// Route::middleware(['auth', 'role:admin'])->group(function() {
+// });
 
-
-//1. Berikan pendapat Anda apa itu stress dalam belajar
-//2. Ceritakan pengalaman Anda ketika mengalami stress dalam belajar(Ceritakan penyebabnya. kapan terjadinya, dan apa yang dirasakan)
-//3. Apa yang dapat Anda lakukan untuk bertahan disituasi pada point 2 tersebut
-
-
-
-// Route::resource('admin', TagihanControllerX::class)
-
-
+// Route::middleware(['auth', 'role:superadmin'])->group(function() {
+// });
 
 
 require __DIR__.'/auth.php';

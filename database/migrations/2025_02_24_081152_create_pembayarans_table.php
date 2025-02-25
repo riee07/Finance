@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id('id_pembayaran');
-            $table->foreignId('tagihan_id')->constrained('tagihans')->onDelete('cascade');
+            $table->unsignedBigInteger('tagihan_id'); // Foreign Key ke tahun_ajarans
+            $table->foreign('tagihan_id')->references('id_tagihan')->on('tagihans')->onDelete('cascade')->onUpdate('cascade'); 
             $table->date('tanggal_pembayaran');
             $table->decimal('jumlah_pembayaran', 10, 2);
             $table->enum('metode_pembayaran', ['Transfer', 'Tunai']);
