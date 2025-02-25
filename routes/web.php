@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifTagihanController;
 use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\JenisTagihanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,7 @@ Route::resource('siswa', SiswaController::class);
 Route::resource('admin', AdminController::class);
 Route::resource('tahun-ajaran', TahunAjaranController::class);
 Route::resource('tarif-tagihan', TarifTagihanController::class);
+Route::resource('jenis-tagihan', JenisTagihanController::class);
 Route::resource('tagihan', TagihanController::class);
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {

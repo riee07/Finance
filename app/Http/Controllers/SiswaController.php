@@ -44,8 +44,6 @@ class SiswaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $siswa = Siswa::findOrFail($id);
-
         $request->validate([
             'nama' => 'required|string|max:255',
             'nis' => 'required|numeric|unique:siswas,nis,'.$id.',id_siswa',
@@ -53,6 +51,8 @@ class SiswaController extends Controller
             'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
         ]);
+        
+        $siswa = Siswa::findOrFail($id);
 
         $siswa->update($request->all());
 

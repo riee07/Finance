@@ -34,10 +34,7 @@ class TahunAjaranController extends Controller
             'status' => 'required|in:aktif,non-aktif',
         ]);
 
-        TahunAjaran::create([
-            'tahun_ajaran' => $request->tahun_ajaran,
-            'status' => $request->status,
-        ]);
+        TahunAjaran::create($request->all());
 
         return redirect()->route('tahun-ajaran.index')->with('success', 'berhasil ditambah');
     }
@@ -71,10 +68,7 @@ class TahunAjaranController extends Controller
 
         $tahun_ajaran = TahunAjaran::findOrFail($id);
 
-        $tahun_ajaran->update([
-            'tahun_ajaran' => $request->tahun_ajaran,
-            'status' => $request->status,
-        ]);
+        $tahun_ajaran->update($request->all());
 
         return redirect()->route('tahun-ajaran.index')->with('success', 'berhasil diubah');
     }

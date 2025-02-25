@@ -12,7 +12,7 @@ class JenisTagihan extends Model
     protected $table = 'jenis_tagihans';
     protected $primaryKey = 'id_jenis_tagihan';
 
-    protected $fillable = ['nama_tagihan'];
+    protected $fillable = ['jenis_tagihan'];
 
     public function tarifTagihan()
     {
