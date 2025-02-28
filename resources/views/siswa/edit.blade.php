@@ -17,10 +17,7 @@
         <label class="block mt-2">Tahun Ajaran:</label>
         <select name="tahun_ajaran_id" class="border p-2 w-full" required>
             @foreach($tahun_ajarans as $tahun)
-                <option value="{{ $tahun->id_tahun_ajaran }}" 
-                    {{ $siswa->tahun_ajaran_id == $tahun->id_tahun_ajaran ? 'selected' : '' }}>
-                    {{ $tahun->tahun_ajaran }}
-                </option>
+                <option value="{{ $tahun->id_tahun_ajaran }}" {{ $siswa->tahun_ajaran_id == $tahun->id_tahun_ajaran ? 'selected' : '' }}>{{ $tahun->tahun_ajaran }}</option>
             @endforeach
         </select>
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisTagihan;
+use App\Models\TahunAjaran;
+use App\Models\TarifTagihan;
 use Illuminate\Http\Request;
 
 class TarifTagihanController extends Controller
@@ -11,15 +14,18 @@ class TarifTagihanController extends Controller
      */
     public function index()
     {
-        //
+        $tarif_tagihans = TarifTagihan::with('tahunAjaran', 'jenisTagihan')->get();
+        return view('tarif_tagihan.index', compact('tarif_tagihans'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $jenis_tagihans = JenisTagihan::all();
+        $tahun_ajarans = TahunAjaran::all();
+        return view('tarif_tagihan.create', compact('jenis_tagihans', 'tahun_ajarans'));
     }
 
     /**
@@ -27,7 +33,15 @@ class TarifTagihanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_tagihan_id' => 'required|exists:jenis_tagihans,id_jenis_tagihan',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran' ,
+            'jumlah_tarif' => 'required|numeric',
+        ]);
+
+        TarifTagihan::create($request->all());
+
+        return redirect()->route('tarif-tagihan.index')->with('success', 'data berhasil ditambah');
     }
 
     /**
@@ -43,7 +57,10 @@ class TarifTagihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tarif_tagihans = TarifTagihan::findOrFail($id);
+        $jenis_tagihans = JenisTagihan::all();
+        $tahun_ajarans = TahunAjaran::all();
+        return view('tarif_tagihan.edit', compact('tarif_tagihans', 'jenis_tagihans', 'tahun_ajarans'));
     }
 
     /**
@@ -51,7 +68,16 @@ class TarifTagihanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'jenis_tagihan_id' => 'required|exists:jenis_tagihans,id_jenis_tagihan',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran' ,
+            'jumlah_tarif' => 'required|numeric',
+        ]);
+
+        $tarif_tagihan = TarifTagihan::findOrFail($id);
+        $tarif_tagihan->update($request->all());
+
+        return redirect()->route('tarif-tagihan.index')->with('success', 'data berhasil ditambah');
     }
 
     /**
@@ -59,6 +85,9 @@ class TarifTagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tarif_tagihan = TarifTagihan::findOrFail($id);
+        $tarif_tagihan->delete();
+
+        return redirect()->route('tarif-tagihan.index')->with('success', 'Tarif Tagihan berhasil dihapus');
     }
 }

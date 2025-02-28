@@ -75,9 +75,9 @@ class JenisTagihanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_jenis_tagihan)
+    public function destroy(string $id)
     {
-        $jenis_tagihan = JenisTagihan::findOrFail($id_jenis_tagihan);
+        $jenis_tagihan = JenisTagihan::findOrFail($id);
         $jenis_tagihan->delete();
         return redirect()->route('jenis-tagihan.index')->with('success', 'berhasil diubah');
     }
