@@ -9,6 +9,7 @@ use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifTagihanController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\JenisTagihanController;
+use App\Http\Controllers\DetailTagihanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,11 +26,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('siswa', SiswaController::class);
-Route::resource('admin', AdminController::class);
 Route::resource('tahun-ajaran', TahunAjaranController::class);
-Route::resource('tarif-tagihan', TarifTagihanController::class);
 Route::resource('jenis-tagihan', JenisTagihanController::class);
+Route::resource('tarif-tagihan', TarifTagihanController::class);
 Route::resource('tagihan', TagihanController::class);
+Route::resource('detail-tagihan', DetailTagihanController::class);
+
+Route::resource('admin', AdminController::class);
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
 // });

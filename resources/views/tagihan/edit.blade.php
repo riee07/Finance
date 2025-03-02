@@ -25,7 +25,7 @@
         </select>
 
         <label class="block">Total Tagihan:</label>
-        <input type="text" name="total_tagihan" class="border p-2 w-full" value="{{$tagihans->total_tagihan}}" required>
+        <input type="number" name="total_tagihan" class="border p-2 w-full" value="{{$tagihans->total_tagihan}}" required>
 
         <label class="block">Status Pembayaran:</label>
         <select name="status_pembayaran" class="border p-2 w-full">

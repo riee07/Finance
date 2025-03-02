@@ -9,10 +9,10 @@ class DetailTagihan extends Model
 {
     use HasFactory;
 
-    protected $table = 'detail_tagihan';
-    protected $primaryKey = 'id_detail';
+    protected $table = 'detail_tagihans';
+    protected $primaryKey = 'id_detail_tagihan';
 
-    protected $fillable = ['tagihan_id', 'tarif_id', 'jumlah'];
+    protected $fillable = ['tagihan_id', 'tarif_tagihan_id', 'jumlah_tagihan'];
 
     public function tagihan()
     {
