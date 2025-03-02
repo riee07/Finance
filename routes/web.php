@@ -10,6 +10,7 @@ use App\Http\Controllers\TarifTagihanController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\JenisTagihanController;
 use App\Http\Controllers\DetailTagihanController;
+use App\Http\Controllers\PembayaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +32,7 @@ Route::resource('jenis-tagihan', JenisTagihanController::class);
 Route::resource('tarif-tagihan', TarifTagihanController::class);
 Route::resource('tagihan', TagihanController::class);
 Route::resource('detail-tagihan', DetailTagihanController::class);
+Route::resource('pembayaran', PembayaranController::class);
 
 Route::resource('admin', AdminController::class);
 
