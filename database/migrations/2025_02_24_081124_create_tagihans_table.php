@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable(); // FK harus dideklarasikan manual
             $table->foreign('tahun_ajaran_id')->references('id_tahun_ajaran')->on('tahun_ajarans')->onDelete('cascade')->onUpdate('cascade');
             $table->decimal('total_tagihan', 10, 2);
-            $table->enum('status_pembayaran', ['belum lunas', 'lunas'])->default('belum lunas');
+            $table->enum('status_pembayaran', ['belum_lunas', 'lunas'])->default('belum_lunas');
             $table->timestamps();
         });
     }
