@@ -13,7 +13,8 @@ class PembayaranExport implements FromView
     public function view(): \Illuminate\Contracts\View\View
     {
         return view('export.table_pembayaran', [
-            'pembayarans' => Pembayaran::all()
+            'pembayarans' => Pembayaran::all(),
+            'isExport' => true,
         ]);
     }
 }

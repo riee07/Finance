@@ -13,7 +13,8 @@ class TahunAjaranExport implements FromView
     public function view(): \Illuminate\Contracts\View\View
     {
         return view('export.table_tahun_ajaran', [
-            'tahun_ajarans' => TahunAjaran::all()
+            'tahun_ajarans' => TahunAjaran::all(),
+            'isExport' => true,
         ]);
     }
 }

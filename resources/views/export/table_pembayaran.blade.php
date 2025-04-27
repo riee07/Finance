@@ -6,7 +6,9 @@
                 <th class="border px-4 py-2">Tanggal Pembayaran</th>
                 <th class="border px-4 py-2">Jumlah Pembayaran</th>
                 <th class="border px-4 py-2">Metode Pembayaran</th>
+                @if (!isset($isExport))
                 <th class="border px-4 py-2">Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -17,6 +19,7 @@
                 <td class="border px-4 py-2">{{ $pembayar->tanggal_pembayaran }}</td>
                 <td class="border px-4 py-2">{{ $pembayar->jumlah_pembayaran }}</td>
                 <td class="border px-4 py-2">{{ $pembayar->metode_pembayaran }}</td>
+                @if (!isset($isExport))
                 <td class="border px-4 py-2">
                     <a href="{{ route('pembayaran.edit', $pembayar->id_pembayaran) }}" class="text-blue-500">Edit</a>
                     <form action="{{ route('pembayaran.destroy', $pembayar->id_pembayaran) }}" method="POST" class="inline">
@@ -24,6 +27,7 @@
                         <button type="submit" class="text-red-500" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                     </form>
                 </td>
+                @endif
             </tr>
             @endforeach
         </tbody>
