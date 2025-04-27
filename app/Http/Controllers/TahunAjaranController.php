@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use App\Exports\TahunAjaranExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TahunAjaranController extends Controller
 {
@@ -14,6 +16,14 @@ class TahunAjaranController extends Controller
     {
         $tahun_ajarans = TahunAjaran::all();
         return view('tahun_ajaran.index', compact('tahun_ajarans'));
+    }
+
+    /**
+     * Export the resource to Excel.
+     */
+    public function export()
+    {
+        return Excel::download(new TahunAjaranExport, 'tahun_ajaran.xlsx');
     }
 
     /**

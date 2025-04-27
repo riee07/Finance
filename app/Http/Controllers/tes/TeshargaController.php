@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\tes;
-namespace app\Models\tes\Tesharga;
+namespace App\Models\tes\Tesharga;
 
 use App\Http\Controllers\Controller;
 use App\Models\tes\Tesharga;

@@ -12,6 +12,9 @@ use App\Http\Controllers\JenisTagihanController;
 use App\Http\Controllers\DetailTagihanController;
 use App\Http\Controllers\PembayaranController;
 
+use App\Exports\PembayaranExport;
+use App\Exports\TahunAjaranExport;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,6 +38,10 @@ Route::resource('detail-tagihan', DetailTagihanController::class);
 Route::resource('pembayaran', PembayaranController::class);
 
 Route::resource('admin', AdminController::class);
+
+//route untuk excel
+Route::get('pembayaran.export', [PembayaranController::class, 'export'])->name('pembayaran.export');
+Route::get('tahun-ajaran.export', [TahunAjaranController::class, 'export'])->name('tahun-ajaran.export');
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
 // });

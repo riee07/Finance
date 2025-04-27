@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Tagihan;
+use App\Exports\PembayaranExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PembayaranController extends Controller
 {
@@ -16,6 +18,12 @@ class PembayaranController extends Controller
         $pembayarans = Pembayaran::all();
         return view('pembayaran.index', compact('pembayarans'));
     }
+
+    public function export()
+    {
+        return Excel::download(new PembayaranExport, 'pembayaran.xlsx');
+    }
+    
     
     /**
      * Show the form for creating a new resource.
