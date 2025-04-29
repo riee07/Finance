@@ -6,6 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Exports\\DinamikExport' => $baseDir . '/app/Exports/DinamikExport.php',
+    'App\\Exports\\PembayaranExport' => $baseDir . '/app/Exports/PembayaranExport.php',
+    'App\\Exports\\TahunAjaranExport' => $baseDir . '/app/Exports/TahunAjaranExport.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',

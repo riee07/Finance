@@ -16,7 +16,7 @@ use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.index');
 });
 
 Route::get('/dashboard', function () {
