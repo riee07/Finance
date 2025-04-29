@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\Pembayaran;
-use App\Models\Tagihan;
+use App\Models\Admin\Pembayaran;
+use App\Models\Admin\Tagihan;
 use App\Exports\PembayaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Models\JenisTagihan;
-use App\Models\TahunAjaran;
-use App\Models\TarifTagihan;
+use App\Models\Admin\JenisTagihan;
+use App\Models\Admin\TahunAjaran;
+use App\Models\Admin\TarifTagihan;
 use Illuminate\Http\Request;
 
 class TarifTagihanController extends Controller

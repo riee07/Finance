@@ -3,14 +3,14 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\TarifTagihanController;
-use App\Http\Controllers\TagihanController;
-use App\Http\Controllers\JenisTagihanController;
-use App\Http\Controllers\DetailTagihanController;
-use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\TahunAjaranController;
+use App\Http\Controllers\Admin\JenisTagihanController;
+use App\Http\Controllers\Admin\TarifTagihanController;
+use App\Http\Controllers\Admin\TagihanController;
+use App\Http\Controllers\Admin\DetailTagihanController;
+use App\Http\Controllers\Admin\PembayaranController;
+use App\Http\Controllers\Admin\AdminController;
 
 use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
