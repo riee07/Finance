@@ -3,9 +3,11 @@
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use App\Models\Pembayaran;
 
-class PembayaranExport implements FromView
+class PembayaranExport implements FromView, WithHeadings, WithTitle
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -17,4 +19,9 @@ class PembayaranExport implements FromView
             'isExport' => true,
         ]);
     }
+
+    // public function headings(): array
+    // {
+    //     return ['ID Pembayaran', 'Tagihan ID', 'Tanggal Pembayaran', 'Jumlah Pembayaran', 'Keterangan'];
+    // }
 }
