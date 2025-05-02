@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Models\JenisTagihan;
+use App\Models\Admin\JenisTagihan;
 use Illuminate\Http\Request;
 
 class JenisTagihanController extends Controller

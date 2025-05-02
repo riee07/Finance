@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Models\TahunAjaran;
+use App\Models\Admin\TahunAjaran;
 use Illuminate\Http\Request;
 use App\Exports\TahunAjaranExport;
 use Maatwebsite\Excel\Facades\Excel;

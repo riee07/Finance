@@ -14,7 +14,7 @@
 <body class="bg-gray-200">
     {{-- tah iye card tah --}}
     <div x-data="{open: false, openChart: false}">
-        <div x-data="sppData">
+        {{-- <div x-data="Tagihan"> --}}
         <div class="w-ful capitalize p-10">
             <div class="flex justify-between text-center items-center text-3xl " style="">
                 <a href="/siswa/x/index" ><-- kembali</a> 
@@ -28,35 +28,40 @@
 
             </div>
             <!-- Notifikasi -->
-            <div 
+            {{-- <div 
                 x-show="$store.cart.notification" 
                 x-text="$store.cart.notification" 
                 class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-all"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:leave="transition ease-in duration-300">
-            </div>
+            </div> --}}
             <div x-data="{openData: false};" class="grid  grid-cols-mamutsm sm:grid-cols-mamutmd md:grid-cols-mamutlg xl:grid-cols-mamutxl md:justify-center justify-center mt-16 gap-10 s">
-                <template x-for="item in items" :key="item.id">
-                    <div class="grid grid-cols-2 rounded-xl p-5 bg-white ">
-                        <div class="flex flex-col gap-y-[41px]">
-                            <p></p>
-                            <h1 class="text-2xl">spp bulan <span x-text="item.bulan"></span></h1>
-                            <p>total biaya</p>
+                <div x-data="Tagihan">
+                    <template x-for="item in items" :key="item.id">
+                        <div class="grid grid-cols-2 rounded-xl p-5 bg-white mb-4">
+                            <div class="flex flex-col gap-y-3">
+                                <h1 class="text-2xl">
+                                    SPP Bulan <span x-text="item.jenis_tagihan"></span>
+                                </h1>
+                                <p>Total Biaya:</p>
+                            </div>
+                            <div class="flex items-end flex-col gap-y-5">
+                                <button>
+                                    <i @click="$store.cart.add(item)" class="bx bx-cart text-2xl text-green-700 cursor-pointer hover:bg-green-800"></i>
+                                </button>
+                                <div x-data="{ openData: false }" @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md">
+                                    <i x-show="openData" class='bx bx-check text-2xl'></i>
+                                </div>
+                                <p x-text="formatRupiah(item.jumlah_tarif)"></p>
+                                <hr class="w-full text-black">
+                                <p @click="open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer">
+                                    Bayar
+                                </p>
+                            </div>
                         </div>
-                        <div class="flex items-end flex-col gap-y-5">
-                            <button><i @click="$store.cart.add(item);" class='bx bx-cart text-[2rem] text-green-700 cursor-pointer hover:bg-green-800'></i></button>
-                            <div x-data="{ openData: false }" @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md"><i x-show="openData" class='bx bx-check text-[2rem]' ></i></div>
-                            <p x-text="formatRupiah(item.harga)"></p>
-                            <hr class="w-[100%] text-black">
-                            
-                            {{-- tambahin ini kalo buat nnti langsung bayar --}}
-                            {{-- $store.cart.add(item); --}}
-                            <p @click="open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer">
-                                Bayar
-                            </p>
-                        </div>
-                    </div>              
-                </template>
+                    </template>
+                </div>
+                
 
             </div>
         </div>
@@ -178,10 +183,28 @@
       <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     {{-- <script>
-        window.sppItems = @json($items); // Menyimpan data ke variabel global
+        // window.tagihan = @json($orders); // Menyimpan data ke variabel global
+        window.tagihan = @json($orders);
     </script>
-    <script src="assets/js/spp_X.js"></script>
-     --}}
+    <script src="assets/js/tagihan.js"></script> --}}
+
+    <script>
+        window.tagihan = @json($orders);
+    </script>
+    
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data("Tagihan", () => ({
+                items: window.tagihan || [],
+                formatRupiah(angka) {
+                    angka = parseFloat(angka);
+                    return isNaN(angka) ? "Rp 0" : "Rp " + new Intl.NumberFormat("id-ID").format(angka);
+                },
+            }));
+        });
+    </script>
+    
+    
 
 </body>
 </html>
