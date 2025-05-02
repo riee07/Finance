@@ -15,6 +15,8 @@ use App\Http\Controllers\TagihanXController;
 use App\Http\Controllers\TagihanXIController;
 use App\Http\Controllers\TagihanXIIController;
 use App\Models\Tagihanx;
+use App\Http\Controllers\SppController;
+use App\Http\Controllers\Tagihan2Controller;
 
 Route::get('/', function () {
     return view('welcome');
@@ -88,8 +90,8 @@ Route::resource('siswa', SiswaController::class);
 Route::get('/siswa', [SppController::class, 'index']);
 
 Route::get('/siswa/x/index', [Tagihan2Controller::class, 'index'])->name('cart.index');
-Route::post('/siswa/x/index', [Tagihan2Controller::class, 'add'])->name('cart.add');
-Route::delete('/siswa/remove/{id}', [Tagihan2Controller::class, 'remove'])->name('cart.remove');
+// Route::post('/siswa/x/index', [Tagihan2Controller::class, 'add'])->name('cart.add');
+// Route::delete('/siswa/remove/{id}', [Tagihan2Controller::class, 'remove'])->name('cart.remove');
 
 
 
