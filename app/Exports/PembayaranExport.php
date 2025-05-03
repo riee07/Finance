@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use App\Models\Pembayaran;
+use App\Models\Admin\Pembayaran;
 
 class PembayaranExport implements FromView, WithHeadings, WithTitle, WithStyles, ShouldAutoSize
 {

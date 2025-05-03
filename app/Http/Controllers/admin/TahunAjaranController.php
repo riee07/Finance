@@ -16,7 +16,7 @@ class TahunAjaranController extends Controller
     public function index()
     {
         $tahun_ajarans = TahunAjaran::all();
-        return view('tahun_ajaran.index', compact('tahun_ajarans'));
+        return view('admin.tahun_ajaran.index', compact('tahun_ajarans'));
     }
 
     /**
@@ -32,7 +32,7 @@ class TahunAjaranController extends Controller
      */
     public function create()
     {
-        return view('tahun_ajaran.create');
+        return view('admin.tahun_ajaran.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class TahunAjaranController extends Controller
 
         TahunAjaran::create($request->all());
 
-        return redirect()->route('tahun-ajaran.index')->with('success', 'berhasil ditambah');
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'berhasil ditambah');
     }
 
     /**
@@ -64,7 +64,7 @@ class TahunAjaranController extends Controller
     public function edit(string $id_tahun_ajaran)
     {
         $tahun_ajarans = TahunAjaran::findOrFail($id_tahun_ajaran);
-        return view('tahun_ajaran.edit', compact('tahun_ajarans'));
+        return view('admin.tahun_ajaran.edit', compact('tahun_ajarans'));
     }
 
     /**
@@ -81,7 +81,7 @@ class TahunAjaranController extends Controller
 
         $tahun_ajaran->update($request->all());
 
-        return redirect()->route('tahun-ajaran.index')->with('success', 'berhasil diubah');
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'berhasil diubah');
     }
 
     /**
@@ -95,7 +95,7 @@ class TahunAjaranController extends Controller
 
         $tahun_ajaran->delete();
 
-        return redirect()->route('tahun-ajaran.index')->with('success', 'berhasil dihapus');
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'berhasil dihapus');
     }
     
 }

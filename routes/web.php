@@ -29,19 +29,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('siswa', SiswaController::class);
-Route::resource('tahun-ajaran', TahunAjaranController::class);
-Route::resource('jenis-tagihan', JenisTagihanController::class);
-Route::resource('tarif-tagihan', TarifTagihanController::class);
-Route::resource('tagihan', TagihanController::class);
-Route::resource('detail-tagihan', DetailTagihanController::class);
-Route::resource('pembayaran', PembayaranController::class);
 
-Route::resource('admin', AdminController::class);
 
 //route untuk excel
 Route::get('pembayaran.export', [PembayaranController::class, 'export'])->name('pembayaran.export');
 Route::get('tahun-ajaran.export', [TahunAjaranController::class, 'export'])->name('tahun-ajaran.export');
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('siswa', SiswaController::class);
+    Route::resource('tahun-ajaran', TahunAjaranController::class);
+    Route::resource('jenis-tagihan', JenisTagihanController::class);
+    Route::resource('tarif-tagihan', TarifTagihanController::class);
+    Route::resource('tagihan', TagihanController::class);
+    Route::resource('detail-tagihan', DetailTagihanController::class);
+    Route::resource('pembayaran', PembayaranController::class);
+    Route::resource('data-admin', AdminController::class);
+});
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
 // });

@@ -27,4 +27,9 @@ class AdminController extends Controller
     {   
         return view('admin.xii.dashboard');
     }
+
+    public function show($id)
+    {
+        //
+    }
 }

@@ -16,7 +16,7 @@ class TarifTagihanController extends Controller
     public function index()
     {
         $tarif_tagihans = TarifTagihan::with('tahunAjaran', 'jenisTagihan')->get();
-        return view('tarif_tagihan.index', compact('tarif_tagihans'));
+        return view('admin.tarif_tagihan.index', compact('tarif_tagihans'));
     }
     
     /**
@@ -26,7 +26,7 @@ class TarifTagihanController extends Controller
     {
         $jenis_tagihans = JenisTagihan::all();
         $tahun_ajarans = TahunAjaran::all();
-        return view('tarif_tagihan.create', compact('jenis_tagihans', 'tahun_ajarans'));
+        return view('admin.tarif_tagihan.create', compact('jenis_tagihans', 'tahun_ajarans'));
     }
 
     /**
@@ -42,7 +42,7 @@ class TarifTagihanController extends Controller
 
         TarifTagihan::create($request->all());
 
-        return redirect()->route('tarif-tagihan.index')->with('success', 'data berhasil ditambah');
+        return redirect()->route('admin.tarif-tagihan.index')->with('success', 'data berhasil ditambah');
     }
 
     /**
@@ -61,7 +61,7 @@ class TarifTagihanController extends Controller
         $tarif_tagihans = TarifTagihan::findOrFail($id);
         $jenis_tagihans = JenisTagihan::all();
         $tahun_ajarans = TahunAjaran::all();
-        return view('tarif_tagihan.edit', compact('tarif_tagihans', 'jenis_tagihans', 'tahun_ajarans'));
+        return view('admin.tarif_tagihan.edit', compact('tarif_tagihans', 'jenis_tagihans', 'tahun_ajarans'));
     }
 
     /**
@@ -78,7 +78,7 @@ class TarifTagihanController extends Controller
         $tarif_tagihan = TarifTagihan::findOrFail($id);
         $tarif_tagihan->update($request->all());
 
-        return redirect()->route('tarif-tagihan.index')->with('success', 'data berhasil ditambah');
+        return redirect()->route('admin.tarif-tagihan.index')->with('success', 'data berhasil ditambah');
     }
 
     /**
@@ -89,6 +89,6 @@ class TarifTagihanController extends Controller
         $tarif_tagihan = TarifTagihan::findOrFail($id);
         $tarif_tagihan->delete();
 
-        return redirect()->route('tarif-tagihan.index')->with('success', 'Tarif Tagihan berhasil dihapus');
+        return redirect()->route('admin.tarif-tagihan.index')->with('success', 'Tarif Tagihan berhasil dihapus');
     }
 }

@@ -16,7 +16,7 @@ class TagihanController extends Controller
     public function index()
     {
         $tagihans = Tagihan::with('siswa', 'tahunAjaran')->get();
-        return view('tagihan.index', compact('tagihans'));
+        return view('admin.tagihan.index', compact('tagihans'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TagihanController extends Controller
     {
         $siswas = Siswa::all();
         $tahun_ajarans = TahunAjaran::all();
-        return view('tagihan.create', compact('siswas', 'tahun_ajarans'));
+        return view('admin.tagihan.create', compact('siswas', 'tahun_ajarans'));
     }
 
     /**
@@ -48,7 +48,7 @@ class TagihanController extends Controller
             'status_pembayaran' => $request->status_pembayaran,
         ]);
 
-        return redirect()->route('tagihan.index')->with('success', 'Data Berhasil Ditambah');
+        return redirect()->route('admin.tagihan.index')->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -68,7 +68,7 @@ class TagihanController extends Controller
         $siswas = Siswa::all();
         $tahun_ajarans = TahunAjaran::all();
 
-        return view('tagihan.edit', compact('tagihans', 'siswas', 'tahun_ajarans'));
+        return view('admin.tagihan.edit', compact('tagihans', 'siswas', 'tahun_ajarans'));
     }
 
     /**
@@ -92,7 +92,7 @@ class TagihanController extends Controller
             'status_pembayaran' => $request->status_pembayaran,
         ]);
 
-        return redirect()->route('tagihan.index')->with('success', 'Data Berhasil Ditambah'); 
+        return redirect()->route('admin.tagihan.index')->with('success', 'Data Berhasil Ditambah'); 
     }
 
     /**
@@ -102,6 +102,6 @@ class TagihanController extends Controller
     {
         $tagihans = Tagihan::findOrFail($id);
         $tagihans->delete();
-        return redirect()->route('tagihan.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('admin.tagihan.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

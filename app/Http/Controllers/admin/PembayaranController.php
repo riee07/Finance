@@ -17,12 +17,12 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayarans = Pembayaran::all();
-        return view('pembayaran.index', compact('pembayarans'));
+        return view('admin.pembayaran.index', compact('pembayarans'));
     }
 
     public function export()
     {
-        return Excel::download(new PembayaranExport, 'pembayaran.xlsx');
+        return Excel::download(new PembayaranExport, 'admin.pembayaran.xlsx');
     }
     
     
@@ -32,7 +32,7 @@ class PembayaranController extends Controller
     public function create()
     {
         $tagihans = Tagihan::all();
-        return view('pembayaran.create', compact('tagihans'));
+        return view('admin.pembayaran.create', compact('tagihans'));
     }
 
     /**
@@ -54,7 +54,7 @@ class PembayaranController extends Controller
             'metode_pembayaran' => $request->metode_pembayaran,
         ]);
 
-        return redirect()->route('pembayaran.index')->with('success', 'Data Berhasil Ditambah');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -72,7 +72,7 @@ class PembayaranController extends Controller
     {
         $pembayarans = Pembayaran::findOrFail($id);
         $tagihans = Tagihan::all();
-        return view('pembayaran.edit', compact('pembayarans', 'tagihans'));
+        return view('admin.pembayaran.edit', compact('pembayarans', 'tagihans'));
     }
 
     /**
@@ -96,7 +96,7 @@ class PembayaranController extends Controller
             'metode_pembayaran' => $request->metode_pembayaran,
         ]);
 
-        return redirect()->route('pembayaran.index')->with('success', 'Data Berhasil Ditambah');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -106,6 +106,6 @@ class PembayaranController extends Controller
     {
         $pembayarans = Pembayaran::findOrFail($id);
         $pembayarans->delete();
-        return redirect()->route('pembayaran.index')->with('success', 'Data Berhail Dihapus');
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data Berhail Dihapus');
     }
 }

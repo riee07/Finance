@@ -17,7 +17,7 @@ class DetailTagihanController extends Controller
     {
         $detail_tagihans = DetailTagihan::all();
 
-        return view('detail_tagihan.index', compact('detail_tagihans'));
+        return view('admin.detail_tagihan.index', compact('detail_tagihans'));
     }
 
     /**
@@ -28,7 +28,7 @@ class DetailTagihanController extends Controller
         $tagihans = Tagihan::all();
         $tarif_tagihans = TarifTagihan::all();
 
-        return view('detail_tagihan.create', compact('tagihans', 'tarif_tagihans'));
+        return view('admin.detail_tagihan.create', compact('tagihans', 'tarif_tagihans'));
     }
 
     /**
@@ -48,7 +48,7 @@ class DetailTagihanController extends Controller
             'jumlah_tagihan' => $request->jumlah_tagihan,
         ]);
 
-        return redirect()->route('detail-tagihan.index')->with('success', 'Data Berhasil Ditambah');
+        return redirect()->route('admin.detail-tagihan.index')->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -67,7 +67,7 @@ class DetailTagihanController extends Controller
         $detail_tagihans = DetailTagihan::findOrFail($id);
         $tagihans = Tagihan::all();
         $tarif_tagihans = TarifTagihan::all();
-        return view('detail_tagihan.edit', compact('detail_tagihans', 'tagihans', 'tarif_tagihans'));
+        return view('admin.detail_tagihan.edit', compact('detail_tagihans', 'tagihans', 'tarif_tagihans'));
     }
 
     /**
@@ -89,7 +89,7 @@ class DetailTagihanController extends Controller
             'jumlah_tagihan' => $request->jumlah_tagihan,
         ]);
 
-        return redirect()->route('detail-tagihan.index')->with('success', 'Data Berhasil Diubah');
+        return redirect()->route('admin.detail-tagihan.index')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -99,6 +99,6 @@ class DetailTagihanController extends Controller
     {
         $detail_tagihans = DetailTagihan::findOrFail($id);
         $detail_tagihans->delete();
-        return redirect()->route('detail-tagihan.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('admin.detail-tagihan.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -14,7 +14,7 @@ class JenisTagihanController extends Controller
     public function index()
     {
         $jenis_tagihans = JenisTagihan::all();
-        return view('jenis_tagihan.index', compact('jenis_tagihans'));
+        return view('admin.jenis_tagihan.index', compact('jenis_tagihans'));
     }
     
     /**
@@ -22,7 +22,7 @@ class JenisTagihanController extends Controller
      */
     public function create()
     {
-        return view('jenis_tagihan.create');
+        return view('admin.jenis_tagihan.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class JenisTagihanController extends Controller
 
         JenisTagihan::create($request->all());
 
-        return redirect()->route('jenis-tagihan.index')->with('success', 'berhasil ditambah');
+        return redirect()->route('admin.jenis-tagihan.index')->with('success', 'berhasil ditambah');
     }
 
     /**
@@ -54,7 +54,7 @@ class JenisTagihanController extends Controller
     {
         $jenis_tagihans = JenisTagihan::findOrFail($id_jenis_tagihan);
 
-        return view('jenis_tagihan.edit', compact('jenis_tagihans'));
+        return view('admin.jenis_tagihan.edit', compact('jenis_tagihans'));
     }
 
     /**
@@ -70,7 +70,7 @@ class JenisTagihanController extends Controller
 
         $jenis_tagihan->update($request->all());
 
-        return redirect()->route('jenis-tagihan.index')->with('success', 'berhasil ditambah');
+        return redirect()->route('admin.jenis-tagihan.index')->with('success', 'berhasil ditambah');
     }
     
     /**
@@ -80,6 +80,6 @@ class JenisTagihanController extends Controller
     {
         $jenis_tagihan = JenisTagihan::findOrFail($id);
         $jenis_tagihan->delete();
-        return redirect()->route('jenis-tagihan.index')->with('success', 'berhasil diubah');
+        return redirect()->route('admin.jenis-tagihan.index')->with('success', 'berhasil diubah');
     }
 }

@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use App\Models\TahunAjaran;
+use App\Models\Admin\TahunAjaran;
 
 class TahunAjaranExport implements FromView, WithHeadings, WithTitle, WithStyles, ShouldAutoSize
 {
