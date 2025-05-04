@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use App\Models\Admin\Siswa;
 
 use Illuminate\Http\Request;
-use App\Models\Admin\Siswa;
 use App\Models\Admin\TahunAjaran;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+
+
 
 class SiswaController extends Controller
 {
@@ -60,11 +63,9 @@ class SiswaController extends Controller
         $siswa->kelas = $request->kelas;
         $siswa->tahun_ajaran_id = $request->tahun_ajaran_id;
         $siswa->status_aktif = $request->status_aktif;
-        dd([
-            'request_all' => $request->all(),
-            'original' => $siswa->getOriginal(),
-            'dirty' => $siswa->getDirty(),
-        ]);
+
+        Log::info('Menyimpan siswa:', $siswa->toArray());   
+
         $siswa->save();
 
         return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil diperbarui.');
