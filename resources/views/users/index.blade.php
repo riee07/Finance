@@ -1,210 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite('resources/css/app.css')
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+<style>
+    .scrollBar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-a4KHawnvhdZdC1_B"></script>
-</head>
-<body class="bg-gray-200">
-    {{-- tah iye card tah --}}
-    <div x-data="{open: false, openChart: false}">
-        {{-- <div x-data="Tagihan"> --}}
-        <div class="w-ful capitalize p-10">
-            <div class="flex justify-between text-center items-center text-3xl " style="">
-                <a href="/siswa/x/index" ><-- kembali</a> 
-                <div class="">
-                    <div id="notif-bayar" style="transform: translateX(40px) translateY(2px)" class=" text-[.5rem] w-4 h-4 absolute rounded-full bg-red-500" x-show="$store.cart.quantity"><p style="transform: translateY(-10px)" class="text-[10px] text-white" x-text="$store.cart.quantity"></p></div>
+<x-allLinks></x-allLinks>
 
-                    <i @click="openChart = !openChart" class='bx bx-cart text-[3rem] text-green-700 cursor-pointer' >
-                    </i>
+  <!-- Container utama dengan state openCart -->
 
-                </div>
-
-            </div>
-            <!-- Notifikasi -->
-            {{-- <div 
-                x-show="$store.cart.notification" 
-                x-text="$store.cart.notification" 
-                class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-all"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:leave="transition ease-in duration-300">
-            </div> --}}
-            <div x-data="{openData: false};" class="grid  grid-cols-mamutsm sm:grid-cols-mamutmd md:grid-cols-mamutlg xl:grid-cols-mamutxl md:justify-center justify-center mt-16 gap-10 s">
-                <div x-data="Tagihan">
-                    <template x-for="item in items" :key="item.id">
-                        <div class="grid grid-cols-2 rounded-xl p-5 bg-white mb-4">
-                            <div class="flex flex-col gap-y-3">
-                                <h1 class="text-2xl">
-                                    SPP Bulan <span x-text="item.jenis_tagihan"></span>
-                                </h1>
-                                <p>Total Biaya:</p>
-                            </div>
-                            <div class="flex items-end flex-col gap-y-5">
-                                <button>
-                                    <i @click="$store.cart.add(item)" class="bx bx-cart text-2xl text-green-700 cursor-pointer hover:bg-green-800"></i>
-                                </button>
-                                <div x-data="{ openData: false }" @click="openData = !openData" class="check p-2 mb-5 border-green-700 text-green-700 border-2 w-14 h-14 hover:bg-black hover:bg-opacity-10 rounded-md">
-                                    <i x-show="openData" class='bx bx-check text-2xl'></i>
-                                </div>
-                                <p x-text="formatRupiah(item.jumlah_tarif)"></p>
-                                <hr class="w-full text-black">
-                                <p @click="open = true" class="bg-green-700 text-white py-2 px-8 rounded-md cursor-pointer">
-                                    Bayar
-                                </p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-                
-
-            </div>
+  <div x-data="{openCart : false}">
+        <!-- Container komponen keranjang: HANYA SATU instance -->
+      <x-navbar-d-spp></x-navbar-d-spp>
+      <div class="max-w-screen-2xl mx-auto my-44 p-5">
+        <div class="mt-8 mx-auto">
+          <h1 class="text-3xl font-bold">Selamat Datang, eaa</h1>
+          <p class="text-gray-600 mt-1">39802398092</p>
         </div>
-        
+        <br><br>
 
-        {{-- input data diri tah iye  --}}
-        <div  x-show="open" class="flex fixed w-full h-screen items-center justify-center bg-black bg-opacity-20 top-0">
-            <div class="flex  justify-center flex-col bg-white p-10 rounded-xl text-2xl capitalize gap-2 relative">
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 text-xl capitalize">
-                    <i @click="open = false" class="bx bx-x right-0 absolute top-0 text-2xl"></i>
-
-                    <dl class="max-w-md text-gray-900 divide-y divide-gray-200 p-5">
-
-                        <div class="flex flex-col pb-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">nama</dt>
-                            {{-- <dd class="text-lg font-semibold">{{ $user->name }}</dd> --}}
-                        </div>
-                        <div class="flex flex-col py-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">kelas</dt>
-                            {{-- <dd class="text-lg font-semibold">{{ $user->kelas }}</dd> --}}
-                        </div>
-                        <div class="flex flex-col pt-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">no hp</dt>
-                            <dd class="text-lg font-semibold">+00 123 456 789 / +12 345 678</dd>
-                        </div>
-                    </dl>
-                    
-                      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
-                          <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">bayar</button>
-                      </div>
-                  </div>
+        {{-- Menampilkan pesan jika ada --}}
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-        </div>
-        
-        <div  x-show="openChart" class="flex fixed w-full h-screen items-center justify-center bg-black bg-opacity-20 top-0">
-            <div class="flex  justify-center flex-col bg-white p-10  rounded-xl text-2xl capitalize gap-2 relative">
-                <i @click="openChart = false" class="bx bx-x right-0 absolute top-0 text-2xl"></i>
-                
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 text-xl capitalize w-[800px] h-[450px]">
-                    <h3 class="text-lg font-bold text-center mt-2">Detail pembayaran</h3>
-                    <dl class="max-w-md text-gray-900 divide-y divide-gray-200 p-5">
+        @endif
 
-                        {{-- Validasi user --}}
-                            {{-- <div>{{ Auth::user()->name }}</div> --}}
-                            {{-- <div>{{ Auth::user()->email }}</div> --}}
-                            {{-- <div>{{ Auth::user()->phone_number }}</div> --}}
-
-                        <div class="flex flex-col pb-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Bulan</dt>
-                                {{-- <div x-show="$store.cart.items.length">
-                                    <div class="grid grid-cols-3 gap-2 text-sm">
-                                        <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-2 text-sm">
-                                        <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-2 text-sm">
-                                        <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
-                                    </div>
-                                </div> --}}
-                            <template x-for="(item, index) in $store.cart.items" :key="index">
-                            <div class="grid grid-cols-3 gap-2">
-                                <dd class="text-lg font-semibold" x-text="item.bulan"></dd>
-                                <dd class="text-lg font-semibold" x-text="item.harga"></dd>
-                                <button type="button" id="remove" @click="$store.cart.remove(item.id)" class="p-0 bg-transparent border-none ">
-                                    <i class="bx bx-x text-2xl"></i>
-                                </button>
-                            </div>  
-                            </template>   
-                            <p class="text-lg" x-show="!$store.cart.items.length">Tidak ada item yang dipilih</p> 
-                        </div>                                   
-                        <div class="flex flex-col py-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">total</dt>
-                            {{-- <template x-for="(item, index) in $store.cart.items" :key="index"> --}}
-                                <dd class="text-lg font-semibold" x-show="$store.cart.items.length" x-text="$store.cart.total ? formatRupiah($store.cart.total) : 'Rp 0'"></dd>
-                            {{-- </template> --}}
-                        </div>
-                        {{-- form Validasi --}}
-                        <div class="flex flex-col py-3">
-                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Detail</dt>
-                                <form action="" id="checkoutForm">
-                                    <div x-show="$store.cart.items.length">
-                                        {{-- <div class="grid grid-cols-3 gap-2 text-sm">
-                                            <p class="text-sm">Nama : <dd class="text-sm">{{ Auth::user()->name }}</dd></p>
-                                            <input type="hidden" name="nama" id="" value="{{ Auth::user()->name }}">
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2 text-sm">
-                                             <p class="text-sm">Email : <dd class="text-sm">{{ Auth::user()->email }}</dd></p>
-                                            <input type="hidden" name="email" id="" value="{{ Auth::user()->email }}">
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2 text-sm">
-                                            <p class="text-sm">Number : <dd class="text-sm">{{ Auth::user()->phone_number }}</dd></p>
-                                            <input type="hidden" name="phone" id="" value="{{ Auth::user()->phone_number }}">
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2 text-sm">
-                                            <input type="hidden" name="items" id="" x-model="JSON.stringify($store.cart.items)">
-                                            <input type="hidden" name="total" id="" x-model="$store.cart.total">
-                                        </div> --}}
-                                    </div>
-                                
-                        </div>
-                    
-                    </dl>
-                    
-                    
-                      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b" id="checkoutButton">
-                          <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">bayar</button>
-                      </div>
-                    </form>
-                    
-                  </div>
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
-        </div>
-        </div>
+        @endif
+```
+    <!-- Container kategori (tetap menggunakan x-data lokal jika diperlukan) -->
+    <div x-data="{ open: false }" class="bg-green-700 rounded-md p-4 m-auto overflow-hidden">
+      <!-- Category Header -->
+      <div x-ref="categori" class="flex duration-200 min-[425px]:translate-x-[0] w-[350px] p-3 relative items-center justify-between mb-4 border bg-white/25 border-white rounded-full">
+        <div @click="$refs.scrollBar.scrollLeft = 0" class="z-[1] px-4 text-sm cursor-pointer min-[425px]:block hidden">Categori 1</div>
+        <div @click="$refs.scrollBar.scrollLeft = 295" class="z-[1] px-4 text-sm cursor-pointer min-[425px]:block hidden">Categori 2</div>
+        <div @click="$refs.scrollBar.scrollLeft = 905" class="z-[1] px-4 text-sm cursor-pointer min-[425px]:block hidden">Categori 3</div>
+        <div @click="$refs.scrollBar.scrollLeft = 0; $refs.categori.classList.add('translate-x-[0]'); $refs.categori.classList.remove('translate-x-[-50px]','translate-x-[-100px]')" class="z-[1] min-[425px]:hidden px-4 text-sm cursor-pointer">Categori 1</div>
+        <div @click="$refs.scrollBar.scrollLeft = 295; $refs.categori.classList.add('translate-x-[-50px]'); $refs.categori.classList.remove('translate-x-[0]','translate-x-[-100px]')" class="z-[1] min-[425px]:hidden px-4 text-sm cursor-pointer">Categori 2</div>
+        <div @click="$refs.scrollBar.scrollLeft = 905; $refs.categori.classList.add('translate-x-[-100px]'); $refs.categori.classList.remove('translate-x-[0]','translate-x-[-50px]')" class="z-[1] min-[425px]:hidden px-4 text-sm cursor-pointer">Categori 3</div>
+  
+        <div id="tarikBg" class="w-[100px] h-[35px] bg-white absolute rounded-full duration-75"></div>
+      </div>
+  
+      <!-- Horizontal Scrollable Container -->
+      <div x-ref="scrollBar" class="overflow-x-auto scrollbar-hide scroll-smooth scrollBar">
+        <div id="gob" class="flex space-x-4 pb-4" style="width: max-content">
+          <!-- Card 1 (Statis) -->
+          <div class="bg-white rounded-xl p-4 w-72 flex-shrink-0">
+            <div class="flex justify-between items-start mb-10">
+              <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <i class="bx bx-cart text-[2rem]"></i>
+            </div>
+            <div class="mb-2">
+              <div class="text-gray-600 text-sm">Bulanan</div>
+              <div class="text-xl font-semibold">SPP</div>
+            </div>
+            <div class="justify-between items-center">
+              <button class="bg-gray-100 py-1 px-3 rounded-sm text-sm" onclick="showDetail()">Detail →</button><br>
+              <hr class="mt-20">
+              <a href="/siswa" class="text-lg font-medium hover:text-primary hover:opacity-50">Bayar Sekarang →</a>
+            </div>
+          </div>
+  
+          <!-- Card 2: Looping Data dari items -->
+          @foreach($tagihans as $tagihan)          
+          <div class="bg-white rounded-xl p-4 w-72 flex-shrink-0">
+            <div class="flex justify-between items-start mb-10">
+              <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <form method="POST" action="{{ route('user-orders.add-to-cart') }}">
+                @csrf
+                <input type="hidden" name="tarif_tagihan_id" value="{{ $tagihan->id_tarif_tagihan }}">
+                <button type="submit">
+                    <i class="bx bx-cart text-[2rem]"></i>
+                </button>
+            </form>            
+            </form>
+            </div>
+            <div class="mb-2">
+              <div class="text-gray-600 text-sm">
+                <span>{{ $tagihan->jenisTagihan->jenis_tagihan }}</span>
+              </div>
+              <div class="text-xl font-semibold">
+                <span>{{ formatRupiah($tagihan->jumlah_tarif) }}</span>
+              </div>
+            </div>
+            <div class="justify-between items-center">
+              <button class="bg-gray-100 px-4 py-1 rounded-lg text-sm" @click="showDetail(item)">Detail →</button><br>
+              <hr class="mt-20">
+              <a class="text-lg font-medium hover:text-primary hover:opacity-50">Bayar Sekarang →</a>
+            </div>
+          </div>
+        @endforeach
     </div>
 
+        <div class="rounded-xl p-4 w-72 flex-shrink-0">
+          @if(session('success'))
+          <div class="alert alert-success">{{ session('success') }}</div>
+          @endif        
+        </div>
 
+    </div>
+    </div>
+  
+    <!-- Bagian Cart (Popup) -->
+    <div x-show="openCart" class="fixed w-full h-screen top-0 left-0 bg-secondary z-10">
+      <p @click="openCart = false" class="absolute right-0 top-0 cursor-pointer text-[2rem]">
+        <i class="bx bx-x"></i>
+      </p>
+      @if(empty($cart))
+      <div class="flex items-center justify-center h-screen">
+        <p class="text-center font-bold text-lg">Keranjang kosong</p>
+      </div>      
+      @else
+      <section class="md:py-16">
+        <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+          <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+            <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+              @foreach($cart as $item)
+              <div class="space-y-6">
+                <div class="rounded-lg border bg-primary text-secondary md:p-6">
+                  <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                  
+                    <a href="#" class="shrink-0 md:order-1">
+                      <img class="h-20 w-20 dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="imac image" />
+                      <img class="hidden h-20 w-20 dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="imac image" />
+                    </a>
+                    <div class="flex items-center justify-between md:order-3 md:justify-end">
+                      <div class="flex items-center">
+                        <p>{{ formatRupiah($item['jumlah_tarif']) }}</p>
+                      </div>
+                      <div class="text-end md:order-4 md:w-32 cursor-pointer">
+                        <a href="{{ route('user-orders.remove-from-cart', $item['id_tarif_tagihan']) }}">
+                          <i class="bx bx-x text-[2rem]"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="w-full min-w-0 flex-1 md:order-2 md:max-w-md">
+                      <p>{{ $item['jenis_tagihan'] }}</p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              @endforeach
+            </div>
+  
+            <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+              <div class="space-y-4 rounded-lg border bg-primary text-secondary sm:p-6">
+                <p class="text-xl font-semibold">Order summary</p>
+                <div class="space-y-4">
+                  <div class="space-y-2">
+                    <dl class="flex items-center justify-between gap-4">
+                      <dt class="text-base font-normal">Original price</dt>
+                      <dd class="text-base font-medium">$7,592.00</dd>
+                    </dl>
+                  </div>
+                  <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                    <dt class="text-base font-bold">Total</dt>
+                    <dd class="text-base font-bold">{{ formatRupiah($total) }}</dd>
+                  </dl>
+                </div>
+                <button type="button" class="flex w-full items-center justify-center rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900">
+                    Buat pesanan
+                </button>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      @endif
+    </div>
+  </div>
+</div>
+</div>
 
-      <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-    {{-- <script>
-        // window.tagihan = @json($orders); // Menyimpan data ke variabel global
-        window.tagihan = @json($orders);
-    </script>
-    <script src="assets/js/tagihan.js"></script> --}}
+</div>
 
-    <script>
-        window.tagihan = @json($orders);
-    </script>
-    
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data("Tagihan", () => ({
-                items: window.tagihan || [],
-                formatRupiah(angka) {
-                    angka = parseFloat(angka);
-                    return isNaN(angka) ? "Rp 0" : "Rp " + new Intl.NumberFormat("id-ID").format(angka);
-                },
-            }));
-        });
-    </script>
-    
-    
+  <!-- Sertakan AlpineJS dan Flowbite (pastikan hanya sekali) -->
 
-</body>
-</html>
+  <script src="https://unpkg.com/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" defer></script>
+
+  
+

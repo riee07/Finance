@@ -15,6 +15,7 @@ use App\Http\Controllers\UsersOrderController;
 
 use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
+use App\Models\UsersOrder;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,7 +55,12 @@ Route::get('tahun-ajaran.export', [TahunAjaranController::class, 'export'])->nam
 // });
 
 // buat users
-Route::resource('UserOrder', [UsersOrderController::class]);
+Route::prefix('user-orders')->name('user-orders.')->group(function () {
+    Route::get('/', [UsersOrderController::class, 'index'])->name('index');
+    Route::post('/add-to-cart', [UsersOrderController::class, 'addToCart'])->name('add-to-cart');
+    Route::get('/remove-from-cart/{id_tarif_tagihan}', [UsersOrderController::class, 'removeFromCart'])
+         ->name('remove-from-cart');
+});
 
 
 require __DIR__.'/auth.php';
