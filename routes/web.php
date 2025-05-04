@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('tagihan', TagihanController::class);
     Route::resource('detail-tagihan', DetailTagihanController::class);
     Route::resource('pembayaran', PembayaranController::class);
-    Route::resource('data-admin', AdminController::class);
+    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
 });
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
