@@ -10,6 +10,8 @@
 
 <x-allLinks></x-allLinks>
 
+
+
   <!-- Container utama dengan state openCart -->
 
   <div x-data="{openCart : false}">
@@ -22,19 +24,6 @@
         </div>
         <br><br>
 
-        {{-- Menampilkan pesan jika ada --}}
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-```
     <!-- Container kategori (tetap menggunakan x-data lokal jika diperlukan) -->
     <div x-data="{ open: false }" class="bg-green-700 rounded-md p-4 m-auto overflow-hidden">
       <!-- Category Header -->
@@ -107,9 +96,7 @@
     </div>
 
         <div class="rounded-xl p-4 w-72 flex-shrink-0">
-          @if(session('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-          @endif        
+          {{-- content lainnya kalo adaa        --}}
         </div>
 
     </div>
@@ -164,8 +151,8 @@
                 <div class="space-y-4">
                   <div class="space-y-2">
                     <dl class="flex items-center justify-between gap-4">
-                      <dt class="text-base font-normal">Original price</dt>
-                      <dd class="text-base font-medium">$7,592.00</dd>
+                      <dt class="text-base font-normal">Jumlah Item</dt>
+                      <dd class="text-base font-medium">{{$jumlahItem}}</dd>
                     </dl>
                   </div>
                   <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">

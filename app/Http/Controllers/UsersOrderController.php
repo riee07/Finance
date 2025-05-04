@@ -20,8 +20,10 @@ class UsersOrderController extends Controller
         
         // Hitung total
         $total = array_sum(array_column($cart, 'jumlah_tarif'));
+
+        $jumlahItem = count($cart);
         
-        return view('users.index', compact('tagihans', 'cart', 'total'));
+        return view('users.index', compact('tagihans', 'cart', 'total', 'jumlahItem'));
     }
 
     public function addToCart(Request $request)
