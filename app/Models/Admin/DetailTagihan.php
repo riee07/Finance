@@ -21,6 +21,6 @@ class DetailTagihan extends Model
 
     public function tarifTagihan()
     {
-        return $this->belongsTo(TarifTagihan::class, 'tarif_id', 'id_tarif');
+        return $this->belongsTo(TarifTagihan::class, 'tarif_tagihan_id', 'id_tarif_tagihan');
     }
 }

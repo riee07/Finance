@@ -24,7 +24,7 @@
                 <td class="border px-4 py-2">{{ $tagih->id_tagihan }}</td>
                 <td class="border px-4 py-2">{{ $tagih->siswa->nama }}</td>
                 <td class="border px-4 py-2">{{ $tagih->tahunAjaran->tahun_ajaran }}</td>
-                <td class="border px-4 py-2">{{ $tagih->total_tagihan }}</td>
+                <td class="border px-4 py-2">{{ formatRupiah($tagih->total_tagihan) }}</td>
                 <td class="border px-4 py-2">{{ $tagih->status_pembayaran }}</td>
                 <td class="border px-4 py-2">
                     <a href="{{ route('admin.tagihan.edit', $tagih->id_tagihan) }}" class="text-blue-500">Edit</a> |

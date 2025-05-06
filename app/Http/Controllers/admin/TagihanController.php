@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Tagihan;
 use App\Models\Admin\Siswa;
 use App\Models\Admin\TahunAjaran;
+use App\Models\Admin\JenisTagihan;
+use App\Models\Admin\TarifTagihan;
+use App\Models\Admin\DetailTagihan;
 
 class TagihanController extends Controller
 {
@@ -104,4 +107,61 @@ class TagihanController extends Controller
         $tagihans->delete();
         return redirect()->route('admin.tagihan.index')->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function generate(Request $request)
+    {
+        $tahunAjaranId = $request->tahun_ajaran_id;
+
+        $siswaAktif = Siswa::where('status_aktif', 'aktif')
+            ->where('tahun_ajaran_id', $tahunAjaranId)
+            ->get();
+
+        $jenisTagihans = JenisTagihan::all();
+
+        foreach ($siswaAktif as $siswa) {
+            // Cek kalau tagihan sudah ada
+            $existing = Tagihan::where('siswa_id', $siswa->id_siswa)
+                ->where('tahun_ajaran_id', $tahunAjaranId)
+                ->first();
+
+            if ($existing) {
+                continue;
+            }
+
+            // Buat tagihan utama
+            $tagihan = Tagihan::create([
+                'siswa_id' => $siswa->id_siswa,
+                'tahun_ajaran_id' => $tahunAjaranId,
+                'total_tagihan' => 0, // sementara, nanti dihitung
+                'status_pembayaran' => 'belum_lunas',
+            ]);
+
+            $total = 0;
+
+            // Tambahkan detail tagihan
+            foreach ($jenisTagihans as $jenis) {
+                $tarif = TarifTagihan::where('jenis_tagihan_id', $jenis->id_jenis_tagihan)
+                    ->where('tahun_ajaran_id', $tahunAjaranId)
+                    ->first();
+
+                if (!$tarif) {
+                    continue;
+                }
+
+                DetailTagihan::create([
+                    'tagihan_id' => $tagihan->id_tagihan,
+                    'tarif_tagihan_id' => $tarif->id_tarif_tagihan,
+                    'jumlah_tagihan' => $tarif->jumlah_tarif,
+                ]);
+
+                $total += $tarif->jumlah_tarif;
+            }
+
+            // Update total tagihan
+            $tagihan->update(['total_tagihan' => $total]);
+        }
+
+        return back()->with('success', 'Tagihan berhasil digenerate!');
+    }
+
 }

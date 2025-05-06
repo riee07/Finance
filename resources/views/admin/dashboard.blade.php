@@ -8,13 +8,13 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @php
             $menus = [
-                ['title' => 'Manajemen Siswa', 'route' => 'admin.siswa.index', 'icon' => '👨‍🎓'],
+                ['title' => 'Tahun Ajaran', 'route' => 'admin.tahun-ajaran.index', 'icon' => '📅'],
                 ['title' => 'Jenis Tagihan', 'route' => 'admin.jenis-tagihan.index', 'icon' => '📄'],
                 ['title' => 'Tarif Tagihan', 'route' => 'admin.tarif-tagihan.index', 'icon' => '💸'],
+                ['title' => 'Manajemen Siswa', 'route' => 'admin.siswa.index', 'icon' => '👨‍🎓'],
                 ['title' => 'Data Tagihan', 'route' => 'admin.tagihan.index', 'icon' => '📋'],
                 ['title' => 'Detail Tagihan', 'route' => 'admin.detail-tagihan.index', 'icon' => '🔍'],
                 ['title' => 'Pembayaran', 'route' => 'admin.pembayaran.index', 'icon' => '💰'],
-                ['title' => 'Tahun Ajaran', 'route' => 'admin.tahun-ajaran.index', 'icon' => '📅'],
             ];
         @endphp
 
@@ -28,4 +28,14 @@
             </a>
         @endforeach
     </div>
+
+    <form action="{{ route('generate.tagihan') }}" method="POST">
+        @csrf
+        <select name="tahun_ajaran_id" required>
+            @foreach ($tahunAjarans as $tahun)
+                <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
+            @endforeach
+        </select>
+        <button type="submit" class="btn btn-primary bg-blue-800">Generate Tagihan</button>
+    </form>
 @endsection

@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\DetailTagihanController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\AdminController;
 
+use App\Http\Controllers\Siswa\RealSiswaController;
+
 use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
 
@@ -45,6 +47,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('pembayaran', PembayaranController::class);
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
 });
+
+Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('dashboard', [RealSiswaController::class, 'index'])->name('dashboard');
+});
+
+Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');
+
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
 // });

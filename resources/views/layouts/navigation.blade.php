@@ -16,9 +16,9 @@
             <nav class="space-y-2">
                 <a href="{{ url('admin/dashboard') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('dashboard') ? 'bg-gray-800' : '' }}">Dashboard</a>
                 <a href="{{ url('admin/tahun-ajaran') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('tahun-ajaran*') ? 'bg-gray-800' : '' }}">Tahun Ajaran</a>
-                <a href="{{ url('admin/siswa') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('siswa*') ? 'bg-gray-800' : '' }}">Manajemen Siswa</a>
                 <a href="{{ url('admin/jenis-tagihan') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('jenis-tagihan*') ? 'bg-gray-800' : '' }}">Jenis Tagihan</a>
                 <a href="{{ url('admin/tarif-tagihan') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('tarif-tagihan*') ? 'bg-gray-800' : '' }}">Tarif Tagihan</a>
+                <a href="{{ url('admin/siswa') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('siswa*') ? 'bg-gray-800' : '' }}">Manajemen Siswa</a>
                 <a href="{{ url('admin/tagihan') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('tagihan*') ? 'bg-gray-800' : '' }}">Data Tagihan</a>
                 <a href="{{ url('admin/detail-tagihan') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('tagihan*') ? 'bg-gray-800' : '' }}">Detail Tagihan</a>
                 <a href="{{ url('admin/pembayaran') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->is('pembayaran*') ? 'bg-gray-800' : '' }}">Pembayaran</a>
