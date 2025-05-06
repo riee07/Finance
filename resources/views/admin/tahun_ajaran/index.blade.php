@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('components.sidebar-admin')
 
 {{-- @section('title', 'Data Tahun Ajaran') --}}
 
