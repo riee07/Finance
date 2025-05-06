@@ -1,8 +1,6 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
-@section('title', 'Data Tagihan')
-
-@section('content')
+@section('admin-sidebar')
     <h1 class="text-2xl font-bold mb-4">Data Tagihan</h1>
 
     <a href="{{ route('admin.tagihan.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Tagihan</a>

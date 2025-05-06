@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Admin;
+use App\Models\UsersOrder;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,5 +28,10 @@ class TahunAjaran extends Model
     public function tagihan()
     {
         return $this->hasMany(Tagihan::class, 'tahun_ajaran_id', 'id_tahun_ajaran');
+    }
+
+    public function userOrders()
+    {
+        return $this->hasMany(UsersOrder::class, 'tahun_ajaran_id', 'id_tahun_ajaran');
     }
 }

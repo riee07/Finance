@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
             case 'superadmin':
                 return redirect('superadmin/dashboard');
             case 'siswa':
-                return redirect('siswa/'. $request->user()->kelas .'/dashboard');
+                return redirect('users/index');
             default:
                 return redirect('dashboard');
         }

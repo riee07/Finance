@@ -1,8 +1,6 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
-@section('title', 'Data Tarif Tagihan')
-
-@section('content')
+@section('admin-sidebar')
     <h1 class="text-2xl font-bold mb-4">Data Tarif Tagihan</h1>
 
     <a href="{{ route('admin.tarif-tagihan.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Tarif Tagihan</a>
@@ -21,7 +19,7 @@
             <tr>
                 <td class="border px-4 py-2">{{ $tarif->jenisTagihan->jenis_tagihan }}</td>
                 <td class="border px-4 py-2">{{ $tarif->tahunAjaran->tahun_ajaran }}</td>
-                <td class="border px-4 py-2">{{ $tarif->jumlah_tarif }}</td>
+                <td class="border px-4 py-2">{{ formatRupiah($tarif->jumlah_tarif) }}</td>
                 <td class="border px-4 py-2">
                     <a href="{{ route('admin.tarif-tagihan.edit', $tarif->id_tarif_tagihan) }}" class="text-blue-500">Edit</a> |
                     <form action="{{ route('admin.tarif-tagihan.destroy', $tarif->id_tarif_tagihan) }}" method="POST" class="inline">

@@ -1,8 +1,8 @@
-@extends('layouts.navigation')
+@extends('layouts.app')
 
-@section('title', 'Data Tahun Ajaran')
+{{-- @section('title', 'Data Tahun Ajaran') --}}
 
-@section('content')
+@section('admin-sidebar')
     <h1 class="text-2xl font-bold mb-4">Data Tahun Ajaran</h1>
 
     <a href="{{ route('admin.tahun-ajaran.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Tahun Ajaran</a>

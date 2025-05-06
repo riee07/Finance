@@ -11,11 +11,13 @@ use App\Http\Controllers\Admin\TagihanController;
 use App\Http\Controllers\Admin\DetailTagihanController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\UsersOrderController;
 
 use App\Http\Controllers\Siswa\RealSiswaController;
 
 use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
+use App\Models\UsersOrder;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,6 +65,14 @@ Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->
 
 // Route::middleware(['auth', 'role:superadmin'])->group(function() {
 // });
+
+// buat users
+Route::prefix('user-orders')->name('user-orders.')->group(function () {
+    Route::get('/', [UsersOrderController::class, 'index'])->name('index');
+    Route::post('/add-to-cart', [UsersOrderController::class, 'addToCart'])->name('add-to-cart');
+    Route::get('/remove-from-cart/{id_tarif_tagihan}', [UsersOrderController::class, 'removeFromCart'])
+         ->name('remove-from-cart');
+});
 
 
 require __DIR__.'/auth.php';
