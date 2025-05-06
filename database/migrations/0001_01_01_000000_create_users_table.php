@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone_number')->nullable()->after('email');
             $table->enum('jurusan',['pplg', 'tkj', 'an'])->nullable();
             $table->enum('role',['siswa','admin','superadmin'])->default('siswa');
+            $table->unsignedBigInteger('siswa_id')->nullable(); // FK harus dideklarasikan manual
+            $table->foreign('siswa_id')->references('id_siswa')->on('siswas')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

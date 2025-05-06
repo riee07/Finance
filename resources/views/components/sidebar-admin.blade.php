@@ -26,7 +26,7 @@
     <nav class="flex flex-col space-y-2 mt-4 px-2 text-sm font-medium">
 
       <!-- Dashboard -->
-      <a href="#" class="flex items-center space-x-3 px-3 py-2 hover:bg-[#578E7E] rounded">
+      <a href="{{ url('admin/dashboard') }}" class="flex items-center space-x-3 px-3 py-2 hover:bg-[#578E7E] rounded">
         <i class="fas fa-th-large"></i>
         <span x-show="isOpen">Dashboard</span>
       </a>
@@ -46,13 +46,13 @@
 
         <!-- Submenu -->
         <div x-show="openProjects" x-collapse x-cloak class="ml-8 mt-1 space-y-1 text-sm">
-         <a href="#" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Siswa</a>
-          <a href="tahun-ajaran" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tahun ajaran</a>
-          <a href="jenis-tagihan" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Jenis tagihan</a>
-          <a href="tarif-tagihan" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">tarif tagihan</a>
-          <a href="tagihan" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tagihan</a>
-          <a href="detail-tagihan" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Detail tagihan</a>
-          <a href="pembayaran" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Pembayaran</a>
+         <a href="{{ url('admin/siswa') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Siswa</a>
+          <a href="{{ url('admin/tahun-ajaran') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tahun ajaran</a>
+          <a href="{{ url('admin/jenis-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Jenis tagihan</a>
+          <a href="{{ url('admin/tarif-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">tarif tagihan</a>
+          <a href="{{ url('admin/tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tagihan</a>
+          <a href="{{ url('admin/detail-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Detail tagihan</a>
+          <a href="{{ url('admin/pembayaran') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Pembayaran</a>
         </div>
       </div>
 
