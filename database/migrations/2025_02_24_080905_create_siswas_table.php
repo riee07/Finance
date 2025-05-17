@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id('id_siswa');
-            $table->string('nama');
-            $table->string('nis')->unique();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('name');
+            $table->string('nisn')->unique();
             $table->string('kelas');
+            $table->string('jurusan');
+            $table->string('no_hp')->nullable();
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable(); // FK harus dideklarasikan manual
             $table->foreign('tahun_ajaran_id')->references('id_tahun_ajaran')->on('tahun_ajarans')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status_aktif', ['aktif', 'non-aktif'])->default('aktif');

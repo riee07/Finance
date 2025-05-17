@@ -23,12 +23,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'phone_number',
-        'kelas',
-        'jurusan',
-        'nisn',
-        'role',
         'password',
+        'password_polos',
+        'role',
     ];
 
     /**
@@ -55,6 +52,6 @@ class User extends Authenticatable
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class, 'siswa_id', 'id_siswa');
+        return $this->hasOne(Siswa::class, 'user_id', 'id');
     }
 }

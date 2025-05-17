@@ -12,7 +12,16 @@ class Siswa extends Model
     protected $table = 'siswas';
     protected $primaryKey = 'id_siswa';
 
-    protected $fillable = ['nama', 'nis', 'kelas', 'tahun_ajaran_id', 'status_aktif'];
+    protected $fillable = [
+        'user_id',
+        'name',
+        'nisn',
+        'kelas',
+        'jurusan',
+        'no_hp',
+        'tahun_ajaran_id',
+        'status_aktif',
+    ];
 
     public function tahunAjaran()
     {
@@ -22,5 +31,10 @@ class Siswa extends Model
     public function tagihan()
     {
         return $this->hasMany(Tagihan::class, 'siswa_id', 'id_siswa');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
     }
 }

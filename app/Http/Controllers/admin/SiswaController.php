@@ -1,20 +1,19 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-use App\Models\Admin\Siswa;
 
-use Illuminate\Http\Request;
-use App\Models\Admin\TahunAjaran;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Admin\Siswa;
+use App\Models\Admin\TahunAjaran;
 
 class SiswaController extends Controller
 {
     public function index()
     {
-        $siswas = Siswa::with('tahunAjaran')->get();
+        $siswas = Siswa::with('tahunAjaran', 'user')->get();
         return view('admin.siswa.index', compact('siswas'));
     }
 
@@ -26,56 +25,41 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'nis' => 'required|numeric|unique:siswas',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'nisn' => 'required|unique:siswas',
             'kelas' => 'required|string',
-            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
+            'jurusan' => 'required|string',
+            'no_hp' => 'nullable|string',
+            'tahun_ajaran_id' => 'nullable|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
         ]);
 
-        Siswa::create($request->all());
+        DB::transaction(function () use ($validated) {
+            // 1. Buat user akun
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+                'password_polos' => $validated['password'],
+                'role' => 'siswa',
+            ]);
 
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan.');
-    }
+            // 2. Buat data siswa
+            Siswa::create([
+                'user_id' => $user->id,
+                'name' => $validated['name'],
+                'nisn' => $validated['nisn'],
+                'kelas' => $validated['kelas'],
+                'jurusan' => $validated['jurusan'],
+                'no_hp' => $validated['no_hp'] ?? null,
+                'tahun_ajaran_id' => $validated['tahun_ajaran_id'] ?? null,
+                'status_aktif' => $validated['status_aktif'],
+            ]);
+        });
 
-    public function edit($id)
-    {
-        $siswa = Siswa::findOrFail($id);
-        $tahun_ajarans = TahunAjaran::all();
-        return view('admin.siswa.edit', compact('siswa', 'tahun_ajarans'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $siswa = Siswa::findOrFail($id);
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'nis' => 'required|numeric|unique:siswas,nis,'.$id.',id_siswa',
-            'kelas' => 'required|string',
-            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
-            'status_aktif' => 'required|in:aktif,non-aktif',
-        ]);
-        
-
-        $siswa->nama = $request->nama;
-        $siswa->nis = $request->nis;
-        $siswa->kelas = $request->kelas;
-        $siswa->tahun_ajaran_id = $request->tahun_ajaran_id;
-        $siswa->status_aktif = $request->status_aktif;
-
-        Log::info('Menyimpan siswa:', $siswa->toArray());   
-
-        $siswa->save();
-
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil diperbarui.');
-    }
-
-    public function destroy($id)
-    {
-        $siswa = Siswa::findOrFail($id);
-        $siswa->delete();
-
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil dihapus');
+        return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
 }

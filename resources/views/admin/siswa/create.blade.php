@@ -7,16 +7,28 @@
 
     <form action="{{ route('admin.siswa.store') }}" method="POST">
         @csrf
-        <label class="block">Nama:</label>
-        <input type="text" name="nama" class="border p-2 w-full" required>
+        <label class="block">Name:</label>
+        <input type="text" name="name" class="border p-2 w-full" required>
 
-        <label class="block mt-2">NIS:</label>
-        <input type="text" name="nis" class="border p-2 w-full" required>
+        <label class="block">Email:</label>
+        <input type="email" name="email" class="border p-2 w-full" required>
+
+        <label class="block">Password:</label>
+        <input type="text" name="password" class="border p-2 w-full" required>
+
+        <label class="block mt-2">NISN:</label>
+        <input type="text" name="nisn" class="border p-2 w-full" required>
 
         <label class="block mt-2">Kelas:</label>
         <input type="text" name="kelas" class="border p-2 w-full" required>
 
-        <label class="block mt-2">Tahun Ajaran:</label>
+        <label class="block mt-2">Jurusan:</label>
+        <input type="text" name="jurusan" class="border p-2 w-full" required>
+
+        <label class="block mt-2">No HP:</label>
+        <input type="text" name="no_hp" class="border p-2 w-full" required>
+
+        <label class="block mt-2">Tahun Ajaran ID:</label>
         <select name="tahun_ajaran_id" class="border p-2 w-full" required>
             <option value="">-- PILIH --</option>
             @foreach($tahun_ajarans as $tahun)
