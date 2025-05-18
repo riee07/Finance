@@ -1,4 +1,4 @@
-Halo Siswa!
+Halo {{ Auth::user()->siswa->name }}!
 Langsung saja yak. Ini dia list bayaran kamu😊
 
 <br>

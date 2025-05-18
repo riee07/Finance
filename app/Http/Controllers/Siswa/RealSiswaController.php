@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailTagihan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RealSiswaController extends Controller
 {
@@ -13,8 +14,9 @@ class RealSiswaController extends Controller
      */
     public function index()
     {
+        $siswa = Auth::user()->siswa;
         $detail_tagihans = DetailTagihan::with('tarifTagihan.jenisTagihan', 'tarifTagihan.tahunAjaran', 'tagihan')->get();
-        return view('siswa.dashboard', compact('detail_tagihans'));
+        return view('siswa.dashboard', compact('siswa', 'detail_tagihans'));
     }
 
     /**

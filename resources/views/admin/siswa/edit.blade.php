@@ -9,7 +9,7 @@
         @csrf
         @method('PUT')
         <label class="block">Nama:</label>
-        <input type="text" name="nama" class="border p-2 w-full" value="{{ $siswa->nama }}" required>
+        <input type="text" name="nama" class="border p-2 w-full" value="{{ $siswa->name }}" required>
 
         <label class="block mt-2">NIS:</label>
         <input type="text" name="nis" class="border p-2 w-full" value="{{ $siswa->nis }}" required>

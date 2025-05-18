@@ -22,7 +22,7 @@
             @foreach($detail_tagihans as $detail)
             <tr>
                 <td class="border px-4 py-2">{{ $detail->id_detail_tagihan }}</td>
-                <td class="border px-4 py-2">{{ $detail->tagihan_id }}  ({{ $detail->tagihan->siswa->nama }})</td>
+                <td class="border px-4 py-2">{{ $detail->tagihan_id }}  ({{ $detail->tagihan->siswa->name }})</td>
                 <td class="border px-4 py-2">{{ $detail->tarif_tagihan_id }} ({{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }})</td>
                 <td class="border px-4 py-2">{{ $detail->tagihan->tahunAjaran->id_tahun_ajaran }}  ({{ $detail->tagihan->tahunAjaran->tahun_ajaran }})</td>
                 <td class="border px-4 py-2">{{ formatRupiah($detail->jumlah_tagihan) }}</td>

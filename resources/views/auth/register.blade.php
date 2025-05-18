@@ -1,3 +1,4 @@
+INI HALAMAN BUAT BIKIN AKUN ADMIN. PAS UDH DI PUBLIC MAH /REGISTER DIHAPUS
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -46,7 +47,6 @@
              <x-input-label for="role" :value="__('Role')" />
              <select name="role" id="usertype" class="block mt-1 w-full" required>
                  <option value="">Pilih Role</option>
-                 <option value="siswa">Siswa</option>
                  <option value="admin">Admin</option>
                  <option value="superadmin">Superadmin</option>
              </select>

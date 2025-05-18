@@ -12,7 +12,7 @@
         <select name="siswa_id" class="border p-2 w-full" required>
             <option value="">-- PILIH --</option>
             @foreach($siswas as $siswa)
-            <option value="{{ $siswa->id_siswa }}" {{ $tagihans->siswa_id == $siswa->id_siswa ? 'selected' : '' }}>{{ $siswa->nama }}</option>
+            <option value="{{ $siswa->id_siswa }}" {{ $tagihans->siswa_id == $siswa->id_siswa ? 'selected' : '' }}>{{ $siswa->name }}</option>
             @endforeach
         </select>
 
