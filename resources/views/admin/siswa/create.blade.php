@@ -11,10 +11,12 @@
         <input type="text" name="name" class="border p-2 w-full" required>
 
         <label class="block">Email:</label>
-        <input type="email" name="email" class="border p-2 w-full" required>
+        <input type="email" name="email" value="{{ old('email', $email ?? '') }}" readonly>
+        <small class="text-gray-500">*Email ini otomatis ter-generate</small>
 
         <label class="block">Password:</label>
-        <input type="text" name="password" class="border p-2 w-full" required>
+        <input type="text" name="password" value="{{ old('password', $password ?? '') }}" readonly>
+        <small class="text-gray-500">*Password ini otomatis ter-generate</small>
 
         <label class="block mt-2">NISN:</label>
         <input type="text" name="nisn" class="border p-2 w-full" required>

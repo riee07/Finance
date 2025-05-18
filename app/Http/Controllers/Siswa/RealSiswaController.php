@@ -14,8 +14,23 @@ class RealSiswaController extends Controller
      */
     public function index()
     {
+        // Ambil data siswa dari user yang sedang login
         $siswa = Auth::user()->siswa;
-        $detail_tagihans = DetailTagihan::with('tarifTagihan.jenisTagihan', 'tarifTagihan.tahunAjaran', 'tagihan')->get();
+
+        // Ambil hanya detail tagihan yang:
+        // - Berasal dari tagihan milik siswa ini
+        // - Tahun ajaran-nya sama dengan tahun_ajaran_id milik siswa
+        $detail_tagihans = DetailTagihan::with([
+                'tarifTagihan.jenisTagihan',
+                'tarifTagihan.tahunAjaran',
+                'tagihan'
+            ])
+            ->whereHas('tagihan', function ($query) use ($siswa) {
+                $query->where('siswa_id', $siswa->id_siswa)
+                    ->where('tahun_ajaran_id', $siswa->tahun_ajaran_id);
+            })
+            ->get();
+
         return view('siswa.dashboard', compact('siswa', 'detail_tagihans'));
     }
 

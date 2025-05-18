@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Admin\Siswa;
 use App\Models\Admin\TahunAjaran;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
@@ -27,8 +28,6 @@ class SiswaController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
             'nisn' => 'required|unique:siswas',
             'kelas' => 'required|string',
             'jurusan' => 'required|string',
@@ -38,16 +37,27 @@ class SiswaController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
-            // 1. Buat user akun
+            // Email: "AF" + 4 digit acak dari NISN
+            $nisnDigits = str_split($validated['nisn']);
+            shuffle($nisnDigits);
+            $emailCode = implode('', array_slice($nisnDigits, 0, 4));
+            $email = 'AF' . $emailCode . '@gmail.com';
+
+            // Password: 3 huruf kapital + 3 angka
+            $passwordLetters = strtoupper(Str::random(3));
+            $passwordNumbers = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
+            $rawPassword = $passwordLetters . $passwordNumbers;
+
+            // Buat user akun
             $user = User::create([
                 'name' => $validated['name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'password_polos' => $validated['password'],
+                'email' => $email,
+                'password' => Hash::make($rawPassword),
+                'password_polos' => $rawPassword,
                 'role' => 'siswa',
             ]);
 
-            // 2. Buat data siswa
+            // Buat data siswa
             Siswa::create([
                 'user_id' => $user->id,
                 'name' => $validated['name'],
@@ -58,8 +68,13 @@ class SiswaController extends Controller
                 'tahun_ajaran_id' => $validated['tahun_ajaran_id'] ?? null,
                 'status_aktif' => $validated['status_aktif'],
             ]);
+
+            // Optional: Simpan info login (email & password) ke session
+            session()->flash('generated_email', $email);
+            session()->flash('generated_password', $rawPassword);
         });
 
         return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
+
 }
