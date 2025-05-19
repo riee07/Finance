@@ -35,8 +35,8 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $tahun_ajarans = TahunAjaran::all();
-        return view('admin.siswa.create', compact('tahun_ajarans'));
+        $siswas = Siswa::with('tahunAjaran', 'user')->get();
+        return view('admin.siswa.create', compact('siswas'));
     }
 
     public function store(Request $request)
@@ -44,8 +44,8 @@ class SiswaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'nisn' => 'required|unique:siswas',
-            'kelas' => 'required|in:x,xi,xii',
-            'jurusan' => 'required|in:pplg,tjkt,an,dkv,ak,mp,dpb,lps,br',
+            'kelas' => 'required|string',
+            'jurusan' => 'required|string',
             'no_hp' => 'nullable|string',
             'tahun_ajaran_id' => 'nullable|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
@@ -59,15 +59,16 @@ class SiswaController extends Controller
             $email = 'AF' . $emailCode . '@gmail.com';
 
             // Password: 3 huruf kapital + 3 angka
-            // $passwordLetters = strtoupper(Str::random(3));
-            // $passwordNumbers = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
-            // $rawPassword = $passwordLetters . $passwordNumbers;
+            $passwordLetters = strtoupper(Str::random(3));
+            $passwordNumbers = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
+            $rawPassword = $passwordLetters . $passwordNumbers;
 
             // Buat user akun
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $email,
-                'password' => Hash::make($validated['nisn']),
+                'password' => Hash::make($rawPassword),
+                'password_polos' => $rawPassword,
                 'role' => 'siswa',
             ]);
 
@@ -85,11 +86,12 @@ class SiswaController extends Controller
 
             // Optional: Simpan info login (email & password) ke session
             session()->flash('generated_email', $email);
-            // session()->flash('generated_password', $rawPassword);
+            session()->flash('generated_password', $rawPassword);
         });
 
         return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
+
 
     public function destroy(Siswa $siswa)
     {

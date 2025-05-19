@@ -82,4 +82,21 @@ class JenisTagihanController extends Controller
         $jenis_tagihan->delete();
         return redirect()->route('admin.jenis-tagihan.index')->with('success', 'berhasil diubah');
     }
+
+    public function ajaxStore(Request $request)
+    {
+        $request->validate([
+            'jenis_tagihan' => 'required|string|max:255',
+        ]);
+
+        $jenis = JenisTagihan::create([
+            'jenis_tagihan' => $request->jenis_tagihan
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $jenis
+        ]);
+    }
+
 }

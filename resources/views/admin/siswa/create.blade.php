@@ -10,13 +10,13 @@
         <label class="block">Name:</label>
         <input type="text" name="name" class="border p-2 w-full" required>
 
-        <!-- <label class="block">Email:</label>
+        <label class="block">Email:</label>
         <input type="email" name="email" value="{{ old('email', $email ?? '') }}" readonly>
-        <small class="text-gray-500">*Email ini otomatis ter-generate</small> -->
+        <small class="text-gray-500">*Email ini otomatis ter-generate</small>
 
-        <!-- <label class="block">Password:</label>
+        <label class="block">Password:</label>
         <input type="text" name="password" value="{{ old('password', $password ?? '') }}" readonly>
-        <small class="text-gray-500">*Password ini otomatis ter-generate</small> -->
+        <small class="text-gray-500">*Password ini otomatis ter-generate</small>
 
         <label class="block mt-2">NISN:</label>
         <input type="text" name="nisn" class="border p-2 w-full" required>
@@ -48,8 +48,8 @@
         <label class="block mt-2">Tahun Ajaran ID:</label>
         <select name="tahun_ajaran_id" class="border p-2 w-full" required>
             <option value="">-- PILIH --</option>
-            @foreach($tahun_ajarans as $tahun)
-            <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
+            @foreach($siswas as $siswa)
+            <option value="{{ $siswa->tahunAjaran->tahun_ajaran }}">{{ $siswa->tahunAjaran->tahun_ajaran }}</option>
             @endforeach
         </select>
         

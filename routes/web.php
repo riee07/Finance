@@ -64,6 +64,7 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
 });
 
 Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');
+Route::post('/admin/jenis-tagihan/ajax-store', [JenisTagihanController::class, 'ajaxStore'])->name('admin.jenis-tagihan.ajax-store');
 
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {
