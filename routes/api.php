@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Siswa\PembayaranController;
+
+
 use Midtrans\Snap;
 use Midtrans\Config;
 
@@ -48,4 +51,5 @@ Route::post('/get-token', function (Request $request) {
     }
 });
 
-Route::post('/midtrans/callback', [App\Http\Controllers\Siswa\PembayaranController::class, 'callback']);
+
+Route::post('/midtrans/callback', [PembayaranController::class, 'callback']);

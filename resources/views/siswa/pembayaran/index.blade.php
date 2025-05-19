@@ -1,4 +1,4 @@
-
+{{-- 
 
 <div class="p-4">
     <h2 class="text-xl font-bold mb-4">Daftar Tagihan</h2>
@@ -31,4 +31,43 @@
 <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button class="w-full text-left py-2 px-4 rounded hover:bg-gray-700">Logout</button>
-</form>
+</form> --}}
+
+<table>
+    <thead>
+        <tr>
+            <th>ID Tagihan</th>
+            <th>Jenis Tagihan</th>
+            <th>Total Tagihan</th>
+            <th>Status Pembayaran</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($detail_tagihans as $detail)
+            <tr>
+                <td>{{ $detail->tagihan->id_tagihan }}</td>
+                <td>{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</td>
+                <td>Rp{{ number_format($detail->jumlah_tagihan, 0, ',', '.') }}</td>
+                <td>
+                    @if ($detail->tagihan->status_pembayaran === 'lunas')
+                        <span style="color: green;">Lunas</span>
+                    @else
+                        <span style="color: red;">Belum Dibayar</span>
+                    @endif
+                </td>
+                <td>
+                    @if ($detail->tagihan->status_pembayaran !== 'lunas')
+                        <form method="POST" action="{{ route('siswa.pembayaran.bayar') }}">
+                            @csrf
+                            <input type="hidden" name="detail_tagihan_id" value="{{ $detail->id_detail_tagihan }}">
+                            <button type="submit">Bayar</button>
+                        </form>
+                    @else
+                        <span>-</span>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>

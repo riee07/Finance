@@ -31,6 +31,13 @@ class Tagihan extends Model
 
     public function pembayaran()
     {
-        return $this->hasOne(Pembayaran::class);
+        return $this->hasOne(Pembayaran::class, 'tagihan_id', 'id_tagihan');
     }
+
+    public function tarifTagihan()
+    {
+        return $this->belongsTo(TarifTagihan::class, 'tarif_tagihan_id', 'id_tarif_tagihan');
+    }
+
+
 }

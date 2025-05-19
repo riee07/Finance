@@ -40,15 +40,21 @@ class PembayaranController extends Controller
         $siswa = Auth::user()->siswa;
         $detail = DetailTagihan::with('tagihan')->findOrFail($request->detail_tagihan_id);
 
+        // Set konfigurasi Midtrans
         MidtransConfig::$serverKey = config('midtrans.server_key');
         MidtransConfig::$isProduction = false;
         MidtransConfig::$isSanitized = config('midtrans.sanitized');
         MidtransConfig::$is3ds = config('midtrans.3ds');
 
+        $tagihan = $detail->tagihan;
+        $orderId = uniqid('INV-');  // Generate order_id
+        $tagihan->order_id = $orderId;
+        $tagihan->save();
+
         $params = [
             'transaction_details' => [
-                'order_id' => uniqid('INV-'),
-                'gross_amount' => $detail->jumlah_tagihan,
+                'order_id' => $orderId,
+                'gross_amount' => (int) $detail->jumlah_tagihan,
             ],
             'customer_details' => [
                 'first_name' => $siswa->name,
@@ -58,60 +64,84 @@ class PembayaranController extends Controller
             'item_details' => [
                 [
                     'id' => 'TAGIHAN-' . $detail->id_detail_tagihan,
-                    'price' => $detail->jumlah_tagihan,
+                    'price' => (int) $detail->jumlah_tagihan,
                     'quantity' => 1,
-                    'name' => $detail->tarifTagihan->jenisTagihan->jenis_tagihan,
+                    'name' => $detail->tarifTagihan->jenisTagihan->jenis_tagihan ?? 'Tagihan Siswa',
                 ],
             ],
         ];
 
+
+
         $snapToken = Snap::getSnapToken($params);
 
-        return view('siswa.pembayaran.bayar', compact('snapToken', 'detail'));
+        return view('siswa.pembayaran.bayar', compact('snapToken', 'detail',));
     }
+
 
     public function callback(Request $request)
     {
-        // Log::info('Midtrans callback received:', $request->all());
+        $data = $request->all();
 
-        
-        // // Bisa validasi status juga kalau mau
-        // if ($request->transaction_status === 'settlement') {
-        //     // Update pembayaran di database, dsb
-        //     Log::info('Pembayaran sukses untuk order_id: ' . $request->order_id);
-        // }
+        Log::info('Midtrans callback data:', $data);
 
-        // return response()->json(['message' => 'OK']);
+        $orderId = $data['order_id'] ?? null;
+        $statusCode = $data['status_code'] ?? null;
+        $grossAmount = $data['gross_amount'] ?? null;
+        $signatureKey = $data['signature_key'] ?? null;
+        $transactionStatus = $data['transaction_status'] ?? null;
+        $paymentType = $data['payment_type'] ?? null;
 
-        // Log::info('Midtrans callback received: ' . json_encode($request->all()));
+        $serverKey = config('midtrans.server_key');
+        $validSignature = hash('sha512', $orderId . $statusCode . $grossAmount . $serverKey);
 
-        $orderId = $request->input('order_id');
-        $status = $request->input('transaction_status');
-        $grossAmount = $request->input('gross_amount');
-        $paymentType = $request->input('payment_type');
+        if ($signatureKey !== $validSignature) {
+            Log::warning('Signature tidak valid untuk order_id: ' . $orderId);
+            return response()->json(['message' => 'Invalid signature'], 403);
+        }
 
-        if ($status === 'settlement') {
-            $tagihan = Tagihan::where('order_id', $orderId)->first();
+        $tagihan = Tagihan::where('order_id', $orderId)->first();
 
-            if ($tagihan) {
-                // Update status tagihan
-                $tagihan->status_pembayaran = 'lunas';
-                $tagihan->save();
+        if (!$tagihan) {
+            Log::warning("Tagihan tidak ditemukan untuk order_id: $orderId");
+            return response()->json(['message' => 'Tagihan not found'], 404);
+        }
 
-                // Simpan ke tabel pembayarans
+        if (in_array($transactionStatus, ['settlement', 'capture'])) {
+            $tagihan->status_pembayaran = 'lunas';
+            $tagihan->save();
+
+            $pembayaranExist = Pembayaran::where('tagihan_id', $tagihan->id_tagihan)->exists();
+
+            if (!$pembayaranExist) {
                 Pembayaran::create([
                     'tagihan_id' => $tagihan->id_tagihan,
                     'tanggal_pembayaran' => now(),
                     'jumlah_pembayaran' => $grossAmount,
                     'metode_pembayaran' => $paymentType,
                 ]);
-
-                Log::info("Pembayaran berhasil disimpan untuk order_id: $orderId");
-            } else {
-                Log::warning("Tagihan tidak ditemukan untuk order_id: $orderId");
             }
+
+            Log::info("Pembayaran berhasil untuk order_id: $orderId");
         }
 
-        return response()->json(['message' => 'OK']);
+        return response()->json(['message' => 'Callback processed']);
     }
+
+    public function riwayat()
+    {
+        $siswa = Auth::user()->siswa;
+
+        $siswa = Auth::user()->siswa;
+
+        $tagihanLunas = Tagihan::with([
+            'detailTagihan.tarifTagihan.jenisTagihan'
+        ])->where('siswa_id', $siswa->id_siswa)
+            ->where('status_pembayaran', 'lunas')
+            ->get();
+
+        return view('siswa.pembayaran.riwayat', compact('tagihanLunas'));
+    }
+
+
 }
