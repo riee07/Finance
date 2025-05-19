@@ -76,4 +76,6 @@ Langsung saja yak. Ini dia list bayaran kamu😊
     <button class="w-full text-left py-2 px-4 rounded hover:bg-gray-700">Logout</button>
 </form>
 
-{{-- <button onclick="pay('{{ $snapToken }}')">Bayar Sekarang</button> --}}
+<button>
+    <a href="{{ route('siswa.pembayaran.index') }}">pembyaran</a>
+</button>
