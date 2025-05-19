@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Models\Admin\Siswa;
 use App\Models\Admin\TahunAjaran;
 use Illuminate\Support\Str;
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -18,10 +21,22 @@ class SiswaController extends Controller
         return view('admin.siswa.index', compact('siswas'));
     }
 
+    public function excel()
+    {
+        return Excel::download(new SiswaExport, 'DataSiswa.xlsx');
+        
+        Excel::import(new SiswaImport, $request->file('file'));
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        return back()->with('success', 'Data siswa berhasil diimpor!');
+    }
+
     public function create()
     {
-        $tahun_ajarans = TahunAjaran::all();
-        return view('admin.siswa.create', compact('tahun_ajarans'));
+        $siswas = Siswa::with('tahunAjaran', 'user')->get();
+        return view('admin.siswa.create', compact('siswas'));
     }
 
     public function store(Request $request)
@@ -77,4 +92,24 @@ class SiswaController extends Controller
         return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
 
+
+    public function destroy(Siswa $siswa)
+    {
+        try {
+            // Hapus akun user terkait jika ada
+            if ($siswa->user) {
+                $siswa->user->delete();
+            }
+
+            // Hapus data siswa
+            $siswa->delete();
+
+            return redirect()->route('siswa.index')
+                ->with('success', 'Data siswa dan akun berhasil dihapus');
+                
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+        }
+    }
 }
