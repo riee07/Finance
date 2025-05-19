@@ -72,30 +72,46 @@ class PembayaranController extends Controller
 
     public function callback(Request $request)
     {
-        Log::info('Midtrans Callback Received', $request->all());
-        // Kamu bisa validasi signatureKey di sini jika mau
-        $serverKey = config('midtrans.server_key');
-        $signatureKey = hash('sha512', 
-            $request->input('order_id') .
-            $request->input('status_code') .
-            $request->input('gross_amount') .
-            $serverKey
-        );
+        // Log::info('Midtrans callback received:', $request->all());
 
-        if ($signatureKey !== $request->input('signature_key')) {
-            return response()->json(['message' => 'Invalid signature'], 403);
+        
+        // // Bisa validasi status juga kalau mau
+        // if ($request->transaction_status === 'settlement') {
+        //     // Update pembayaran di database, dsb
+        //     Log::info('Pembayaran sukses untuk order_id: ' . $request->order_id);
+        // }
+
+        // return response()->json(['message' => 'OK']);
+
+        // Log::info('Midtrans callback received: ' . json_encode($request->all()));
+
+        $orderId = $request->input('order_id');
+        $status = $request->input('transaction_status');
+        $grossAmount = $request->input('gross_amount');
+        $paymentType = $request->input('payment_type');
+
+        if ($status === 'settlement') {
+            $tagihan = Tagihan::where('order_id', $orderId)->first();
+
+            if ($tagihan) {
+                // Update status tagihan
+                $tagihan->status_pembayaran = 'lunas';
+                $tagihan->save();
+
+                // Simpan ke tabel pembayarans
+                Pembayaran::create([
+                    'tagihan_id' => $tagihan->id_tagihan,
+                    'tanggal_pembayaran' => now(),
+                    'jumlah_pembayaran' => $grossAmount,
+                    'metode_pembayaran' => $paymentType,
+                ]);
+
+                Log::info("Pembayaran berhasil disimpan untuk order_id: $orderId");
+            } else {
+                Log::warning("Tagihan tidak ditemukan untuk order_id: $orderId");
+            }
         }
 
-        // Simpan ke tabel pembayaran
-        Pembayaran::create([
-            'tagihan_id' => $request->input('tagihan_id'), // bisa kamu sesuaikan
-            'tanggal_pembayaran' => now(),
-            'jumlah_pembayaran' => $request->input('gross_amount'),
-            'metode_pembayaran' => 'Midtrans',
-            'status' => $request->input('transaction_status'),
-            'nomor_referensi' => $request->input('order_id'),
-        ]);
-
-        return response()->json(['message' => 'Pembayaran berhasil diproses']);
+        return response()->json(['message' => 'OK']);
     }
 }

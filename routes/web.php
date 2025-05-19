@@ -57,7 +57,6 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
 });
 
 Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');
-Route::post('/midtrans/callback', [App\Http\Controllers\Siswa\PembayaranController::class, 'callback']);
 
 
 // Route::middleware(['auth', 'role:siswa'])->group(function() {

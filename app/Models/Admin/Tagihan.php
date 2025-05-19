@@ -12,7 +12,7 @@ class Tagihan extends Model
     protected $table = 'tagihans';
     protected $primaryKey = 'id_tagihan';
 
-    protected $fillable = ['siswa_id', 'tahun_ajaran_id', 'total_tagihan', 'status_pembayaran'];
+    protected $fillable = ['siswa_id', 'tahun_ajaran_id', 'total_tagihan', 'status_pembayaran', 'order_id'];
 
     public function siswa()
     {
