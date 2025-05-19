@@ -52,6 +52,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
 Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('dashboard', [RealSiswaController::class, 'index'])->name('dashboard');
+    Route::get('/pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::post('/pembayaran/bayar', [App\Http\Controllers\Siswa\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
 });
 
 Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');

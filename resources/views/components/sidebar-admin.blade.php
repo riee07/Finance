@@ -46,10 +46,10 @@
 
         <!-- Submenu -->
         <div x-show="openProjects" x-collapse x-cloak class="ml-8 mt-1 space-y-1 text-sm">
-         <a href="{{ url('admin/siswa') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Siswa</a>
           <a href="{{ url('admin/tahun-ajaran') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tahun ajaran</a>
           <a href="{{ url('admin/jenis-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Jenis tagihan</a>
           <a href="{{ url('admin/tarif-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">tarif tagihan</a>
+          <a href="{{ url('admin/siswa') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Siswa</a>
           <a href="{{ url('admin/tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Tagihan</a>
           <a href="{{ url('admin/detail-tagihan') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Detail tagihan</a>
           <a href="{{ url('admin/pembayaran') }}" class="block px-3 py-1.5 rounded hover:bg-[#F5ECD5] hover:text-[#3D3D3D]">Pembayaran</a>
@@ -77,10 +77,11 @@
         <span x-show="isOpen">Setting</span>
       </a>
 
-      <a href="#" class="flex items-center space-x-3 px-3 py-2 hover:bg-[#578E7E] rounded">
+      <form method="POST" class="flex items-center space-x-3 px-3 py-2 hover:bg-[#578E7E] rounded" action="{{ route('logout') }}">
+        @csrf
         <i class="fas fa-sign-out-alt"></i>
-        <span x-show="isOpen">Logout</span>
-      </a>
+           <button class="w-full text-left py-2 px-4 rounded hover:bg-gray-700">kotnol</button>
+       </form>
     </nav>
   </div>
 

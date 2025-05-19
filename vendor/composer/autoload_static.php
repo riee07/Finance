@@ -629,6 +629,8 @@ class ComposerStaticInit8bf982ca0f3d5bbb45892503656e7a69
         'App\\Models\\UsersOrder' => __DIR__ . '/../..' . '/app/Models/UsersOrder.php',
         'App\\Models\\tes\\Tesharga' => __DIR__ . '/../..' . '/app/Models/tes/Tesharga.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\Providers\\MidtransServiceProvider' => __DIR__ . '/../..' . '/app/Providers/MidtransServiceProvider.php',
+        'App\\Services\\MidtransService' => __DIR__ . '/../..' . '/app/Services/MidtransService.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

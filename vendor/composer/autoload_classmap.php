@@ -49,6 +49,8 @@ return array(
     'App\\Models\\UsersOrder' => $baseDir . '/app/Models/UsersOrder.php',
     'App\\Models\\tes\\Tesharga' => $baseDir . '/app/Models/tes/Tesharga.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
+    'App\\Providers\\MidtransServiceProvider' => $baseDir . '/app/Providers/MidtransServiceProvider.php',
+    'App\\Services\\MidtransService' => $baseDir . '/app/Services/MidtransService.php',
     'App\\View\\Components\\AppLayout' => $baseDir . '/app/View/Components/AppLayout.php',
     'App\\View\\Components\\GuestLayout' => $baseDir . '/app/View/Components/GuestLayout.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
