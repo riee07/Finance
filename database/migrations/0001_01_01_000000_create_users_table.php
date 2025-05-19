@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('password_polos')->nullable();
             $table->enum('role',['siswa','admin','superadmin'])->default('siswa');
             $table->rememberToken();
             $table->timestamps();

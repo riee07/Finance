@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\DetailTagihanController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\UsersOrderController;
+use App\Http\Controllers\Admin\SiswaImportController;
+use App\Imports\SiswaImport;
+
 
 use App\Http\Controllers\Siswa\RealSiswaController;
 
@@ -38,6 +41,10 @@ Route::middleware('auth')->group(function () {
 //route untuk excel
 Route::get('pembayaran.export', [PembayaranController::class, 'export'])->name('pembayaran.export');
 Route::get('tahun-ajaran.export', [TahunAjaranController::class, 'export'])->name('tahun-ajaran.export');
+Route::get('siswa.export', [SiswaController::class, 'excel'])->name('siswa.export');
+Route::get('/import-siswa', [SiswaImportController::class, 'form']);
+Route::post('/import-siswa', [SiswaImportController::class, 'import']);
+
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('siswa', SiswaController::class);

@@ -10,22 +10,37 @@
         <label class="block">Name:</label>
         <input type="text" name="name" class="border p-2 w-full" required>
 
-        <label class="block">Email:</label>
+        <!-- <label class="block">Email:</label>
         <input type="email" name="email" value="{{ old('email', $email ?? '') }}" readonly>
-        <small class="text-gray-500">*Email ini otomatis ter-generate</small>
+        <small class="text-gray-500">*Email ini otomatis ter-generate</small> -->
 
-        <label class="block">Password:</label>
+        <!-- <label class="block">Password:</label>
         <input type="text" name="password" value="{{ old('password', $password ?? '') }}" readonly>
-        <small class="text-gray-500">*Password ini otomatis ter-generate</small>
+        <small class="text-gray-500">*Password ini otomatis ter-generate</small> -->
 
         <label class="block mt-2">NISN:</label>
         <input type="text" name="nisn" class="border p-2 w-full" required>
 
         <label class="block mt-2">Kelas:</label>
-        <input type="text" name="kelas" class="border p-2 w-full" required>
+        <select name="kelas" class="border p-2 w-full rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+            <option value="x" {{ old('kelas') == 'x' ? 'selected' : '' }}>Kelas X</option>
+        <option value="xi" {{ old('kelas') == 'xi' ? 'selected' : '' }}>Kelas XI</option>
+        <option value="xii" {{ old('kelas') == 'xii' ? 'selected' : '' }}>Kelas XII</option>
+        </select>
 
         <label class="block mt-2">Jurusan:</label>
-        <input type="text" name="jurusan" class="border p-2 w-full" required>
+        <select name="jurusan" class="border p-2 w-full rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <option value="">Pilih Jurusan</option>
+            <option value="pplg" {{ old('jurusan') == 'pplg' ? 'selected' : '' }}>PPLG</option>
+            <option value="tkj" {{ old('jurusan') == 'tkj' ? 'selected' : '' }}>TKJ</option>
+            <option value="an" {{ old('jurusan') == 'an' ? 'selected' : '' }}>AN</option>
+            <option value="dpb" {{ old('jurusan') == 'dpb' ? 'selected' : '' }}>DPB</option>
+            <option value="mp" {{ old('jurusan') == 'mp' ? 'selected' : '' }}>MP</option>
+            <option value="br" {{ old('jurusan') == 'br' ? 'selected' : '' }}>BR</option>
+            <option value="ak" {{ old('jurusan') == 'ak' ? 'selected' : '' }}>AK</option>
+            <option value="lps" {{ old('jurusan') == 'lps' ? 'selected' : '' }}>LPS</option>
+            <option value="dkv" {{ old('jurusan') == 'dkv' ? 'selected' : '' }}>DKV</option>
+        </select>
 
         <label class="block mt-2">No HP:</label>
         <input type="text" name="no_hp" class="border p-2 w-full" required>
