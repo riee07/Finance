@@ -44,8 +44,8 @@ class SiswaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'nisn' => 'required|unique:siswas',
-            'kelas' => 'required|string',
-            'jurusan' => 'required|string',
+            'kelas' => 'required|in:x,xi,xii',
+            'jurusan' => 'required|in:pplg,tjkt,an,dkv,ak,mp,dpb,lps,br',
             'no_hp' => 'nullable|string',
             'tahun_ajaran_id' => 'nullable|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
@@ -58,17 +58,12 @@ class SiswaController extends Controller
             $emailCode = implode('', array_slice($nisnDigits, 0, 4));
             $email = 'AF' . $emailCode . '@gmail.com';
 
-            // Password: 3 huruf kapital + 3 angka
-            $passwordLetters = strtoupper(Str::random(3));
-            $passwordNumbers = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
-            $rawPassword = $passwordLetters . $passwordNumbers;
-
+            // Password: NISN
             // Buat user akun
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $email,
-                'password' => Hash::make($rawPassword),
-                'password_polos' => $rawPassword,
+                'password' => Hash::make($nisn),
                 'role' => 'siswa',
             ]);
 
@@ -86,7 +81,6 @@ class SiswaController extends Controller
 
             // Optional: Simpan info login (email & password) ke session
             session()->flash('generated_email', $email);
-            session()->flash('generated_password', $rawPassword);
         });
 
         return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
