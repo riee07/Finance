@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Siswa;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Admin\Pembayaran;
-use App\Models\User;
-use App\Models\Admin\Tagihan;
-use App\Models\Admin\DetailTagihan;
-use Illuminate\Support\Facades\Auth;
 use Midtrans\Snap;
+use App\Models\User;
 use Midtrans\Config;
+use Illuminate\Http\Request;
+use App\Models\Admin\Tagihan;
+use App\Models\Admin\Pembayaran;
+use App\Models\Admin\DetailTagihan;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Midtrans\Config as MidtransConfig;
 
 
@@ -50,8 +51,17 @@ class PembayaranController extends Controller
                 'gross_amount' => $detail->jumlah_tagihan,
             ],
             'customer_details' => [
-                'first_name' => $siswa->nama_siswa,
+                'first_name' => $siswa->name,
+                'phone' => $siswa->no_hp,
                 'email' => Auth::user()->email,
+            ],
+            'item_details' => [
+                [
+                    'id' => 'TAGIHAN-' . $detail->id_detail_tagihan,
+                    'price' => $detail->jumlah_tagihan,
+                    'quantity' => 1,
+                    'name' => $detail->tarifTagihan->jenisTagihan->jenis_tagihan,
+                ],
             ],
         ];
 
@@ -62,6 +72,7 @@ class PembayaranController extends Controller
 
     public function callback(Request $request)
     {
+        Log::info('Midtrans Callback Received', $request->all());
         // Kamu bisa validasi signatureKey di sini jika mau
         $serverKey = config('midtrans.server_key');
         $signatureKey = hash('sha512', 
