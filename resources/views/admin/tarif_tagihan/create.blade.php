@@ -42,7 +42,7 @@
     </form>
     
     <!-- Modal Jenis Tagihan -->
-    <div id="modalJenis" class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div id="modalJenis" class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 items-center justify-center hidden">
         <div class="bg-white p-6 rounded shadow w-full max-w-md relative">
             <button onclick="document.getElementById('modalJenis').classList.add('hidden')" class="absolute top-2 right-3 text-gray-500 text-xl">&times;</button>
             <h2 class="text-lg font-bold mb-4">Tambah Jenis Tagihan</h2>

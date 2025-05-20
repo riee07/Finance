@@ -35,8 +35,8 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $siswas = Siswa::with('tahunAjaran', 'user')->get();
-        return view('admin.siswa.create', compact('siswas'));
+        $tahun_ajarans = TahunAjaran::all();
+        return view('admin.siswa.create', compact('tahun_ajarans'));
     }
 
     public function store(Request $request)
@@ -47,12 +47,12 @@ class SiswaController extends Controller
             'kelas' => 'required|in:x,xi,xii',
             'jurusan' => 'required|in:pplg,tjkt,an,dkv,ak,mp,dpb,lps,br',
             'no_hp' => 'nullable|string',
-            'tahun_ajaran_id' => 'nullable|exists:tahun_ajarans,id_tahun_ajaran',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
         ]);
 
         DB::transaction(function () use ($validated) {
-            // Email: "AF" + 4 digit acak dari NISN
+            // Email otomatis: "AF" + 4 angka acak dari NISN
             $nisnDigits = str_split($validated['nisn']);
             shuffle($nisnDigits);
             $emailCode = implode('', array_slice($nisnDigits, 0, 4));
@@ -63,10 +63,10 @@ class SiswaController extends Controller
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $email,
-                'password' => Hash::make($nisn),
+                'password' => Hash::make($validated['nisn']),
                 'role' => 'siswa',
             ]);
-
+            
             // Buat data siswa
             Siswa::create([
                 'user_id' => $user->id,

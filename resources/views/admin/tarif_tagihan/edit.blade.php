@@ -25,9 +25,43 @@
         </select>
 
         <label class="block">Jumlah Tarif:</label>
-        <input type="text" name="jumlah_tarif" class="border p-2 w-full" value="{{$tarif_tagihans->jumlah_tarif}}" required>
+        <!-- Input tampilan user -->
+        <input type="text" id="jumlah_tarif_display" value="{{ formatRupiah($tarif_tagihans->jumlah_tarif) }}" class="border p-2 w-full" required>
+
+        <!-- Hidden input untuk dikirim ke server -->
+        <input type="hidden" name="jumlah_tarif" id="jumlah_tarif">
 
         <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
         <a href="{{ route('admin.tarif-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
     </form>
+
+    <script>
+        document.getElementById('jumlah_tarif_display').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/[^,\d]/g, '');
+            if (!value) {
+                e.target.value = '';
+                document.getElementById('jumlah_tarif').value = '';
+                return;
+            }
+
+            const numberString = value.toString();
+            const split = numberString.split(',');
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            const ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                const separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            const formatted = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+            e.target.value = 'Rp. ' + formatted;
+
+            // Kirim nilai bersih ke hidden input
+            const angkaBersih = value.replace(/\./g, '');
+            document.getElementById('jumlah_tarif').value = angkaBersih;
+        });
+    </script>
+
 @endsection
