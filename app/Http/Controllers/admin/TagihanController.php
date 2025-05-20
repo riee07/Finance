@@ -119,49 +119,46 @@ class TagihanController extends Controller
         $jenisTagihans = JenisTagihan::all();
 
         foreach ($siswaAktif as $siswa) {
-            // Cek kalau tagihan sudah ada
-            $existing = Tagihan::where('siswa_id', $siswa->id_siswa)
-                ->where('tahun_ajaran_id', $tahunAjaranId)
-                ->first();
+            // Cek apakah tagihan utama sudah ada
+            $tagihan = Tagihan::firstOrCreate(
+                [
+                    'siswa_id' => $siswa->id_siswa,
+                    'tahun_ajaran_id' => $tahunAjaranId,
+                ],
+                [
+                    'total_tagihan' => 0,
+                    'status_pembayaran' => 'belum_lunas',
+                ]
+            );
 
-            if ($existing) {
-                continue;
-            }
+            $total = $tagihan->detailTagihan()->sum('jumlah_tagihan');
 
-            // Buat tagihan utama
-            $tagihan = Tagihan::create([
-                'siswa_id' => $siswa->id_siswa,
-                'tahun_ajaran_id' => $tahunAjaranId,
-                'total_tagihan' => 0, // sementara, nanti dihitung
-                'status_pembayaran' => 'belum_lunas',
-            ]);
-
-            $total = 0;
-
-            // Tambahkan detail tagihan
             foreach ($jenisTagihans as $jenis) {
                 $tarif = TarifTagihan::where('jenis_tagihan_id', $jenis->id_jenis_tagihan)
                     ->where('tahun_ajaran_id', $tahunAjaranId)
                     ->first();
 
-                if (!$tarif) {
-                    continue;
+                if (!$tarif) continue;
+
+                $cekDetail = DetailTagihan::where('tagihan_id', $tagihan->id_tagihan)
+                    ->where('tarif_tagihan_id', $tarif->id_tarif_tagihan)
+                    ->first();
+
+                if (!$cekDetail) {
+                    DetailTagihan::create([
+                        'tagihan_id' => $tagihan->id_tagihan,
+                        'tarif_tagihan_id' => $tarif->id_tarif_tagihan,
+                        'jumlah_tagihan' => $tarif->jumlah_tarif,
+                    ]);
+
+                    $total += $tarif->jumlah_tarif;
                 }
-
-                DetailTagihan::create([
-                    'tagihan_id' => $tagihan->id_tagihan,
-                    'tarif_tagihan_id' => $tarif->id_tarif_tagihan,
-                    'jumlah_tagihan' => $tarif->jumlah_tarif,
-                ]);
-
-                $total += $tarif->jumlah_tarif;
             }
 
-            // Update total tagihan
             $tagihan->update(['total_tagihan' => $total]);
         }
 
-        return back()->with('success', 'Tagihan berhasil digenerate!');
+        return back()->with('success', 'Tagihan berhasil digenerate (termasuk yang belum lengkap)!');
     }
 
 }
