@@ -35,8 +35,8 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $siswas = Siswa::with('tahunAjaran', 'user')->get();
-        return view('admin.siswa.create', compact('siswas'));
+        $tahun_ajarans = TahunAjaran::all();
+        return view('admin.siswa.create', compact('tahun_ajarans'));
     }
 
     public function store(Request $request)
@@ -44,21 +44,21 @@ class SiswaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'nisn' => 'required|unique:siswas',
-            'kelas' => 'required|string',
+            'kelas' => 'required|in:x,xi,xii',
             'jurusan' => 'required|string',
             'no_hp' => 'nullable|string',
-            'tahun_ajaran_id' => 'nullable|exists:tahun_ajarans,id_tahun_ajaran',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id_tahun_ajaran',
             'status_aktif' => 'required|in:aktif,non-aktif',
         ]);
 
         DB::transaction(function () use ($validated) {
-            // Email: "AF" + 4 digit acak dari NISN
+            // Email otomatis: "AF" + 4 angka acak dari NISN
             $nisnDigits = str_split($validated['nisn']);
             shuffle($nisnDigits);
             $emailCode = implode('', array_slice($nisnDigits, 0, 4));
             $email = 'AF' . $emailCode . '@gmail.com';
 
-            // Password: 3 huruf kapital + 3 angka
+            // Password otomatis: 3 huruf + 3 angka
             $passwordLetters = strtoupper(Str::random(3));
             $passwordNumbers = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
             $rawPassword = $passwordLetters . $passwordNumbers;
@@ -71,7 +71,7 @@ class SiswaController extends Controller
                 'password_polos' => $rawPassword,
                 'role' => 'siswa',
             ]);
-
+            
             // Buat data siswa
             Siswa::create([
                 'user_id' => $user->id,
