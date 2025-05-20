@@ -61,6 +61,8 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
     Route::get('dashboard', [RealSiswaController::class, 'index'])->name('dashboard');
     Route::get('/pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::post('/pembayaran/bayar', [App\Http\Controllers\Siswa\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
+    //history
+    Route::get('/riwayat-pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'riwayat'])->name('siswa.pembayaran.riwayat');
 });
 
 Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');
