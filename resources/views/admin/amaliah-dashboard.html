@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amaliah - Data Tagihan</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="bg-white shadow-md transition-all duration-300 w-64 flex-shrink-0">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-4 border-b">
+                <div class="flex items-center">
+                    <div class="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center text-white mr-2">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjCH5oxtpVBPr6mv5jRyyOBfNxdtTQCoT-rA&s" alt="">
+                    </div>
+                    <h1 class="text-xl font-semibold">Amaliah</h1>
+                </div>
+                <button id="collapse-btn" class="lg:hidden text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="py-4">
+                <p class="px-4 text-xs font-medium uppercase text-gray-500 mb-2">Menu</p>
+                
+                <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <!-- Manajemen Tagihan Dropdown -->
+                <div class="relative">
+                    <button id="manajemen-dropdown" class="w-full flex items-center justify-between px-4 py-3 text-left text-gray-700 hover:bg-green-50 hover:text-green-600">
+                        <div class="flex items-center">
+                            <i class="fas fa-file-invoice-dollar w-5 h-5 mr-3"></i>
+                            <span>Manajemen Tagihan</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="manajemen-menu" class="block bg-gray-50">
+                        <a href="#" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Jenis Tagihan</a>
+                        <a href="#" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Tarif Tagihan</a>
+                        <a href="#" class="block pl-12 pr-4 py-2 bg-green-50 text-green-600 border-l-4 border-green-500">Data Tagihan</a>
+                        <a href="#" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Detail Tagihan</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
+                    <span>Tahun Ajaran</span>
+                </a>
+                
+                <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    <i class="fas fa-credit-card w-5 h-5 mr-3"></i>
+                    <span>Pembayaran</span>
+                </a>
+            </div>
+
+            <!-- General Section -->
+            <div class="py-4 border-t">
+                <p class="px-4 text-xs font-medium uppercase text-gray-500 mb-2">General</p>
+                
+                <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    <i class="fas fa-question-circle w-5 h-5 mr-3"></i>
+                    <span>Bantuan</span>
+                </a>
+                
+                <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                    <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm z-10">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div class="flex items-center space-x-2">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <a href="#" class="hover:text-green-600">home</a> 
+                            <span class="mx-2">/</span> 
+                            <a href="#" class="hover:text-green-600">manajemen tagihan</a> 
+                            <span class="mx-2">/</span> 
+                            <span class="text-gray-700">data tagihan</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <div class="h-8 w-8 rounded-full bg-green-500 text-white flex items-center justify-center">
+                                    <span class="font-medium">M</span>
+                                </div>
+                                <span class="hidden md:block">Menurut Einstein</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Data Tagihan</h2>
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center text-sm font-medium">
+                        <i class="fas fa-plus mr-2"></i>
+                        Tambah Data
+                    </button>
+                </div>
+
+                <!-- Filters -->
+                <div class="bg-white p-4 rounded-md shadow-sm mb-6">
+                    <div class="flex flex-wrap items-center justify-between">
+                        <div class="flex space-x-2 mb-2 sm:mb-0">
+                            <button class="flex items-center space-x-1 px-3 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-filter"></i>
+                                <span>Filter</span>
+                            </button>
+                            <button class="flex items-center space-x-1 px-3 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-sort"></i>
+                                <span>Sort by</span>
+                            </button>
+                        </div>
+                        <div class="w-full sm:w-auto mt-2 sm:mt-0">
+                            <div class="relative">
+                                <input type="text" placeholder="Search" class="w-full sm:w-64 pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <div class="absolute left-3 top-2.5 text-gray-400">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-white rounded-md shadow-sm overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID Tagihan</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Siswa</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Tagihan</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Pembayaran</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun Ajaran</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Mamut</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">2100000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        <i class="fas fa-times-circle mr-1"></i> belum bayar
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Mamut</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">2100000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        <i class="fas fa-check-circle mr-1"></i> sudah bayar
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar toggle functionality
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const collapseBtn = document.getElementById('collapse-btn');
+        
+        sidebarToggle.addEventListener('click', () => {
+            if (sidebar.classList.contains('w-64')) {
+                sidebar.classList.remove('w-64');
+                sidebar.classList.add('w-0');
+            } else {
+                sidebar.classList.remove('w-0');
+                sidebar.classList.add('w-64');
+            }
+        });
+        
+        collapseBtn.addEventListener('click', () => {
+            sidebar.classList.remove('w-64');
+            sidebar.classList.add('w-0');
+        });
+
+        // Dropdown menu
+        const manajemenDropdown = document.getElementById('manajemen-dropdown');
+        const manajemenMenu = document.getElementById('manajemen-menu');
+        
+        manajemenDropdown.addEventListener('click', () => {
+            if (manajemenMenu.classList.contains('block')) {
+                manajemenMenu.classList.remove('block');
+                manajemenMenu.classList.add('hidden');
+            } else {
+                manajemenMenu.classList.remove('hidden');
+                manajemenMenu.classList.add('block');
+            }
+        });
+
+        // Handle responsive behavior
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('w-64');
+                sidebar.classList.add('w-0');
+            } else {
+                sidebar.classList.remove('w-0');
+                sidebar.classList.add('w-64');
+            }
+        }
+
+        // Initial check on page load
+        window.addEventListener('resize', handleResize);
+        
+        // For small screens, start with sidebar collapsed
+        if (window.innerWidth < 768) {
+            sidebar.classList.remove('w-64');
+            sidebar.classList.add('w-0');
+        }
+    </script>
+</body>
+</html>
