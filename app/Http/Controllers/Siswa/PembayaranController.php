@@ -132,8 +132,6 @@ class PembayaranController extends Controller
     {
         $siswa = Auth::user()->siswa;
 
-        $siswa = Auth::user()->siswa;
-
         $tagihanLunas = Tagihan::with([
             'detailTagihan.tarifTagihan.jenisTagihan'
         ])->where('siswa_id', $siswa->id_siswa)
