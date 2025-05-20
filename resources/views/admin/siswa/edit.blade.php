@@ -33,7 +33,10 @@
             <option value="ak" {{ old('jurusan', $siswa->jurusan) == 'ak' ? 'selected' : '' }}>AK</option>
             <option value="lps" {{ old('jurusan', $siswa->jurusan) == 'lps' ? 'selected' : '' }}>LPS</option>
             <option value="dkv" {{ old('jurusan', $siswa->jurusan) == 'dkv' ? 'selected' : '' }}>DKV</option>
-        </select>        
+        </select>   
+        
+        <label class="block mt-2">No Telepon:</label>
+        <input type="text" name="no_telp" class="border p-2 w-full" value="{{ $siswa->no_telp }}" required>
 
         <label class="block mt-2">Tahun Ajaran:</label>
         <select name="tahun_ajaran_id" class="border p-2 w-full" value="{{ $siswa->tahun_ajaran }}" required>
