@@ -55,6 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('detail-tagihan', DetailTagihanController::class);
     Route::resource('pembayaran', PembayaranController::class);
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::post('siswa/promosi', [SiswaController::class, 'promosiKelas'])->name('siswa.promosi');
 });
 
 Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->group(function () {

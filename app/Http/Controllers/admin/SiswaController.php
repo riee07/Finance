@@ -134,10 +134,10 @@ public function update(Request $request, $id)
 
         return redirect()->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil diperbarui!');
-    } catch (\Exception $e) {
-        return back()->with('error', 'Gagal memperbarui data: '.$e->getMessage());
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui data: '.$e->getMessage());
+        }
     }
-}
 
     public function destroy(Siswa $siswa)
     {
@@ -153,9 +153,49 @@ public function update(Request $request, $id)
             return redirect()->route('siswa.index')
                 ->with('success', 'Data siswa dan akun berhasil dihapus');
                 
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
-        }
+            } catch (\Exception $e) {
+                return redirect()->back()
+                    ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+            }
     }
+
+    public function promosiKelas(Request $request)
+    {
+        DB::transaction(function () {
+            // Ambil tahun ajaran aktif
+            $tahunSekarang = TahunAjaran::where('status', 'aktif')->first();
+            if (!$tahunSekarang) {
+                throw new \Exception("Tahun ajaran aktif belum diatur.");
+            }
+
+            // Ambil semua siswa aktif
+            $siswas = Siswa::where('status_aktif', 'aktif')->get();
+
+            foreach ($siswas as $siswa) {
+                // Tentukan kelas baru
+                $kelasBaru = match ($siswa->kelas) {
+                    'x' => 'xi',
+                    'xi' => 'xii',
+                    'xii' => 'lulus', // lulus
+                    default => null,
+                };
+
+                if ($kelasBaru === null) {
+                    // Siswa lulus → nonaktifkan
+                    $siswa->update([
+                        'status_aktif' => 'non-aktif',
+                    ]);
+                } else {
+                    // Naik kelas + ganti tahun ajaran
+                    $siswa->update([
+                        'kelas' => $kelasBaru,
+                        'tahun_ajaran_id' => $tahunSekarang->id_tahun_ajaran,
+                    ]);
+                }
+            }
+        });
+
+        return back()->with('success', 'Kelas siswa berhasil diperbarui.');
+    }
+
 }
