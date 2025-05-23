@@ -12,7 +12,7 @@
         <input type="text" name="name" class="border p-2 w-full" value="{{ $siswa->name }}" required>
 
         <label class="block mt-2">NIS:</label>
-        <input type="text" name="nis" class="border p-2 w-full" value="{{ $siswa->nis }}" required>
+        <input type="text" name="nisn" class="border p-2 w-full" value="{{ $siswa->nisn }}" required>
 
         <label class="block text-gray-700 mb-2">Kelas</label>
         <select name="kelas" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -33,7 +33,10 @@
             <option value="ak" {{ old('jurusan', $siswa->jurusan) == 'ak' ? 'selected' : '' }}>AK</option>
             <option value="lps" {{ old('jurusan', $siswa->jurusan) == 'lps' ? 'selected' : '' }}>LPS</option>
             <option value="dkv" {{ old('jurusan', $siswa->jurusan) == 'dkv' ? 'selected' : '' }}>DKV</option>
-        </select>        
+        </select>   
+        
+        <label class="block mt-2">No Telepon:</label>
+        <input type="text" name="no_telp" class="border p-2 w-full" value="{{ $siswa->no_telp }}" required>
 
         <label class="block mt-2">Tahun Ajaran:</label>
         <select name="tahun_ajaran_id" class="border p-2 w-full" value="{{ $siswa->tahun_ajaran }}" required>
