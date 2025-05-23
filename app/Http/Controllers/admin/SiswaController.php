@@ -63,7 +63,7 @@ class SiswaController extends Controller
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $email,
-                'password' => Hash::make($nisnDigits),
+                'password' => Hash::make($validated['nisn']),
                 'role' => 'siswa',
             ]);
             

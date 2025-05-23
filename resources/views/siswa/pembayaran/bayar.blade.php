@@ -1,11 +1,22 @@
+<x-allLinks></x-allLinks>
 
 
-<div class="p-4">
-    <h2 class="text-xl font-bold mb-4">Pembayaran</h2>
-    <p><strong>Tagihan:</strong> {{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</p>
-    <p><strong>Jumlah:</strong> Rp{{ number_format($detail->jumlah_tagihan) }}</p>
+<div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md mt-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Pembayaran</h2>
 
-    <button id="pay-button" class="mt-4 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+    <div class="space-y-2 mb-6">
+        <div class="flex justify-between text-sm text-gray-600">
+            <span>Tagihan</span>
+            <span class="font-semibold text-gray-800">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</span>
+        </div>
+        <div class="flex justify-between text-sm text-gray-600">
+            <span>Jumlah</span>
+            <span class="font-bold text-gray-900 text-lg">Rp{{ number_format($detail->jumlah_tagihan) }}</span>
+        </div>
+    </div>
+
+    <button id="pay-button"
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow transition">
         Bayar Sekarang
     </button>
 </div>
@@ -35,4 +46,3 @@
         });
     });
 </script>
-
