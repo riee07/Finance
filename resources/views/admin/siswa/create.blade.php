@@ -42,9 +42,6 @@
             <option value="dkv" {{ old('jurusan') == 'dkv' ? 'selected' : '' }}>DKV</option>
     </select>
 
-    <label class="block mt-2">No HP:</label>
-    <input type="text" name="no_hp" class="border p-2 w-full" required>
-
         <label class="block mt-2">Tahun Ajaran ID:</label>
     <select name="tahun_ajaran_id" class="border p-2 w-full" required>
         <option value="">-- PILIH --</option>
