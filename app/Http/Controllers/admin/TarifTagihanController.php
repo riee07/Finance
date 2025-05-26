@@ -13,10 +13,51 @@ class TarifTagihanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $tarif_tagihans = TarifTagihan::with('tahunAjaran', 'jenisTagihan')->get();
-        return view('admin.tarif_tagihan.index', compact('tarif_tagihans'));
+        $tahun_ajarans = TahunAjaran::all();
+
+        $tarif_tagihans = TarifTagihan::query()
+            ->with('tahunAjaran', 'jenisTagihan')
+            ->when($request->search, function($query, $search) {
+                return $query->where('jenis_tagihan_id', 'like', "%{$search}%")
+                    ->orWhere('jumlah_tarif', 'like', "%{$search}%")
+                    ->orWhereHas('tahunAjaran', function($q) use ($search) {
+                        $q->where('tahun_ajaran', 'like', "%{$search}%");
+                    });      
+            })
+            ->when($request->jenis_tagihan, function($query, $jenisTagihan) {
+                return $query->where('jenis_tagihan_id', $jenisTagihan);
+            })
+            ->when($request->tahun_ajaran, function($query, $tahunId) {
+                return $query->where('id_tahun_ajaran', $tahunId);
+            })
+            ->when($request->sort, function($query, $sort) {
+                switch($sort) {
+                    case 'jenis_tagihan_asc':
+                        return $query->orderBy('jenis_tagihan_id', 'asc');
+                    case 'jenis_tagihan_desc':
+                        return $query->orderBy('jenis_tagihan_id', 'desc');
+                    case 'jumlah_tarif_asc':
+                        return $query->orderBy('jumlah_tarif', 'asc');
+                    case 'jumlah_tarif_desc':
+                        return $query->orderBy('jumlah_tarif', 'desc');
+                    case 'tahun_ajaran_asc':
+                        return $query->orderBy('tahun_ajaran_id', 'asc');
+                    case 'tahun_ajaran_desc':
+                        return $query->orderBy('tahun_ajaran_id', 'desc');
+                    default:
+                        return $query->latest();
+                }
+            },  function($query) {
+                return $query->latest();
+            })
+            ->paginate(10);
+        
+        $jenis_tagihans = JenisTagihan::orderby('jenis_tagihan')->get();
+        $tahunAjarans = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
+        return view('admin.tarif_tagihan.index', compact('tarif_tagihans', 'jenis_tagihans', 'tahun_ajarans'));
     }
     
     /**

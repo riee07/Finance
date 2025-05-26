@@ -13,9 +13,41 @@ class TahunAjaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $tahun_ajarans = TahunAjaran::all();
+
+        $tahun_ajarans = TahunAjaran::query()
+            ->when($request->search, function($query, $search) {
+                return $query->where('tahun_ajaran', 'like', "%{$seacrh}%")
+                    ->orWhere('status', 'like', "%{$search}%");
+            })
+            ->when($request->tahun_ajaran, function($query, $tahunId) {
+                return $query->where('id_tahun_ajaran', $tahunId);
+            })
+            ->when($request->status, function($query, $status) {
+                return $query->where('status', $status);
+            })
+            ->when($request->sort, function($query, $sort) {
+                switch($sort) {
+                    case 'tahun_ajaran_asc':
+                        return $query->orderBy('tahun_ajaran', 'asc');
+                    case 'tahun_ajaran_desc':
+                        return $query->orderBy('tahun_ajaran', 'desc');
+                    case 'status_asc':
+                        return $query->orderBy('status', 'asc');
+                    case 'status_desc':
+                        return $query->orderBy('status', 'desc');
+                    default:
+                        return $query->latest();
+                }
+                
+            }, function($query) {
+                    return $query->latest();
+            })
+            ->paginate(10);
+
+        $tahunAjarans = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
         return view('admin.tahun_ajaran.index', compact('tahun_ajarans'));
     }
 
