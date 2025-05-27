@@ -1,6 +1,6 @@
 @extends('components.sidebar-admin')
 
-@section('admin-sidebar')
+@section('content')
     <h1 class="text-2xl font-bold mb-4">Data Tagihan</h1>
 <div class="max-w-7xl mx-auto px-6 py-6">
         <div class="flex items-center justify-between mb-6">

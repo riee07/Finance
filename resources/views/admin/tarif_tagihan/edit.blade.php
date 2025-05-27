@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Tarif Tagihan')
 
@@ -9,7 +9,7 @@
         @csrf @method('PUT')
 
         <label class="block mt-2">Jenis Tagihan:</label>
-        <select name="jenis_tagihan_id" class="border p-2 w-full" required>
+        <select name="jenis_tagihan_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($jenis_tagihans as $jenis)
             <option value="{{ $jenis->id_jenis_tagihan }}" {{ $tarif_tagihans->jenis_tagihan_id == $jenis->id_jenis_tagihan ? 'selected' : '' }}>{{ $jenis->jenis_tagihan }}</option>
@@ -17,7 +17,7 @@
         </select>
 
         <label class="block mt-2">Tahun Ajaran:</label>
-        <select name="tahun_ajaran_id" class="border p-2 w-full" required>
+        <select name="tahun_ajaran_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($tahun_ajarans as $tahun)
             <option value="{{ $tahun->id_tahun_ajaran }}" {{ $tarif_tagihans->tahun_ajaran_id == $tahun->id_tahun_ajaran ? 'selected' : '' }}>{{ $tahun->tahun_ajaran }}</option>
@@ -26,13 +26,15 @@
 
         <label class="block">Jumlah Tarif:</label>
         <!-- Input tampilan user -->
-        <input type="text" id="jumlah_tarif_display" value="{{ formatRupiah($tarif_tagihans->jumlah_tarif) }}" class="border p-2 w-full" required>
+        <input type="text" id="jumlah_tarif_display" value="{{ formatRupiah($tarif_tagihans->jumlah_tarif) }}" class="border p-2 w-full rounded-md" required>
 
         <!-- Hidden input untuk dikirim ke server -->
         <input type="hidden" name="jumlah_tarif" id="jumlah_tarif">
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('admin.tarif-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('admin.tarif-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
 
     <script>
