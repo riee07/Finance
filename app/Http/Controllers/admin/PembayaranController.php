@@ -17,6 +17,18 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayarans = Pembayaran::all();
+        
+        $permabyarans = Pembayaran::query()
+            ->with('tagihan')
+            ->when($request->search, function($query, $search) {
+                return $query->where('metode_pembayaran', 'like', "%{$search}%")
+                    ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
+                    ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
+                    ->orWhereHas('tagihan', function($q) use ($search) {
+                        $q->where('tagihan', 'like', "%{$search}%");
+                    });
+            })
+            ->when()
         return view('admin.pembayaran.index', compact('pembayarans'));
     }
 
