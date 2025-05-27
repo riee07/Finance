@@ -14,22 +14,53 @@ class PembayaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $pembayarans = Pembayaran::all();
         
-        $permabyarans = Pembayaran::query()
+        $permbayarans = Pembayaran::query()
             ->with('tagihan')
             ->when($request->search, function($query, $search) {
-                return $query->where('metode_pembayaran', 'like', "%{$search}%")
-                    ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
-                    ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
-                    ->orWhereHas('tagihan', function($q) use ($search) {
-                        $q->where('tagihan', 'like', "%{$search}%");
-                    });
+                return $query->where(function($q) use ($search) {
+                    $q->where('metode_pembayaran', 'like', "%{$search}%")
+                      ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
+                      ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
+                      ->orWhere('metode_pembayaran', 'like', "%{$search}%")
+                      ->orWhereHas('tagihan', function($q) use ($search) {
+                            $q->where('tagihan', 'like', "%{$search}%");
+                        });  
+            });
             })
-            ->when()
-        return view('admin.pembayaran.index', compact('pembayarans'));
+            ->when($request->tagihan_id, function($query, $tagihan_id) {
+                return $query->where('tagihan_id', $tagihan_id);
+            })
+            ->when($request->tanggal_pembayaran, function($query, $tanggal_pembayaran) {
+                return $query->whereDate('tanggal_pembayaran', $tanggal_pembayaran);
+            })
+            ->when($request->jumlah_pembayaran, function($query, $jumlah_pembayaran) {
+                return $query->where('jumlah_pembayaran', $jumlah_pembayaran);
+            })
+            ->when($request->metode_pembayaran, function($query, $metode_pembayaran) {
+                return $query->where('metode_pembayaran', $metode_pembayaran);
+            })
+            ->when($request->sort, function($query, $sort) {
+                switch($sort) {
+                    case 'tanggal_pembayaran_asc':
+                        return $query->orderBy('tanggal_pembayaran', 'asc');
+                    case 'tanggal_pembayaran_desc':
+                        return $query->orderBy('tanggal_pembayaran', 'desc');
+                    case 'jumlah_pembayaran_asc':
+                        return $query->orderBy('jumlah_pembayaran', 'asc');
+                    case 'jumlah_pembayaran_desc':
+                        return $query->orderBy('jumlah_pembayaran', 'desc');
+                }
+            }, function($query) {
+                return $query->latest();
+            })
+            ->paginate(10);
+
+        $tagihans = Tagihan::orderBy('tagihan', 'asc')->get();
+        return view('admin.pembayaran.index', compact('pembayarans', 'tagihans', 'permbayarans'));
     }
 
     public function export()

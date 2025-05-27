@@ -33,10 +33,12 @@
                             <!-- Total Tagihan Filter -->
                             <div>
                                 <label class="block text-xs font-medium text-gray-500">Total Tagihan</label>
-                                <select name="tahun_ajaran" class="w-full p-1 border rounded text-sm">
+                                <select name="total_tagihan" class="w-full p-1 border rounded text-sm">
                                     <option value="">Semua Total Tagihan</option>
-                                    @foreach($tagihans as $tagihan)
-                                    <option value="{{ $tagihan->id }}">{{ $tagihan->total_tagihan }}</option>
+                                    @foreach($tagihans->unique('total_tagihan') as $tagihan)
+                                    <option value="{{ $tagihan->total_tagihan }}" {{ request('total_tagihan') == $tagihan->total_tagihan ? 'selected' : '' }}>
+                                        {{ formatRupiah($tagihan->total_tagihan) }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -45,9 +47,9 @@
                             <div>
                                 <label class="block text-xs font-medium text-gray-500">Status</label>
                                 <select name="status" class="w-full p-1 border rounded text-sm">
-                                    <option value="">Status</option>
-                                    <option value="belum_lunas">Belum Lunas</option>
-                                    <option value="lunas">Lunas</option>
+                                    <option value="">Semua Status</option>
+                                    <option value="belum_lunas" {{ request('status') == 'belum_lunas' ? 'selected' : '' }}>Belum Lunas</option>
+                                    <option value="lunas" {{ request('status') == 'lunas' ? 'selected' : '' }}>Lunas</option>
                                 </select>
                             </div>
                             
@@ -57,7 +59,9 @@
                                 <select name="tahun_ajaran" class="w-full p-1 border rounded text-sm">
                                     <option value="">Semua Tahun</option>
                                     @foreach($tahun_ajarans as $tahun)
-                                    <option value="{{ $tahun->id }}">{{ $tahun->tahun_ajaran }}</option>
+                                    <option value="{{ $tahun->id }}" {{ request('tahun_ajaran') == $tahun->id ? 'selected' : '' }}>
+                                        {{ $tahun->tahun_ajaran }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -79,8 +83,8 @@
                         <div class="p-2 space-y-2">
                             <select name="sort" class="w-full p-1 border rounded text-sm">
                                 <option value="">Default</option>
-                                <option value="name_asc">Nama (A-Z)</option>
-                                <option value="name_desc">Nama (Z-A)</option>
+                                <option value="siswa_asc">Nama (A-Z)</option>
+                                <option value="siswa_desc">Nama (Z-A)</option>
                                 <option value="total_tagihan_desc">Total Tagihan (Terbesar)</option>
                                 <option value="total_tagihan_asc">Total Tagihan (Terkecil)</option>
                                 <option value="tahun_ajaran_desc">Tahun Ajaran (Terbaru)</option>
@@ -174,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Keep existing filter params
         const urlParams = new URLSearchParams(window.location.search);
-        ['siswa', 'total_tagihan', 'status', 'tahun_ajaran'].forEach(param => {
+        ['siswa', 'total_tagihan', 'tahun_ajaran'].forEach(param => {
             if(urlParams.has(param)) addInput(form, param, urlParams.get(param));
         });
         

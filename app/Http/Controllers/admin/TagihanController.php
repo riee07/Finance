@@ -24,12 +24,20 @@ class TagihanController extends Controller
         $tagihans = Tagihan::query()
             ->with('tahunAjaran', 'siswa')
             ->when($request->search, function($query, $search){
-                return $query->where('siswa_id', 'like', "%{$search}%")
-                    ->orWhere('total_tagihan', 'like', "%{$search}%")
+                return $query->where('total_tagihan', 'like', "%{$search}%")
                     ->orWhere('status_pembayaran', 'like', "%{$search}%")
+                    ->orWhereHas('siswa', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                    })
                     ->orWhereHas('tahunAjaran', function($q) use ($search) {
                         $q->where('tahun_ajaran', 'like', "%{$search}%");
                     });
+            })
+            ->when($request->total_tagihan, function($query, $total) {
+            return $query->where('total_tagihan', $total);
+            })
+            ->when($request->status, function($query, $status) {
+                return $query->where('status_pembayaran', $status);
             })
             ->when($request->tahun_ajaran, function($query, $tahunId) {
                 return $query->where('id_tahun_ajaran', $tahunId);
@@ -50,11 +58,7 @@ class TagihanController extends Controller
                     case 'total_tagihan_asc':
                         return $query->orderBy('total_tagihan', 'asc');
                     case 'total_tagihan_desc':
-                        return $query->orderBy('total_tagihan', 'desc');
-                    case 'status_asc':
-                        return $query->orderBy('status', 'asc');  
-                    case 'status_desc':
-                        return $query->orderBy('status', 'desc');   
+                        return $query->orderBy('total_tagihan', 'desc');   
                 }
             }, function($query) {
                 return $query->latest();
