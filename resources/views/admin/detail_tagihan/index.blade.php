@@ -32,14 +32,14 @@
                     <div class="hidden group-hover:block absolute z-10 mt-1 w-56 bg-white rounded-md shadow-lg border">
                         <div class="p-2 space-y-2">
                             
-                         <!-- Tarif Tagihan Filter -->
+                         <!-- Tagihan Filter -->
                             <div>
                                 <label class="block text-xs font-medium text-gray-500">Jenis Tagihan</label>
-                                <select name="tarif_tagihan_id" class="w-full p-1 border rounded text-sm">
+                                <select name="tagihan_id" class="w-full p-1 border rounded text-sm">
                                     <option value="">Semua Jenis Tagihan</option>
-                                    @foreach($tarif_tagihans as $tarif)
-                                    <option value="{{ $tarif->id_tarif_tagihan }}" {{ request('tarif_tagihan_id') == $tarif->id_tarif_tagihan ? 'selected' : '' }}>
-                                        {{ $tarif->jenis_tagihan->nama_jenis ?? $tarif->jenis_tagihan_id }}
+                                    @foreach($tagihans as $tagihan)
+                                    <option value="{{ $tagihan->id }}" {{ request('tagihan_id') == $tagihan->id ? 'selected' : '' }}>
+                                        {{ $tagihan->id }} {{ $tagihan->siswa->name }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -59,14 +59,14 @@
                             </div>    
                                     
                                     
-                           <!-- Tagihan Filter -->
+                           <!-- Tarif Tagihan Filter -->
                             <div>
-                                <label class="block text-xs font-medium text-gray-500">Tagihan</label>
-                                <select name="tagihan_id" class="w-full p-1 border rounded text-sm">
+                                <label class="block text-xs font-medium text-gray-500"> Tarif Tagihan</label>
+                                <select name="tarif_tagihan_id" class="w-full p-1 border rounded text-sm">
                                     <option value="">Semua Tagihan</option>
-                                    @foreach($tagihans as $tagihan)
-                                    <option value="{{ $tagihan->id }}" {{ request('tagihan_id') == $tagihan->id ? 'selected' : '' }}>
-                                        {{ $tagihan->tagihan_id ?? 'No ID' }} - {{ $tagihan->id }}
+                                    @foreach($tarif_tagihans as $tarif)
+                                    <option value="{{ $tarif->id }}" {{ request('tarif_tagihan_id') == $tarif->id ? 'selected' : '' }}>
+                                        {{ $tarif->id }} {{ $tarif->jenisTagihan->jenis_tagihan }} 
                                     </option>
                                     @endforeach
                                 </select>
