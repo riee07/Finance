@@ -1,11 +1,11 @@
 @extends('components.sidebar-admin')
 
-@section('admin-sidebar')
+@section('content')
     <h1 class="text-2xl font-bold mb-4">Data Pembayaran</h1>
 
 <div class="max-w-7xl mx-auto px-6 py-6">
         <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Data Siswa</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">Data Pembayaran</h1>
             <div class="flex items-center space-x-3">
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-2">
@@ -130,10 +130,18 @@ document.addEventListener('DOMContentLoaded', function() {
         form.action = window.location.pathname;
         
         const tagihan_id = document.querySelector('select[name="tagihan_id"]').value;
-        const tanggal_pembayaran = document.querySelector('select[name="tanggal_pembayaran"]').value;
-        const jumlah_pembayaran = document.querySelector('select[name="jumlah_pembayaran"]').value;
-        const metode_pembayaran = document.querySelector('select[name="metode_pembayaran"]').value;
+        const tanggal_pembayaran = document.querySelector('input[name="tanggal_pembayaran"]').value;
+        const jumlah_pembayaran = document.querySelector('input[name="jumlah_pembayaran"]').value; // Fixed: input not select
+        const metode_pembayaran = document.querySelector('select[name="metode_pembayaran"]').value; // Fixed: select not input
         const search = document.querySelector('input[name="search"]').value;
+
+        console.log('Filter values:', {
+            tagihan_id,
+            tanggal_pembayaran,
+            jumlah_pembayaran,
+            metode_pembayaran,
+            search
+        });
         
         if(tagihan_id) addInput(form, 'tagihan_id', tagihan_id);
         if(tanggal_pembayaran) addInput(form, 'tanggal_pembayaran', tanggal_pembayaran);
@@ -143,6 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(form);
         form.submit();
+    });
+    
+    // Clear Filter - ADD THIS
+    document.getElementById('clear-filter').addEventListener('click', function() {
+        window.location.href = window.location.pathname;
     });
     
     // Apply Sort
@@ -193,9 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set current filter values from URL
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has('tagihan_id')) document.querySelector('select[name="tagihan_id"]').value = urlParams.get('tagihan_id');
-    if(urlParams.has('tanggal_pembayaran')) document.querySelector('select[name="tanggal_pembayaran"]').value = urlParams.get('tanggal_pembayaran');
-    if(urlParams.has('jumlah_pembayaran')) document.querySelector('select[name="jumlah_pembayaran"]').value = urlParams.get('jumlah_pembayaran');
-    if(urlParams.has('metode_pembayaran')) document.querySelector('select[name="metode_pembayaran"]').value = urlParams.get('metode_pembayaran');
+    if(urlParams.has('tanggal_pembayaran')) document.querySelector('input[name="tanggal_pembayaran"]').value = urlParams.get('tanggal_pembayaran');
+    if(urlParams.has('jumlah_pembayaran')) document.querySelector('input[name="jumlah_pembayaran"]').value = urlParams.get('jumlah_pembayaran'); // Fixed
+    if(urlParams.has('metode_pembayaran')) document.querySelector('select[name="metode_pembayaran"]').value = urlParams.get('metode_pembayaran'); // Fixed
     if(urlParams.has('sort')) document.querySelector('select[name="sort"]').value = urlParams.get('sort');
 });
 </script>

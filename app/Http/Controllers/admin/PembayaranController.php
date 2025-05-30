@@ -18,18 +18,31 @@ class PembayaranController extends Controller
     {
         $pembayarans = Pembayaran::all();
         
-        $permbayarans = Pembayaran::query()
-            ->with('tagihan')
-            ->when($request->search, function($query, $search) {
-                return $query->where(function($q) use ($search) {
-                    $q->where('metode_pembayaran', 'like', "%{$search}%")
-                      ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
-                      ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
-                      ->orWhere('metode_pembayaran', 'like', "%{$search}%")
-                      ->orWhereHas('tagihan', function($q) use ($search) {
-                            $q->where('tagihan', 'like', "%{$search}%");
-                        });  
-            });
+        // $permbayarans = Pembayaran::query()
+        //     ->with('tagihan')
+        //     ->when($request->search, function($query, $search) {
+        //         return $query->where(function($q) use ($search) {
+        //             $q->where('metode_pembayaran', 'like', "%{$search}%")
+        //               ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
+        //               ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
+        //               ->orWhere('metode_pembayaran', 'like', "%{$search}%")
+        //               ->orWhereHas('tagihan', function($q) use ($search) {
+        //                 $q->where('tagihan', 'like', "%{$search}%");
+        //             });           
+
+        //     });
+            $pembayarans = Pembayaran::query()
+                ->with('tagihan')
+                ->when($request->search, function($query, $search) {
+                    return $query->where(function($q) use ($search) {
+                        $q->where('metode_pembayaran', 'like', "%{$search}%")
+                        ->orWhere('tanggal_pembayaran', 'like', "%{$search}%")
+                        ->orWhere('jumlah_pembayaran', 'like', "%{$search}%")
+                        ->orWhereHas('tagihan', function($q) use ($search) {
+                                $q->where('tagihan', 'like', "%{$search}%");
+                            });  
+                    });
+                
             })
             ->when($request->tagihan_id, function($query, $tagihan_id) {
                 return $query->where('tagihan_id', $tagihan_id);
@@ -59,8 +72,10 @@ class PembayaranController extends Controller
             })
             ->paginate(10);
 
+            
+
         $tagihans = Tagihan::orderBy('tagihan', 'asc')->get();
-        return view('admin.pembayaran.index', compact('pembayarans', 'tagihans', 'permbayarans'));
+        return view('admin.pembayaran.index', compact('pembayarans', 'tagihans'));
     }
 
     public function export()

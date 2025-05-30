@@ -6,11 +6,11 @@
 <div x-data="{ isOpen: true, openProjects: false }" class="flex">
 
   <!-- Sidebar -->
-  <div :class="isOpen ? 'w-64' : 'w-16'" class="bg-white transition-all duration-300 flex flex-col h-screen text-gray-700 relative">
+  <div :class="isOpen ? 'w-64' : 'w-16'" class="bg-white transition-all duration-300 flex flex-col h-screen text-gray-700 relative border">
   <!-- Toggle Button -->
     <button @click="isOpen = !isOpen"
-            class="absolute -right-4 top-6 bg-white text-black rounded-full p-1 shadow z-10">
-      <i class="fas fa-chevron-left transition-transform"
+            class="absolute -right-2.5 top-6 bg-green-500 text-black rounded-full p-1 shadow z-10">
+      <i class="fas fa-chevron-left transition-transform text-white"
          :class="{ 'rotate-180': !isOpen }"></i>
     </button>
 
@@ -32,15 +32,15 @@
             <div class="py-4">
                 <p class="px-4 text-xs font-medium uppercase text-gray-500 mb-2">Menu</p>
                 
-                <a href="{{ url('admin/dashboard') }}" class="flex items-center px-4 py-3 gap-x-2 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                <a href="{{ url('admin/dashboard') }}" class="flex items-center px-4 py-3 gap-x-2 text-gray-700 hover:bg-green-50 hover:text-green-600 border-b">
                     <i class="fa fa-th-large" aria-hidden="true"></i>
                     <span x-show="isOpen" x-transition>Dashboard</span>
                 </a>
                 
                 <!-- Manajemen Tagihan Dropdown -->
-                <div class="relative">
+                <div class="relative border-b">
                   <button @click="openProjects = !openProjects"
-                          class="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:bg-green-50">
+                          class="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">
                     <div class="flex items-center space-x-3">
                       <i class="bi bi-cash-stack"></i> 
                             <span x-show="isOpen" x-transition>Manajemen Tagihan</span>
@@ -50,19 +50,15 @@
                         :class="{ 'rotate-180': openProjects }"></i>
                     </button>
                     <div x-show="openProjects" x-collapse x-cloak id="manajemen-menu" class="block bg-gray-50">
-                        <a href="{{ url('admin/detail-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Detail Tagihan</a>
-                        <a href="{{ url('admin/jenis-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Jenis Tagihan</a>
-                        <a href="{{ url('admin/tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Tagihan</a>
-                        <a href="{{ url('admin/tarif-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600">Tarif Tagihan</a>
+                        <a href="{{ url('admin/jenis-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Jenis Tagihan</a>
+                        <a href="{{ url('admin/tarif-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Tarif Tagihan</a>
+                        <a href="{{ url('admin/siswa') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Siswa</a>
+                        <a href="{{ url('admin/tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Tagihan</a>
+                        <a href="{{ url('admin/detail-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Detail Tagihan</a>
                     </div>
                 </div>
-
-                <a href="{{ url('admin/siswa') }}" class="flex items-center px-4 gap-x-2 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span x-show="isOpen" x-transition>Siswa</span>
-                </a>
                 
-                <a href="{{ url('admin/tahun-ajaran') }}" class="flex items-center px-4 gap-x-2 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">
+                <a href="{{ url('admin/tahun-ajaran') }}" class="flex items-center px-4 gap-x-2 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 border-b">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <span x-show="isOpen" x-transition>Tahun Ajaran</span>
                 </a>
@@ -89,7 +85,7 @@
             </div>
             
  <div class="flex-1 p-6">
-     @yield('admin-sidebar')
+     @yield('content')
   </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Tarif Tagihan')
 
@@ -9,7 +9,7 @@
         @csrf
 
         <label class="block mt-2">Jenis Tagihan:</label>
-        <select name="jenis_tagihan_id" class="border p-2 w-full" required>
+        <select name="jenis_tagihan_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($jenis_tagihans as $jenis)
             <option value="{{ $jenis->id_jenis_tagihan }}">{{ $jenis->jenis_tagihan }}</option>
@@ -23,7 +23,7 @@
         </div>
 
         <label class="block mt-2">Tahun Ajaran:</label>
-        <select name="tahun_ajaran_id" class="border p-2 w-full" required>
+        <select name="tahun_ajaran_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($tahun_ajarans as $tahun)
             <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
@@ -32,13 +32,15 @@
 
         <label class="block">Jumlah Tarif:</label>
         <!-- Input tampilan user -->
-        <input type="text" id="jumlah_tarif_display" class="border p-2 w-full" required>
+        <input type="text" id="jumlah_tarif_display" class="border p-2 w-full rounded-md" required>
 
         <!-- Hidden input untuk dikirim ke server -->
         <input type="hidden" name="jumlah_tarif" id="jumlah_tarif">
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('admin.tarif-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('admin.tarif-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
     
     <!-- Modal Jenis Tagihan -->
@@ -50,7 +52,7 @@
             <form id="formJenisTagihan">
                 @csrf
                 <label class="block mb-2">Jenis Tagihan:</label>
-                <input type="text" name="jenis_tagihan" class="border p-2 w-full mb-4" required>
+                <input type="text" name="jenis_tagihan" class="border p-2 w-full mb-4 rounded-md" required>
 
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
             </form>

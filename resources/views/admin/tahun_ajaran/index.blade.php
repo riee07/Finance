@@ -2,11 +2,11 @@
 
 {{-- @section('title', 'Data Tahun Ajaran') --}}
 
-@section('admin-sidebar')
+@section('content')
     <h1 class="text-2xl font-bold mb-4">Data Tahun Ajaran</h1>
 <div class="max-w-7xl mx-auto px-6 py-6">
         <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Data Siswa</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">Data Tahun Ajaran</h1>
             <div class="flex items-center space-x-3">
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-2">

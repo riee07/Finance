@@ -2,7 +2,7 @@
 
 {{-- @section('title', 'Data Detail Tagihan') --}}
 
-@section('admin-sidebar')
+@section('content')
     <h1 class="text-2xl font-bold mb-4">Data Detail Tagihan</h1>
 
     <div class="max-w-7xl mx-auto px-6 py-6">

@@ -1,6 +1,6 @@
 @extends('components.sidebar-admin')
 
-@section('admin-sidebar')
+@section('content')
 
      <h1 class="text-2xl font-bold mb-4">Data Siswa</h1>
 

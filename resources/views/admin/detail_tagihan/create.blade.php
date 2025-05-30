@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Detail Tagihan')
 
@@ -9,7 +9,7 @@
         @csrf
 
         <label class="block mt-2">Tagihan ID:</label>
-        <select name="tagihan_id" class="border p-2 w-full" required>
+        <select name="tagihan_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($tagihans as $tagih)
             <option value="{{ $tagih->id_tagihan }}">{{ $tagih->id_tagihan }}</option>
@@ -17,7 +17,7 @@
         </select>
 
         <label class="block mt-2">Tarif Tagihan ID:</label>
-        <select name="tarif_tagihan_id" class="border p-2 w-full" required>
+        <select name="tarif_tagihan_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($tarif_tagihans as $tarif)
             <option value="{{ $tarif->id_tarif_tagihan }}">{{ $tarif->id_tarif_tagihan }}</option>
@@ -25,9 +25,11 @@
         </select>
 
         <label class="block">Jumlah Tagihan:</label>
-        <input type="number" name="jumlah_tagihan" class="border p-2 w-full" required>
+        <input type="number" name="jumlah_tagihan" class="border p-2 w-full rounded-md" required>
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('admin.detail-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('admin.detail-tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
 @endsection
