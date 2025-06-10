@@ -16,7 +16,7 @@
       <p class="cursor-pointer border-primary hover:opacity-50 border-none" id="nav-btn">help</p>
       @if (Route::has('login'))
       @auth
-          <a class="lr  block bg-primary border-[1px] py-1 px-3 rounded-[4px] border-primary text-secondary " href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . '/index') }}">Dashboard</a>
+          <a class="lr  block bg-primary border-[1px] py-1 px-3 rounded-[4px] border-primary text-secondary " href="{{ url(Auth::user()->role . (Auth::user()->role == 'siswa' ? '/' . Auth::user()->kelas : '') . 'dashboard') }}">Dashboard</a>
       @else
       <a class="lr  block bg-primary border-[1px] py-1 px-3 rounded-[4px] border-primary text-secondary " href="{{ route('login') }}">Log in</a>
       @endauth

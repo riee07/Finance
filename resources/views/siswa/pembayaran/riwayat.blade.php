@@ -12,7 +12,7 @@
     </tr>
 @endforeach --}}
 
-<x-allLinks></x-allLinks>
+{{-- <x-allLinks></x-allLinks>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -363,4 +363,151 @@
   </div>
 
 </body>
-</html>
+</html> --}}
+
+<x-layout-dashboard-siswa>
+   <div class="flex space-x-2 px-8 max-w-4xl xl:max-w-5xl mx-auto mt-10">
+    <select class="px-3 py-2 w-[100px] focus:border-primary focus:ring-primary  rounded border border-gray-300 text-sm text-gray-700">
+      <option class="before:ring-white after:ring-white">bulan</option>
+      <option>juni</option>
+      <option>mei</option>
+      <!-- Tambah lainnya -->
+    </select>
+    <select class="px-3 py-2 w-[100px] focus:border-primary focus:ring-primary  rounded border border-gray-300 text-sm text-gray-700">
+      <option class="before:ring-white after:ring-white">tanggal</option>
+      <option>1</option>
+      <option>2</option>
+      <!-- Tambah lainnya -->
+    </select>
+    <select class="px-3 py-2 w-[100px] focus:border-primary focus:ring-primary  rounded border border-gray-300 text-sm text-gray-700">
+      <option class="before:ring-white after:ring-white">tahun</option>
+      <option>2025</option>
+      <option>2045</option>
+      <!-- Tambah lainnya -->
+    </select>
+  </div>
+
+  <!-- List Item -->
+  <div class="space-y-3 mt-5 max-w-4xl xl:max-w-5xl mx-auto">
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+    <div class="flex items-center justify-between border-b px-8 pb-2">
+      <div>
+        <p class="text-sm text-gray-700">spp, bulan juni</p>
+        <p class="text-sm font-semibold">2 , mei , 2025</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <p class="text-sm text-gray-800">Rp.350.00</p>
+        <i class="bi bi-arrow-right-circle-fill text-lg"></i>
+      </div>
+    </div>
+  </div>
+</x-layout-dashboard-siswa>
