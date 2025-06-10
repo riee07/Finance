@@ -15,10 +15,61 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $siswas = Siswa::with('tahunAjaran', 'user')->get();
-        return view('admin.siswa.index', compact('siswas'));
+        $tahun_ajarans = TahunAjaran::all();
+        $siswas = Siswa::query()
+        ->with('tahunAjaran', 'user')
+        ->when($request->search, function($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                ->orWhere('nisn', 'like', "%{$search}%")
+                ->orWhere('kelas', 'like', "%{$search}%")
+                ->orWhere('jurusan', 'like', "%{$search}%")
+                ->orWhere('no_hp', 'like', "%{$search}%")
+                ->orWhereHas('tahunAjaran', function($q) use ($search) {
+                        $q->where('tahun_ajaran', 'like', "%{$search}%");
+                    })
+                ->orWhereHas('user', function($q) use ($search) {
+                    $q->where('email', 'like', "%{$search}%");
+                });
+        })
+        ->when($request->jurusan, function($query, $jurusan) {
+            return $query->where('jurusan', $jurusan);
+        })
+        ->when($request->kelas, function($query, $kelas) {
+            return $query->where('kelas', 'like', "{$kelas}%");
+        })
+        ->when($request->status_aktif, function($query, $status) {
+            return $query->where('status_aktif', $status);
+        })
+        ->when($request->tahun_ajaran, function($query, $tahunId) {
+            return $query->where('id_tahun_ajaran', $tahunId);
+        })
+        ->when($request->sort, function($query, $sort) {
+            switch($sort) {
+                case 'name_asc':
+                    return $query->orderBy('name', 'asc');
+                case 'name_desc':
+                    return $query->orderBy('name', 'desc');
+                case 'kelas_asc':
+                    return $query->orderBy('kelas', 'asc');
+                case 'kelas_desc':
+                    return $query->orderBy('kelas', 'desc');
+                case 'tahun_ajaran_desc':
+                    return $query->orderBy('id_tahun_ajaran', 'desc');
+                case 'tahun_ajaran_asc':
+                    return $query->orderBy('id_tahun_ajaran', 'asc');
+                default:
+                    return $query->latest();
+            }
+        }, function($query) {
+            return $query->latest();
+        })
+        ->paginate(10);
+
+        $tahunAjarans = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
+        return view('admin.siswa.index', compact('siswas', 'tahun_ajarans'));
     }
 
     public function edit(Siswa $siswa)
@@ -134,10 +185,10 @@ public function update(Request $request, $id)
 
         return redirect()->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil diperbarui!');
-    } catch (\Exception $e) {
-        return back()->with('error', 'Gagal memperbarui data: '.$e->getMessage());
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui data: '.$e->getMessage());
+        }
     }
-}
 
     public function destroy(Siswa $siswa)
     {
@@ -153,9 +204,49 @@ public function update(Request $request, $id)
             return redirect()->route('siswa.index')
                 ->with('success', 'Data siswa dan akun berhasil dihapus');
                 
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
-        }
+            } catch (\Exception $e) {
+                return redirect()->back()
+                    ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+            }
     }
+
+    public function promosiKelas(Request $request)
+    {
+        DB::transaction(function () {
+            // Ambil tahun ajaran aktif
+            $tahunSekarang = TahunAjaran::where('status', 'aktif')->first();
+            if (!$tahunSekarang) {
+                throw new \Exception("Tahun ajaran aktif belum diatur.");
+            }
+
+            // Ambil semua siswa aktif
+            $siswas = Siswa::where('status_aktif', 'aktif')->get();
+
+            foreach ($siswas as $siswa) {
+                // Tentukan kelas baru
+                $kelasBaru = match ($siswa->kelas) {
+                    'x' => 'xi',
+                    'xi' => 'xii',
+                    'xii' => 'lulus', // lulus
+                    default => null,
+                };
+
+                if ($kelasBaru === null) {
+                    // Siswa lulus → nonaktifkan
+                    $siswa->update([
+                        'status_aktif' => 'non-aktif',
+                    ]);
+                } else {
+                    // Naik kelas + ganti tahun ajaran
+                    $siswa->update([
+                        'kelas' => $kelasBaru,
+                        'tahun_ajaran_id' => $tahunSekarang->id_tahun_ajaran,
+                    ]);
+                }
+            }
+        });
+
+        return back()->with('success', 'Kelas siswa berhasil diperbarui.');
+    }
+
 }

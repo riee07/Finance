@@ -1,26 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\UsersOrder;
 
+use App\Imports\SiswaImport;
+use App\Exports\PembayaranExport;
+use App\Exports\TahunAjaranExport;
+use App\Http\Middleware\CekNoHpSiswa;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersOrderController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\TagihanController;
+use App\Http\Controllers\Siswa\RealSiswaController;
+use App\Http\Controllers\Admin\PembayaranController;
+
+
+
+use App\Http\Controllers\Admin\SiswaImportController;
+
 use App\Http\Controllers\Admin\TahunAjaranController;
 use App\Http\Controllers\Admin\JenisTagihanController;
 use App\Http\Controllers\Admin\TarifTagihanController;
-use App\Http\Controllers\Admin\TagihanController;
 use App\Http\Controllers\Admin\DetailTagihanController;
-use App\Http\Controllers\Admin\PembayaranController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\UsersOrderController;
-use App\Http\Controllers\Admin\SiswaImportController;
-use App\Imports\SiswaImport;
-
-
-use App\Http\Controllers\Siswa\RealSiswaController;
-
-use App\Exports\PembayaranExport;
-use App\Exports\TahunAjaranExport;
-use App\Models\UsersOrder;
+use App\Http\Controllers\Siswa\LengkapiProfilController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,14 +62,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('detail-tagihan', DetailTagihanController::class);
     Route::resource('pembayaran', PembayaranController::class);
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::post('siswa/promosi', [SiswaController::class, 'promosiKelas'])->name('siswa.promosi');
 });
 
-Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->group(function () {
+Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa', 'cek.nohp'])->group(function () {
     Route::get('dashboard', [RealSiswaController::class, 'index'])->name('dashboard');
     Route::get('/pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::post('/pembayaran/bayar', [App\Http\Controllers\Siswa\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
     //history
     Route::get('/riwayat-pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'riwayat'])->name('siswa.pembayaran.riwayat');
+});
+
+// route yang tidak dicek 'cek.nohp'
+Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
+    Route::get('/lengkapi-nohp', [LengkapiProfilController::class, 'form'])->name('lengkapi.nohp');
+    Route::post('/lengkapi-nohp', [LengkapiProfilController::class, 'simpan'])->name('lengkapi.nohp.submit');
 });
 
 Route::post('/admin/generate-tagihan', [TagihanController::class, 'generate'])->name('generate.tagihan');

@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Siswa')
 
@@ -8,18 +8,25 @@
 <form action="{{ route('admin.siswa.store') }}" method="POST">
     @csrf
     <label class="block">Name:</label>
-    <input type="text" name="name" class="border p-2 w-full" required>
+    <input type="text" name="name" class="border p-2 w-full rounded-md" required>
 
-    <label class="block mt-2">Email:</label>
-    <input type="email" name="email" value="{{ old('email', $email ?? '') }}" readonly class="border p-2 w-full bg-gray-100">
-    <small class="text-gray-500">*Email ini otomatis ter-generate</small>
+    <div>
+        <div class="flex gap-4 w-full">
+            <div class="w-full">
+                <label class="block mt-2">Email:</label>
+                <input type="email" name="email" value="{{ old('email', $email ?? '') }}" readonly class="border p-2 w-full bg-gray-100 rounded-md cursor-not-allowed focus:ring-0 focus:border-black">
+            </div>
 
-    <label class="block mt-2">Password:</label>
-    <input type="text" name="password" value="{{ old('password', $password ?? '') }}" readonly class="border p-2 w-full bg-gray-100">
-    <small class="text-gray-500">*Password ini otomatis ter-generate</small>
+            <div class="w-full">
+                <label class="block mt-2">Password:</label>
+                <input type="text" name="password" value="{{ old('password', $password ?? '') }}" readonly class="border p-2 w-full bg-gray-100 rounded-md cursor-not-allowed focus:ring-0 focus:border-black">
+            </div>
+        </div>
+        <small class="text-center">*Email dan Password otomatis Ter-Generate</small>
+    </div>
 
     <label class="block mt-2">NISN:</label>
-    <input type="text" name="nisn" class="border p-2 w-full" required>
+    <input type="text" name="nisn" class="border p-2 w-full rounded-md" required>
 
     <label class="block mt-2">Kelas:</label>
         <select name="kelas" class="border p-2 w-full rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
@@ -42,11 +49,8 @@
             <option value="dkv" {{ old('jurusan') == 'dkv' ? 'selected' : '' }}>DKV</option>
     </select>
 
-    <label class="block mt-2">No HP:</label>
-    <input type="text" name="no_hp" class="border p-2 w-full" required>
-
-        <label class="block mt-2">Tahun Ajaran ID:</label>
-    <select name="tahun_ajaran_id" class="border p-2 w-full" required>
+    <label class="block mt-2">Tahun Ajaran ID:</label>
+    <select name="tahun_ajaran_id" class="border p-2 w-full rounded-md" required>
         <option value="">-- PILIH --</option>
         @foreach($tahun_ajarans as $tahun)
             <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
@@ -54,13 +58,15 @@
     </select>
 
     <label class="block mt-2">Status Siswa:</label>
-    <select name="status_aktif" class="border p-2 w-full" required>
+    <select name="status_aktif" class="border p-2 w-full rounded-md" required>
         <option value="">-- PILIH --</option>
         <option value="aktif" {{ old('status_aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
         <option value="non-aktif" {{ old('status_aktif') == 'non-aktif' ? 'selected' : '' }}>Nonaktif</option>
     </select>
 
-    <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-    <a href="{{ route('admin.siswa.index') }}" class="ml-2 text-gray-600">Batal</a>
+    <div class="float-right">
+        <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
+        <a href="{{ route('admin.siswa.index') }}" class="ml-2 text-gray-600">Batal</a>
+    </div>
 </form>
 @endsection

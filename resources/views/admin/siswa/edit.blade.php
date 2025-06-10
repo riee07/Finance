@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Siswa')
 
@@ -9,10 +9,10 @@
         @csrf
         @method('PUT')
         <label class="block">Nama:</label>
-        <input type="text" name="name" class="border p-2 w-full" value="{{ $siswa->name }}" required>
+        <input type="text" name="name" class="border p-2 w-full rounded-md" value="{{ $siswa->name }}" required>
 
         <label class="block mt-2">NIS:</label>
-        <input type="text" name="nisn" class="border p-2 w-full" value="{{ $siswa->nisn }}" required>
+        <input type="text" name="nisn" class="border p-2 w-full rounded-md" value="{{ $siswa->nisn }}" required>
 
         <label class="block text-gray-700 mb-2">Kelas</label>
         <select name="kelas" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -36,22 +36,24 @@
         </select>   
         
         <label class="block mt-2">No Telepon:</label>
-        <input type="text" name="no_telp" class="border p-2 w-full" value="{{ $siswa->no_telp }}" required>
+        <input type="text" name="no_telp" class="border p-2 w-full rounded-md" value="{{ $siswa->no_telp }}" required>
 
         <label class="block mt-2">Tahun Ajaran:</label>
-        <select name="tahun_ajaran_id" class="border p-2 w-full" value="{{ $siswa->tahun_ajaran }}" required>
+        <select name="tahun_ajaran_id" class="border p-2 w-full rounded-md" value="{{ $siswa->tahun_ajaran }}" required>
             @foreach($tahun_ajarans as $tahun)
             <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
             @endforeach
         </select>
         
         <label class="block mt-2">Status Siswa:</label>
-        <select name="status_aktif" class="border p-2 w-full" required>
+        <select name="status_aktif" class="border p-2 w-full rounded-md" required>
             <option value="aktif" {{ $siswa->status_aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
             <option value="non-aktif" {{ $siswa->status_aktif == 'non-aktif' ? 'selected' : '' }}>Non-Aktif</option>
         </select>
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('admin.siswa.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('admin.siswa.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
 @endsection

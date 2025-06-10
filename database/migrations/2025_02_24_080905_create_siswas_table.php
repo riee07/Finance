@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('nisn')->unique();
-            $table->enum('kelas', ['x', 'xi', 'xii']);
+            $table->enum('kelas', ['x', 'xi', 'xii', 'lulus']);
             $table->enum('jurusan', ['pplg', 'tjkt', 'an', 'dkv', 'ak', 'mp', 'dpb', 'lps', 'br']);
             $table->string('no_hp')->nullable();
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable(); // FK harus dideklarasikan manual

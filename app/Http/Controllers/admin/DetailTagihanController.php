@@ -7,17 +7,84 @@ use App\Models\Admin\DetailTagihan;
 use Illuminate\Http\Request;
 use App\Models\Admin\Tagihan;
 use App\Models\Admin\TarifTagihan;
+use App\Models\Admin\TahunAjaran;
 
 class DetailTagihanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $detail_tagihans = DetailTagihan::all();
+        
+        // Query untuk Detail Tagihan (sesuai yang sudah diperbaiki sebelumnya)
+        $detail_tagihans = DetailTagihan::query()
+            ->with('tagihan', 'tarifTagihan', 'tahunAjaran')
+            ->when($request->search, function($query, $search) {
+                return $query->where(function($q) use ($search) {
+                    $q->where('tagihan_id', 'like', "%{$search}%")
+                    ->orWhere('jumlah_tagihan', 'like', "%{$search}%")
+                    ->orWhereHas('tagihan', function($subQ) use ($search) {
+                        $subQ->where('tagihan_id', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('tarifTagihan', function($subQ) use ($search) {
+                        $subQ->where('jenis_tagihan_id', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('tagihan.tahunAjaran', function($subQ) use ($search) {
+                        $subQ->where('tahun_ajaran', 'like', "%{$search}%");
+                    });
+                });
+            })
+            ->when($request->tagihan_id, function($query, $tagihanId) {
+                return $query->where('tagihan_id', $tagihanId);
+            })
+            ->when($request->tarif_tagihan_id, function($query, $tarifTagihanId) {
+                return $query->where('tarif_tagihan_id', $tarifTagihanId);
+            })
+            ->when($request->tahun_ajaran, function($query, $tahunId) {
+                return $query->whereHas('tagihan', function($q) use ($tahunId) {
+                    $q->where('id_tahun_ajaran', $tahunId);
+                });
+            })
+            ->when($request->sort, function($query, $sort) {
+                switch($sort) {
+                    case 'tagihan_asc':
+                        return $query->orderBy('tagihan_id', 'asc');
+                    case 'tagihan_desc':
+                        return $query->orderBy('tagihan_id', 'desc');
+                    case 'tarif_asc':
+                        return $query->orderBy('tarif_tagihan_id', 'asc');
+                    case 'tarif_desc':
+                        return $query->orderBy('tarif_tagihan_id', 'desc');
+                    case 'tahun_ajaran_asc':
+                        return $query->join('tagihans', 'detail_tagihans.tagihan_id', '=', 'tagihans.id_tagihan')
+                                ->join('tahun_ajarans', 'tagihans.id_tahun_ajaran', '=', 'tahun_ajarans.id_tahun_ajaran')
+                                ->orderBy('tahun_ajarans.tahun_ajaran', 'asc')
+                                ->select('detail_tagihans.*');
+                    case 'tahun_ajaran_desc':
+                        return $query->join('tagihans', 'detail_tagihans.tagihan_id', '=', 'tagihans.id_tagihan')
+                                ->join('tahun_ajarans', 'tagihans.id_tahun_ajaran', '=', 'tahun_ajarans.id_tahun_ajaran')
+                                ->orderBy('tahun_ajarans.tahun_ajaran', 'desc')
+                                ->select('detail_tagihans.*');
+                    case 'jumlah_tagihan_asc':
+                        return $query->orderBy('jumlah_tagihan', 'asc');
+                    case 'jumlah_tagihan_desc':
+                        return $query->orderBy('jumlah_tagihan', 'desc');
+                    default:
+                        return $query->latest();
+                }
+            }, function($query) {
+                return $query->latest();
+            })
+            ->paginate(10);
 
-        return view('admin.detail_tagihan.index', compact('detail_tagihans'));
+    // Data untuk Filter Dropdown
+    $tagihans = Tagihan::orderBy('siswa')->orderBy('siswa_id')->get(); // Ambil semua tagihan dengan relasi siswa
+    $tarif_tagihans = TarifTagihan::with('jenisTagihan')->get(); // Ambil semua tarif tagihan dengan relasi jenis
+    $tahun_ajarans = TahunAjaran::all(); // Ambil semua tahun ajaran
+        
+        return view('admin.detail_tagihan.index', compact('detail_tagihans', 'tagihans', 'tarif_tagihans', 'tahun_ajarans'));
     }
 
     /**

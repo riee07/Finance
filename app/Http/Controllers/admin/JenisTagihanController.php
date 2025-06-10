@@ -14,6 +14,13 @@ class JenisTagihanController extends Controller
     public function index()
     {
         $jenis_tagihans = JenisTagihan::all();
+
+        $jenis_tagihans = JenisTagihan::query()
+            ->when(request('search'), function($query, $search) {
+                return $query->where('jenis_tagihan', 'like', "%{$search}%");
+            })
+            ->orderBy('jenis_tagihan', 'asc')
+            ->get();
         return view('admin.jenis_tagihan.index', compact('jenis_tagihans'));
     }
     

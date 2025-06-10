@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Tambah Tagihan')
 
@@ -9,7 +9,7 @@
         @csrf
 
         <label class="block mt-2">Siswa:</label>
-        <select name="siswa_id" class="border p-2 w-full" required>
+        <select name="siswa_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($siswas as $siswa)
             <option value="{{ $siswa->id_siswa }}">{{ $siswa->name }}</option>
@@ -17,7 +17,7 @@
         </select>
 
         <label class="block mt-2">Tahun Ajaran:</label>
-        <select name="tahun_ajaran_id" class="border p-2 w-full" required>
+        <select name="tahun_ajaran_id" class="border p-2 w-full rounded-md" required>
             <option value="">-- PILIH --</option>
             @foreach($tahun_ajarans as $tahun)
             <option value="{{ $tahun->id_tahun_ajaran }}">{{ $tahun->tahun_ajaran }}</option>
@@ -25,16 +25,18 @@
         </select>
 
         <label class="block">Total Tagihan:</label>
-        <input type="number" name="total_tagihan" class="border p-2 w-full" required>
+        <input type="number" name="total_tagihan" class="border p-2 w-full rounded-md" required>
 
         <label class="block">Status Pembayaran:</label>
-        <select name="status_pembayaran" class="border p-2 w-full">
+        <select name="status_pembayaran" class="border p-2 w-full rounded-md">
             <option value="">-- PILIH --</option>
             <option value="belum_lunas">Belum Lunas</option>
             <option value="lunas"> Lunas</option>
         </select>
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
-        <a href="{{ route('admin.tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
+            <a href="{{ route('admin.tagihan.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
 @endsection

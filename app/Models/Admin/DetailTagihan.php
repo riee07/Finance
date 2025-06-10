@@ -23,4 +23,9 @@ class DetailTagihan extends Model
     {
         return $this->belongsTo(TarifTagihan::class, 'tarif_tagihan_id', 'id_tarif_tagihan');
     }
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    }
+
 }

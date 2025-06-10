@@ -1,36 +1,36 @@
-<table class="w-full mt-4 border">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="border px-4 py-2">Nama</th>
-                <th class="border px-4 py-2">Email</th>
-                <th class="border px-4 py-2">NISN</th>
-                <th class="border px-4 py-2">Kelas</th>
-                <th class="border px-4 py-2">Jurusan</th>
-                <th class="border px-4 py-2">No HP
-                <th class="border px-4 py-2">Tahun Ajaran</th>
-                <th class="border px-4 py-2">Status Aktif</th>
+<table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NISN</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jurusan</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No HP
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun Ajaran</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Aktif</th>
                 @if (!isset($isExport))
-                <th class="border px-4 py-2">Aksi</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 @endif
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white divide-y divide-gray-200">
             @foreach($siswas as $data)
             <tr>
-                <td class="border px-4 py-2">{{ $data->name }}</td>
-                <td class="border px-4 py-2">{{ $data->user->email }}</td>
-                <td class="border px-4 py-2">{{ $data->nisn }}</td>
-                <td class="border px-4 py-2">{{ $data->kelas }}</td>
-                <td class="border px-4 py-2">{{ $data->jurusan }}</td>
-                <td class="border px-4 py-2">{{ $data->no_hp }}</td>
-                <td class="border px-4 py-2">{{ $data->tahunAjaran->tahun_ajaran ?? 'Tidak Ada' }}</td>
-                <td class="border px-4 py-2">{{ $data->status_aktif }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->user->email }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->nisn }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->kelas }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->jurusan }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->no_hp }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->tahunAjaran->tahun_ajaran ?? 'Tidak Ada' }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $data->status_aktif }}</td>
                 @if (!isset($isExport))
-                <td class="border px-4 py-2">
-                    <a href="{{ route('admin.siswa.edit', $data->id_siswa) }}" class="text-blue-500">Edit</a> |
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                    <a href="{{ route('admin.siswa.edit', $data->id_siswa) }}" class="text-blue-500"><i class="fas fa-edit"></i></a> |
                     <form action="{{ route('admin.siswa.destroy', $data->id_siswa) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
-                        <button type="submit" class="text-red-500" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                        <button type="submit" class="text-red-500" onclick="return confirm('Yakin ingin menghapus?')"><i class="fas fa-trash-alt"></i></button>
                     </form>
                 </td>
                 @endif

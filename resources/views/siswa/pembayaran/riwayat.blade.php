@@ -1,16 +1,4 @@
-{{-- @foreach($tagihanLunas as $tagihan)
-    <tr>
-        <td>{{ $tagihan->order_id }}</td>
-        <td>
-            @foreach($tagihan->detailTagihan as $detail)
-                {{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan ?? 'Tidak Ada' }} -
-                Rp{{ number_format($detail->jumlah_tagihan, 0, ',', '.') }}<br>
-            @endforeach
-        </td>
-        <td>{{ $tagihan->status_pembayaran }}</td>
-        <td>{{ $tagihan->created_at->format('d-m-Y') }}</td>
-    </tr>
-@endforeach --}}
+
 
 {{-- <x-allLinks></x-allLinks>
 
@@ -23,8 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <style>
     :root {
-      --primary-color: #2e7d32; /* Hijau utama */
-      --secondary-color: #1b5e20; /* Hijau gelap */
+      --primary-color: #29d847; /* Warna utama */
+      --secondary-color: #82f095; /* Warna sekunder */
+      --accent-color: #3ff35e; /* Warna aksen */
       --light-gray: #f8f9fa;
       --medium-gray: #e0e0e0;
       --dark-gray: #757575;
@@ -236,8 +225,8 @@
     }
 
     .credit-card {
-      background: linear-gradient(135deg, #2e7d32, #1b5e20);
-      color: white;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--text-color); /* TEXT JADI HITAM */
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 25px;
@@ -293,23 +282,19 @@
   </style>
 </head>
 <body>
-
-  <div class="navbar">
-    <div class="logo">
-      <i class="fas fa-wallet logo-icon"></i> PayTrack
-    </div>
-    <ul class="nav-menu">
-      <li class="nav-item active"><i class="fas fa-history nav-icon"></i> Payment History</li>
-      <li class="nav-item"><i class="fas fa-chart-line nav-icon"></i> Analytics</li>
-      <li class="nav-item"><i class="fas fa-user nav-icon"></i> Profile</li>
-      <li class="nav-item"><i class="fas fa-cog nav-icon"></i> Settings</li>
-    </ul>
-    <div class="user-profile">
-      <div class="profile-pic"><i class="fas fa-user"></i></div>
-      <div class="profile-name">John Doe</div>
-    </div>
-  </div>
-
+{{-- @foreach($tagihanLunas as $tagihan)
+    <tr>
+        <td>{{ $tagihan->order_id }}</td>
+        <td>
+            @foreach($tagihan->detailTagihan as $detail)
+                {{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan ?? 'Tidak Ada' }} -
+                Rp{{ number_format($detail->jumlah_tagihan, 0, ',', '.') }}<br>
+            @endforeach
+        </td>
+        <td>{{ $tagihan->status_pembayaran }}</td>
+        <td>{{ $tagihan->created_at->format('d-m-Y') }}</td>
+    </tr>
+@endforeach --}}
   <div class="main-content">
     <h1 class="page-title">Payment History</h1>
 
@@ -318,9 +303,9 @@
         <div class="card-logo">{{ Auth::user()->siswa->name }}</div>
         <div class="card-chip"><i class="fas fa-microchip"></i></div>
       </div>
-      <div class="card-number">•••• •••• •••• 2364</div>
+      <div class="card-number">{{Auth::user()->siswa->nisn}}</div>
       <div class="card-footer">
-        <div class="card-name">JOHN DOE</div>
+        <div class="card-name"></div>
         <div class="card-expiry">07/2022</div>
       </div>
     </div>
@@ -334,30 +319,24 @@
         </div>
       </div>
 
+       @foreach($tagihanLunas as $tagihan)
+            @foreach($tagihan->detailTagihan as $detail)
       <div class="payment-list">
         <div class="payment-card">
           <div class="payment-avatar">PW</div>
           <div class="payment-details">
-            <div class="payment-recipient">Pavel Woods</div>
-            <div class="payment-date">May 23, 2021 • <span class="status-badge">Completed</span></div>
+            <div class="payment-recipient">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan ?? 'Tidak Ada' }}
+            <div class="payment-date">{{ $tagihan->created_at->format('d-m-Y') }}atus_pembayaran }}
           </div>
           <div class="payment-meta">
             <div class="payment-amount positive-amount">$25.00</div>
             <button class="feedback-btn">Give Feedback</button>
           </div>
         </div>
+        @endforeach
+      @endforeach
 
-        <div class="payment-card">
-          <div class="payment-avatar">DC</div>
-          <div class="payment-details">
-            <div class="payment-recipient">Dolall Craig</div>
-            <div class="payment-date">May 23, 2021 • <span class="status-badge">Completed</span></div>
-          </div>
-          <div class="payment-meta">
-            <div class="payment-amount positive-amount">$32.50</div>
-            <button class="feedback-btn">Give Feedback</button>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

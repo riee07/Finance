@@ -16,10 +16,57 @@ class TagihanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $tagihans = Tagihan::with('siswa', 'tahunAjaran')->get();
-        return view('admin.tagihan.index', compact('tagihans'));
+        $tahun_ajarans = TahunAjaran::all();
+
+        $tagihans = Tagihan::query()
+            ->with('tahunAjaran', 'siswa')
+            ->when($request->search, function($query, $search){
+                return $query->where('total_tagihan', 'like', "%{$search}%")
+                    ->orWhere('status_pembayaran', 'like', "%{$search}%")
+                    ->orWhereHas('siswa', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('tahunAjaran', function($q) use ($search) {
+                        $q->where('tahun_ajaran', 'like', "%{$search}%");
+                    });
+            })
+            ->when($request->total_tagihan, function($query, $total) {
+            return $query->where('total_tagihan', $total);
+            })
+            ->when($request->status, function($query, $status) {
+                return $query->where('status_pembayaran', $status);
+            })
+            ->when($request->tahun_ajaran, function($query, $tahunId) {
+                return $query->where('id_tahun_ajaran', $tahunId);
+            })
+            ->when($request->siswa_id, function($query, $siswa_id){
+                return $query->where('siswa_id', $siswa_id);
+            })
+            ->when($request->sort, function($query, $sort) {
+                switch($sort) {
+                    case 'siswa_asc':
+                        return $query->orderBy('siswa', 'asc');
+                    case 'siswa_desc':
+                        return $query->orderBy('siswa', 'desc');
+                    case 'tahun_ajaran_asc':
+                        return $query->orderBy('tahun_ajaran', 'asc');
+                    case 'tahun_ajaran_desc':
+                        return $query->orderBy('tahun_ajaran', 'desc');
+                    case 'total_tagihan_asc':
+                        return $query->orderBy('total_tagihan', 'asc');
+                    case 'total_tagihan_desc':
+                        return $query->orderBy('total_tagihan', 'desc');   
+                }
+            }, function($query) {
+                return $query->latest();
+            })
+            ->paginate(10);
+        
+        $siswas = Siswa::orderBy('siswa', 'desc')->get();
+        return view('admin.tagihan.index', compact('tagihans', 'siswas', 'tahun_ajarans'));
     }
 
     /**

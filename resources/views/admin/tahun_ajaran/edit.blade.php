@@ -1,4 +1,4 @@
-@extends('layouts.navigation')
+@extends('components.sidebar-admin')
 
 @section('title', 'Edit Tahun Ajaran')
 
@@ -17,7 +17,9 @@
             <option value="non-aktif" {{ $tahun_ajarans->status == 'non-aktif' ? 'selected' : '' }}>Nonaktif</option>
         </select>
 
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-        <a href="{{ route('admin.tahun-ajaran.index') }}" class="ml-2 text-gray-600">Batal</a>
+        <div class="float-right">
+            <button type="submit" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Update</button>
+            <a href="{{ route('admin.tahun-ajaran.index') }}" class="ml-2 text-gray-600">Batal</a>
+        </div>
     </form>
 @endsection
