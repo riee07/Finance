@@ -299,7 +299,7 @@
   <h2 class="text-2xl md:text-3xl font-semibold mb-8 mt-10">bantuan</h2>
   <div class="grid md:grid-cols-2 gap-8">
     <video height="300" controls class="rounded-lg video flex items-center justify-center">
-      <source src="assets/images/babyujang.mp4" type="video/mp4" />
+      <source src="" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div class="space-y-2">
