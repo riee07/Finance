@@ -52,11 +52,16 @@
                     <div x-show="openProjects" x-collapse x-cloak id="manajemen-menu" class="block bg-gray-50">
                         <a href="{{ url('admin/jenis-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Jenis Tagihan</a>
                         <a href="{{ url('admin/tarif-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Tarif Tagihan</a>
-                        <a href="{{ url('admin/siswa') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Siswa</a>
                         <a href="{{ url('admin/tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Tagihan</a>
                         <a href="{{ url('admin/detail-tagihan') }}" class="block pl-12 pr-4 py-2 text-gray-600 hover:bg-green-50 hover:text-green-600 border-b">Detail Tagihan</a>
                     </div>
                 </div>
+
+                <a href="{{ url('admin/siswa') }}" class="flex items-center px-4 gap-x-2 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 border-b">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span x-show="isOpen" x-transition>Siswa</span>
+                </a>
+
                 
                 <a href="{{ url('admin/tahun-ajaran') }}" class="flex items-center px-4 gap-x-2 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 border-b">
                     <i class="fa fa-calendar" aria-hidden="true"></i>

@@ -12,42 +12,54 @@
                 
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-2">
-                    <!-- Naikkan Kelas -->
-                    <form action="{{ route('admin.siswa.promosi') }}" method="POST" onsubmit="return confirm('Yakin ingin naikkan semua kelas?')" class="inline">
-                        @csrf
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium btn-hover">
-                            Naikkan Kelas
-                        </button>
-                    </form>
-                    
-                    <!-- Export -->
-                    <form action="{{ url('/siswa.export') }}" method="GET" class="inline">
-                        <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium btn-hover">
-                            Export
-                        </button>
-                    </form>
+                <!-- Naikkan Kelas -->
+                <form action="{{ route('admin.siswa.promosi') }}" method="POST" onsubmit="return confirm('Yakin ingin naikkan semua kelas?')" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium h-10">
+                        Naikkan Kelas
+                    </button>
+                </form>
 
-                    <!-- Import -->
-                    <div class="relative">
-                        <form action="{{ url('/import-siswa') }}" method="POST" enctype="multipart/form-data" class="flex">
-                        @csrf
-                        <input type="file" name="file" class="hidden" required><br>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md flex items-center text-sm font-medium">
-                            <i class="fas fa-plus mr-2"></i>
-                            Import
-                        </button>
-                    </form>
-                       
-                    </div>
+                <!-- Export -->
+                <form action="{{ url('/siswa.export') }}" method="GET" class="inline">
+                    <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium h-10">
+                        Export
+                    </button>
+                </form>
 
-                    <!-- Tambah Data -->
-                    <a href="{{ route('admin.siswa.create') }}" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium btn-hover flex items-center">
-                        Tambah Data
-                        <i class="fas fa-plus ml-2 text-xs"></i>
-                    </a>
-                </div>
+                <!-- Import -->
+                <form action="{{ url('/import-siswa') }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-2">
+                    @csrf
+
+                    <!-- Hidden file input -->
+                    <input type="file" name="file" id="fileInput" class="hidden" required>
+
+                    <!-- Label Upload -->
+                    <label for="fileInput" class="cursor-pointer bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-md flex items-center text-sm font-medium h-10 min-w-[120px]">
+                        <i class="fas fa-upload mr-2"></i> Pilih File
+                    </label>
+
+                    <!-- Nama File -->
+                    <span id="fileName"
+                        class="hidden text-sm text-gray-600 px-4 py-2 rounded-md font-medium h-10 min-w-[120px] items-center bg-white border border-gray-300"></span>
+
+                    <!-- Tombol Import -->
+                    <button type="submit"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md flex items-center text-sm font-medium h-10">
+                        <i class="fas fa-plus mr-2"></i>
+                        Import
+                    </button>
+                </form>
+
+                <!-- Tambah Data -->
+                <a href="{{ route('admin.siswa.create') }}" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center h-10">
+                    Tambah Data
+                    <i class="fas fa-plus ml-2 text-xs"></i>
+                </a>
             </div>
+                </div>
         </div>
+    </div>
 
     <!-- Filters -->
     <div class="bg-white p-4 rounded-md shadow-sm mb-6">
@@ -233,6 +245,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if(urlParams.has('tahun_ajaran')) document.querySelector('select[name="tahun_ajaran"]').value = urlParams.get('tahun_ajaran');
     if(urlParams.has('sort')) document.querySelector('select[name="sort"]').value = urlParams.get('sort');
 });
+
+//buat import
+const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = fileInput.files[0].name;
+            fileName.classList.remove('hidden');
+            fileName.classList.add('flex'); // biar align dengan tombol
+        } else {
+            fileName.textContent = '';
+            fileName.classList.remove('flex');
+            fileName.classList.add('hidden');
+        }
+    });
 </script>
 
     
