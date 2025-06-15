@@ -51,6 +51,7 @@ class PembayaranController extends Controller
         $tagihan->order_id = $orderId;
         $tagihan->save();
 
+
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
@@ -81,6 +82,8 @@ class PembayaranController extends Controller
 
     public function callback(Request $request)
     {
+        Log::info('Callback diterima', request()->all());
+
         $data = $request->all();
 
         Log::info('Midtrans callback data:', $data);
@@ -127,6 +130,7 @@ class PembayaranController extends Controller
 
         return response()->json(['message' => 'Callback processed']);
     }
+
 
     public function riwayat()
     {

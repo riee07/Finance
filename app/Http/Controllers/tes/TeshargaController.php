@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\tes;
+namespace App\Http\Controllers\Tes;
 namespace App\Models\tes\Tesharga;
 
 use App\Http\Controllers\Controller;
