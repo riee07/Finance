@@ -20,48 +20,33 @@
         <script src="https://unpkg.com/alpinejs" defer></script>
         <style>
             .scrollbar-hide {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
         </style>
     </head>
-    <body class=" antialiased font-poppins text-text" >
+    <body class=" antialiased font-poppins text-text " >
         <main>
             {{ $slot }}
         </main>
+        <x-footer></x-footer>
         <script>
-        const wrapper = document.getElementById('mobileSidebarWrapper');
-        const sidebar = document.getElementById('mobileSidebar');
-        const gapArea = document.getElementById('sidebarGap');
-        const openBtn = document.getElementById('toggleSidebar');
-
         window.addEventListener('scroll', function(){
             document.querySelector('nav').classList.replace('shadow-none','shadow')
             document.querySelector('nav').classList.replace('bg-transparent','bg-white')
-            
             if(window.scrollY == 0){
-            document.querySelector('nav').classList.replace('shadow','shadow-none')
-            document.querySelector('nav').classList.replace('bg-white','bg-transparent')
+                document.querySelector('nav').classList.replace('shadow','shadow-none')
+                document.querySelector('nav').classList.replace('bg-white','bg-transparent')
             }
         })
-
-        openBtn.addEventListener('click', () => {
-            wrapper.classList.remove('hidden');
-            setTimeout(() => {
-            sidebar.classList.remove('translate-x-full');
-            }, 10); // slight delay to allow transition
-        });
-
-        gapArea.addEventListener('click', () => {
-            sidebar.classList.add('translate-x-full');
-            setTimeout(() => {
-            wrapper.classList.add('hidden');
-            }, 300); // match transition duration
-        });
         </script>
+        <script src="assets/js/utama.js"></script>
     </body>
 </html>
