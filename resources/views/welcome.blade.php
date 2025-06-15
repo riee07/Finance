@@ -17,7 +17,7 @@
 
         <!-- Login Button -->
         <div class="hidden md:block">
-        <a href="#" class=" border-2 hover:bg-[#29d847]  px-4 py-1 rounded-full text-sm">
+        <a href="{{ route('login') }}" class=" border-2 hover:bg-[#29d847]  px-4 py-1 rounded-full text-sm">
             login
         </a>
         </div>
@@ -54,7 +54,7 @@
                 <i class="bi bi-info-circle text-4xl"></i>
                 <p class="text-sm">mohon login terlebih dahulu untuk bisa membayar</p>
             </div>
-            <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-full text-center">login</a>
+            <a href="{{ route('login') }}" class="bg-green-500 text-white px-4 py-2 rounded-full text-center">login</a>
         </div>
     </div>
 </div>

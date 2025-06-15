@@ -6,6 +6,7 @@ use App\Imports\SiswaImport;
 use App\Exports\PembayaranExport;
 use App\Exports\TahunAjaranExport;
 use App\Http\Middleware\CekNoHpSiswa;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersOrderController;
@@ -27,10 +28,6 @@ use App\Http\Controllers\Siswa\LengkapiProfilController;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/account', function () {
-    return view('account');
 });
 
 Route::get('/dashboard', function () {
@@ -70,7 +67,9 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa', 'cek.n
     Route::get('/pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::post('/pembayaran/bayar', [App\Http\Controllers\Siswa\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
     //history
-    Route::get('/riwayat-pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'riwayat'])->name('siswa.pembayaran.riwayat');
+    Route::get('/riwayat-pembayaran', [App\Http\Controllers\Siswa\PembayaranController::class, 'riwayat'])->name('riwayat.pembayaran');
+
+    Route::get('/account', [RealSiswaController::class, 'account'])->name('account');
 });
 
 // route yang tidak dicek 'cek.nohp'
@@ -99,6 +98,13 @@ Route::prefix('user-orders')->name('user-orders.')->group(function () {
     Route::get('/remove-from-cart/{id_tarif_tagihan}', [UsersOrderController::class, 'removeFromCart'])
          ->name('remove-from-cart');
 });
+
+Route::get('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login'); // arahkan ke halaman login atau home
+})->name('logout');
 
 
 require __DIR__.'/auth.php';

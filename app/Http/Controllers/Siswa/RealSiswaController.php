@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailTagihan;
+use App\Models\Admin\Tagihan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +18,8 @@ class RealSiswaController extends Controller
     {
         // Ambil data siswa dari user yang sedang login
         $siswa = Auth::user()->siswa;
+
+        $tagihans = Tagihan::where('siswa_id', $siswa->id_siswa)->where('tahun_ajaran_id', $siswa->tahun_ajaran_id)->latest()->first();
 
         // Ambil hanya detail tagihan yang:
         // - Berasal dari tagihan milik siswa ini
@@ -31,7 +35,7 @@ class RealSiswaController extends Controller
             })
             ->get();
 
-        return view('siswa.dashboard', compact('siswa', 'detail_tagihans'));
+        return view('siswa.dashboard', compact('siswa', 'detail_tagihans', 'tagihans'));
     }
 
     /**
@@ -80,5 +84,12 @@ class RealSiswaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function account()
+    {
+        $user = Auth::user();
+
+        return view('siswa.account', compact('user'));
     }
 }
