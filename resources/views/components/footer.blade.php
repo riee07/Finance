@@ -1,16 +1,13 @@
 <footer class="w-full bg-primary mt-52">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <!--Grid-->
             <div class="py-14 grid grid-cols-12 gap-x-5 gap-y-8">
                 <div class="col-span-full xl:col-span-3 relative bg-gradient-to-tr from-accent to-secondary rounded-2xl gap-12 p-6 xl:w-72 h-96 flex flex-col justify-center items-center">
-                    
                     <a href="#home" class="flex justify-center lg:justify-start">
                       <img src="assets/images/lps.png" alt="" class="h-20">
-
                     </a>
                     <p class="text-center ">Trusted in more than 100 countries & 5 million customers.
-                        Have any query? contact us we are here for you.</p>
-                   
+                        Have any query? contact us we are here for you.
+                    </p>
                     <div class="flex  space-x-4 sm:justify-center  ">
                         <a href="javascript:;"
                             class="w-9 h-9 rounded-full bg-white flex justify-center items-center hover:shadow-md">
@@ -22,8 +19,6 @@
                                         fill="#000" />
                                 </g>
                             </svg>
-
-
                         </a>
                         <a href="javascript:;"
                             class="w-9 h-9 rounded-full bg-white flex justify-center items-center hover:shadow-md">
@@ -40,7 +35,6 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-
                         </a>
                         <a href="javascript:;"
                             class="w-9 h-9 rounded-full bg-white flex justify-center items-center hover:shadow-md">
@@ -58,7 +52,6 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-
                         </a>
                         <a href="javascript:;"
                             class="w-9 h-9 rounded-full bg-white flex justify-center items-center hover:shadow-md">
@@ -76,11 +69,9 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-
                         </a>
                     </div>
                 </div>
-
                 <div class="block text-center xl:text-left xl:py-16 col-span-full min-[500px]:col-span-6 md:col-span-4 xl:col-span-3 xl:pl-5">
                     <h4 class="text-lg text-gray-900 font-bold mb-9">Get In Touch</h4>
                     <ul class="text-gray-900 transition-all duration-500 grid gap-6">
@@ -112,9 +103,7 @@
                         </button>
                     </div>
                 </form>
-
             </div>
-            <!--Grid-->
         </div>
         <div class="py-4 bg-white">
             <div class="flex items-center justify-center">

@@ -1,28 +1,21 @@
 <x-layout>
 <nav x-data="{open: false}" class=" px-4 py-3 fixed top-0 left-0 right-0 z-40 duration-300 bg-transparent shadow-none mb-20">
     <div class="max-w-7xl mx-auto flex justify-between items-center text-text">
-        <!-- Logo + Title -->
         <div class="flex items-center space-x-2">
         <img src="assets/images/lps.png" alt="Logo" class="h-[50px]" />
         <span class="text-lg font-medium">Smk Amaliah </span>
         </div>
-
-        <!-- Desktop Menu -->
         <ul class="hidden md:flex space-x-6 text-sm font-medium">
         <li><a id="navbar" href="#home" class=" border-b-2 border-green-500 hover:border-b-2">home</a></li>
         <li><a id="navbar" href="#about" class=" border-b-0 border-green-500 hover:border-b-2">about</a></li>
         <li><a id="navbar" href="#produk" class=" border-b-0 border-green-500 hover:border-b-2">bayar</a></li>
         <li><a id="navbar" href="#help" class=" border-b-0 border-green-500 hover:border-b-2">bantuan</a></li>
         </ul>
-
-        <!-- Login Button -->
         <div class="hidden md:block">
         <a href="/login" class=" border-2 hover:bg-[#29d847]  px-4 py-1 rounded-full text-sm">
             login <i class="bi bi-box-arrow-in-right"></i>
         </a>
         </div>
-
-        <!-- Hamburger Button -->
         <div class="md:hidden">
         <button @click="open = !open" class=" focus:outline-none">
             <i class="bi bi-list text-3xl"></i>
@@ -64,35 +57,29 @@
     <img src="assets/images/tkj.png" alt="" class="h-[40px] lg:h-[60px] animate-pulse col-start-3 col-end-4 row-start-10 lg:col-start-10  lg:col-end-11 lg:row-start-9">
     <img src="assets/images/br.png" alt="" class="h-[40px] lg:h-[60px] animate-pulse col-start-6 col-end-7 row-start-10 lg:col-start-6  lg:col-end-7 lg:row-start-10">
   </div>
-<div class="text-center flex flex-col items-center justify-center px-5 z-10">
-    <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold max-w-screen-md mb-5">
-    Permudah pembayaran Amalaiah Dengan <span class="text-secondary font-medium">Amaliah Finance</span>
-    </h1>
-    <p class="text-[10px] md:text-sm text-paragraph mb-6 max-w-screen-sm ">
-    amaliah finance adalah sebuah platform digital untuk mempermudah
-    pengelolaan dan pembayaran yang ada di smk amaliah
-    </p>
-    <a href="/login"
-    class="flex items-center gap-x-2 justify-center w-fit  text-sm px-5 py-1 rounded-full shadow bg-primary hover:bg-green-500">
-    <p>Bayar Sekarang</p>
-    <i class="bi bi-arrow-right-circle-fill text-xl "></i>
-    </a>
-</div>
+  <div class="text-center flex flex-col items-center justify-center px-5 z-10">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold max-w-screen-md mb-5">
+      Permudah pembayaran Amalaiah Dengan <span class="text-secondary font-medium">Amaliah Finance</span>
+      </h1>
+      <p class="text-[10px] md:text-sm text-paragraph mb-6 max-w-screen-sm ">
+      amaliah finance adalah sebuah platform digital untuk mempermudah
+      pengelolaan dan pembayaran yang ada di smk amaliah
+      </p>
+      <a href="/login"
+      class="flex items-center gap-x-2 justify-center w-fit  text-sm px-5 py-1 rounded-full shadow bg-primary hover:bg-green-500">
+      <p>Bayar Sekarang</p>
+      <i class="bi bi-arrow-right-circle-fill text-xl "></i>
+      </a>
+  </div>
 </section>
 <section id="about" class="page px-6 py-12 md:px-10 md:py-16 bg-white max-w-screen-xl pt-20 mx-auto">
-    
-  <!-- Judul -->
   <h2 class="text-2xl md:text-3xl font-bold mb-5  decoration-blue-5000 mt-10">
     Tentang Amaliah Finance
   </h2>
-
-  <!-- Gambar -->
   <div class="flex flex-col lg:flex-row  gap-4 mb-10">
     <img src="https://smkamaliah.sch.id/wp-content/uploads/slider/cache/4f3bc4a463046d9696d5ad4d19410ef6/Picture12.png" class="rounded-lg h-40 md:h-64 w-[50%] lg:w-[30%]"></img>
     <img src="assets/images/gerbang.png" class="rounded-lg h-40 md:h-64 lg:w-[70%]"></img>
   </div>
-
-  <!-- Konten teks -->
   <div class="grid grid-cols-1 md:grid-cols-3 mt-32 gap-6">
     <div>
       <h3 class="text-xl font-semibold mb-4">Apa itu amaliah finance?</h3>
@@ -102,18 +89,14 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto, quibusdam quia voluptatibus illo ducimus iure facilis temporibus sit laboriosam, eius odio voluptates libero vero impedit?
       </p>
       <br>
-            <p>
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto, quibusdam quia voluptatibus illo ducimus iure facilis temporibus sit laboriosam, eius odio voluptates libero vero impedit?
       </p>
     </div>
   </div>
 </section>
-
-
-
 <section class="px-6 py-12 md:px-10 md:py-16 bg-white max-w-screen-xl mt-[100px] mx-auto">
   <div class="grid md:grid-cols-3 gap-8 items-start">
-    <!-- Kiri: Judul dan deskripsi -->
     <div>
       <h2 class="text-xl font-semibold mb-4">
         kenapa amaliah<br />finance?
@@ -122,10 +105,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
       </p>
     </div>
-
-    <!-- Kanan: 4 fitur -->
     <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <!-- Item 1 -->
       <div>
         <div class="bg-gray-300 rounded-md h-[300px] mb-4" style="background: url('https://smkamaliah.sch.id/wp-content/uploads/2023/03/Picture11-1170x658.png'); background-position: center; background-size: cover"></div>
         <h3 class="text-sm font-semibold mb-1">memudahkan pembayaran</h3>
@@ -154,15 +134,9 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
         </p>
       </div>
-
     </div>
   </div>
 </section>
-
-
-
-
-
 <section id="produk" class="page px-6 py-12 md:px-10 md:py-16 bg-white max-w-screen-xl mt-[100px] mx-auto">
   <h2 class="text-2xl md:text-3xl font-semibold mb-8 mt-10">Jenis pembayaran</h2>
   <div class="overflow-x-scroll scrollbar-hide xl:overflow-x-visible " >
@@ -294,7 +268,6 @@
     </div>
   </div>
 </section>
-
 <section id="help" class="page px-6 py-12 md:px-10 md:py-16 bg-white  max-w-screen-xl mt-[100px] mx-auto ">
   <h2 class="text-2xl md:text-3xl font-semibold mb-8 mt-10">bantuan</h2>
   <div class="grid md:grid-cols-2 gap-8">
@@ -325,7 +298,6 @@
     </div>
   </div>
 </section>
-
-
+<x-footer></x-footer>
 </x-layout>
 

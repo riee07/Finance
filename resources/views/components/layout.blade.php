@@ -36,7 +36,6 @@
         <main>
             {{ $slot }}
         </main>
-        <x-footer></x-footer>
         <script>
         window.addEventListener('scroll', function(){
             document.querySelector('nav').classList.replace('shadow-none','shadow')
