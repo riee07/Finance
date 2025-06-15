@@ -3,10 +3,10 @@
 
     <div class="flex flex-col items-center space-y-1">
     <div class="flex items-center justify-center w-32 h-32 border-4 rounded-full">
-      <p class="text-4xl">M</p>
+      <p class="text-4xl">{{ strtoupper(substr($user->siswa->name, 0, 1)) }}</p>
     </div>
-    <h2 class="text-sm font-semibold">Mamut</h2>
-    <p class="text-gray-500 text-sm">mamut@gmail.com</p>
+    <h2 class="text-sm font-semibold">{{ ucwords(strtolower($user->siswa->name)) }}</h2>
+    <p class="text-gray-500 text-sm">{{ $user->email }}</p>
   </div>
 
   <!-- Detail Section -->
@@ -15,23 +15,23 @@
     <div class="space-y-4 text-sm text-gray-800 bg-gray-50 shadow-lg p-4 rounded-md">
       <div>
         <p class="text-gray-400">Nama</p>
-        <p>Mamut Einsten</p>
+        <p>{{ ucwords(strtolower($user->siswa->name)) }}</p>
       </div>
       <div>
         <p class="text-gray-400">Email</p>
-        <p>ujang@gmail.com</p>
+        <p>{{ $user->email }}</p>
       </div>
       <div>
         <p class="text-gray-400">Kelas</p>
-        <p>XI</p>
+        <p>{{ strtoupper($user->siswa->kelas) }}</p>
       </div>
       <div>
         <p class="text-gray-400">Jurusan</p>
-        <p>PPLG</p>
+        <p>{{ strtoupper($user->siswa->jurusan) }}</p>
       </div>
       <div>
         <p class="text-gray-400">NISN</p>
-        <p class="font-semibold">12234235467568</p>
+        <p class="font-semibold">{{ $user->siswa->nisn }}</p>
       </div>
     </div>
   </div>

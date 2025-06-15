@@ -110,39 +110,43 @@ class SiswaController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
-            // Email otomatis: "AF" + 4 angka acak dari NISN
+            // Generate email
             $nisnDigits = str_split($validated['nisn']);
             shuffle($nisnDigits);
             $emailCode = implode('', array_slice($nisnDigits, 0, 4));
             $email = 'AF' . $emailCode . '@gmail.com';
 
-            // Password: NISN
-            // Buat user akun
-            $user = User::create([
-                'name' => $validated['name'],
-                'email' => $email,
-                'password' => Hash::make($validated['nisn']),
-                'role' => 'siswa',
-            ]);
-            
-            // Buat data siswa
-            Siswa::create([
-                'user_id' => $user->id,
+            // 1. Buat dulu data siswa tanpa user_id
+            $siswa = Siswa::create([
                 'name' => $validated['name'],
                 'nisn' => $validated['nisn'],
                 'kelas' => $validated['kelas'],
                 'jurusan' => $validated['jurusan'],
                 'no_hp' => $validated['no_hp'] ?? null,
-                'tahun_ajaran_id' => $validated['tahun_ajaran_id'] ?? null,
+                'tahun_ajaran_id' => $validated['tahun_ajaran_id'],
                 'status_aktif' => $validated['status_aktif'],
             ]);
 
-            // Optional: Simpan info login (email & password) ke session
+            // 2. Buat user dan isi siswa_id
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $email,
+                'password' => Hash::make($validated['nisn']),
+                'role' => 'siswa',
+                'siswa_id' => $siswa->id_siswa,
+            ]);
+
+            // 3. Update user_id di data siswa
+            $siswa->update([
+                'user_id' => $user->id,
+            ]);
+
             session()->flash('generated_email', $email);
         });
 
         return redirect()->route('admin.siswa.index')->with('success', 'Data siswa berhasil ditambahkan.');
     }
+
 
 public function update(Request $request, $id)
 {

@@ -10,19 +10,19 @@
 <div class="h-full justify-center items-center fixed top-0 z-10 hidden md:flex">
   <div class="py-20 px-2 flex bg-white shadow-md w-fit border border-[#efefef] rounded-tr-[4rem] rounded-br-[4rem] group  -translate-x-[60%] hover:translate-x-0 duration-100">
     <div class=" flex-col space-y-5 flex">
-      <a href="/siswa/dashboard" class="text-center">
+      <a href="{{ route('siswa.dashboard') }}" class="text-center">
         <i class="text-xl bi bi-house-door"></i>
         <div class=" text-xs">home</div>
       </a>
-      <a href="/siswa/pembayaran" class="text-center">
+      <a href="{{ route('siswa.pembayaran.index') }}" class="text-center">
         <i class="text-xl bi bi-cash-stack"></i>
         <div class=" text-xs">tagihan</div>
       </a>
-      <a href="/siswa/riwayat-pembayaran" class="text-center">
+      <a href="{{ route('siswa.riwayat.pembayaran') }}" class="text-center">
         <i class="text-xl bi bi-clock-history"></i>
         <div class=" text-xs">riwayat</div>
       </a>
-      <a href="/account" class="text-center">
+      <a href="{{ route('siswa.account') }}" class="text-center">
         <i class="text-xl bi bi-person-circle"></i>
         <div class=" text-xs">account</div>
       </a>

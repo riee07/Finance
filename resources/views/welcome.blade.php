@@ -12,8 +12,8 @@
         <li><a id="navbar" href="#help" class=" border-b-0 border-green-500 hover:border-b-2">bantuan</a></li>
         </ul>
         <div class="hidden md:block">
-        <a href="/login" class=" border-2 hover:bg-[#29d847]  px-4 py-1 rounded-full text-sm">
-            login <i class="bi bi-box-arrow-in-right"></i>
+        <a href="{{ route('login') }}" class=" border-2 hover:bg-[#29d847]  px-4 py-1 rounded-full text-sm">
+            login
         </a>
         </div>
         <div class="md:hidden">
@@ -22,27 +22,32 @@
         </button>
         </div>
     </div>
-    <div x-show="open" class="fixed inset-0 z-50 text-text">
-        <div @click="open = !open" 
-            class="absolute top-0 left-0 h-full w-full bg-black bg-opacity-20 ">
-        </div>
-        <div x-show="open"
-        x-transition:enter=" translate-x-full"
-        x-transition:leave=" translate-x-full" class="absolute top-0 right-0 h-full w-[300px] bg-white shadow-lg  duration-300 ">
-            <div class="p-4 flex flex-col space-y-10 pt-5">
-                <i @click="open = !open"  class="bi bi-x-circle text-right text-2xl cursor-pointer"></i>
-                <div class="space-y-3 flex flex-col">
-                    <a @click="open = !open" id="sidebar" href="#home" class="py-2 px-3 rounded-md bg-primary">home</a>
-                    <a @click="open = !open" id="sidebar" href="#about" class="py-2 px-3 rounded-md bg-none ">about</a>
-                    <a @click="open = !open" id="sidebar" href="#produk" class="py-2 px-3 rounded-md bg-none ">bayar</a>
-                    <a @click="open = !open" id="sidebar" href="#help" class="py-2 px-3 rounded-md bg-none ">bantuan</a>
-                </div>
-                <div class="w-full text-center">
-                    <i class="bi bi-info-circle text-4xl"></i>
-                    <p class="text-sm">mohon login terlebih dahulu untuk bisa membayar</p>
-                </div>
-                <a href="/login" class="bg-green-500 text-white px-4 py-2 rounded-full text-center">login</a>
+</nav> 
+
+<!-- Mobile Sidebar -->
+<div id="mobileSidebarWrapper" class="fixed inset-0 z-50 hidden md:hidden text-text">
+<!-- Klik area (sisa celah) -->
+    <div id="sidebarGap"
+        class="absolute top-0 left-0 h-full w-full bg-black bg-opacity-20">
+    </div>
+
+    <!-- Sidebar box -->
+    <div id="mobileSidebar"
+        class="absolute top-0 right-0 h-full w-[300px] bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-4 flex flex-col space-y-10 pt-5">
+            <i class="bi bi-x-circle text-right text-2xl"></i>
+
+            <div class="space-y-3 flex flex-col">
+                <a href="#" class="bg-green-500 py-2 px-3 rounded-md">home</a>
+                <a href="#" class="hover:bg-green-500 py-2 px-3 rounded-md ">about</a>
+                <a href="#" class="hover:bg-green-500 py-2 px-3 rounded-md ">kontak</a>
+                <a href="#" class="hover:bg-green-500 py-2 px-3 rounded-md ">bantuan</a>
             </div>
+            <div class="w-full text-center">
+                <i class="bi bi-info-circle text-4xl"></i>
+                <p class="text-sm">mohon login terlebih dahulu untuk bisa membayar</p>
+            </div>
+            <a href="{{ route('login') }}" class="bg-green-500 text-white px-4 py-2 rounded-full text-center">login</a>
         </div>
     </div>
 </nav> 
