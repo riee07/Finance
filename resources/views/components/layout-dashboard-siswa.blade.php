@@ -12,14 +12,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            .scrollbar-hide {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
+            .shadowss{
+                box-shadow: -0px -6px 10px 0px #0000001f;
+            }
+            @media (min-width: 1024px) {
+                .shadowss{
+                    box-shadow: 0px 0px 0 0px #fff;
+                }
+            }
         </style>
     </head>
     <body class=" antialiased font-poppins text-text " >

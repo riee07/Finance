@@ -1,9 +1,6 @@
 <x-allLinks></x-allLinks>
-
-
 <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md mt-10">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Pembayaran</h2>
-
     <div class="space-y-2 mb-6">
         <div class="flex justify-between text-sm text-gray-600">
             <span>Tagihan</span>

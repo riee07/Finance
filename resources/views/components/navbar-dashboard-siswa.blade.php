@@ -9,7 +9,7 @@
 </nav>
 <div class="h-full justify-center items-center fixed top-0 z-10 hidden md:flex">
   <div class="py-20 px-2 flex bg-white shadow-md w-fit border border-[#efefef] rounded-tr-[4rem] rounded-br-[4rem] group  -translate-x-[60%] hover:translate-x-0 duration-100">
-    <div class=" flex-col space-y-5 flex">
+    <div class=" flex-col space-y-5 flex z-30">
       <a href="{{ route('siswa.dashboard') }}" class="text-center">
         <i class="text-xl bi bi-house-door"></i>
         <div class=" text-xs">home</div>
@@ -32,16 +32,17 @@
 </div>
     
 <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-[#00000008] z-50 flex justify-around py-2 md:hidden">
-  <a href="/siswa/dashboard">
-    <i class="text-lg bi bi-house-door"></i>
-  </a>
-  <a href="/siswa/pembayaran">
-    <i class="text-lg bi bi-cash-stack"></i>
-  </a>
-  <a href="/siswa/riwayat-pembayaran">
-    <i class="text-lg bi bi-clock-history"></i>
-  </a>
-  <a href="/account">
-    <i class="text-lg bi bi-person-circle"></i>
-  </a>
+      <a href="{{ route('siswa.dashboard') }}" class="text-center">
+        <i class="text-xl bi bi-house-door"></i>
+      </a>
+      <a href="{{ route('siswa.pembayaran.index') }}" class="text-center">
+        <i class="text-xl bi bi-cash-stack"></i>
+      </a>
+      <a href="{{ route('siswa.riwayat.pembayaran') }}" class="text-center">
+        <i class="text-xl bi bi-clock-history"></i>
+      </a>
+      <a href="{{ route('siswa.account') }}" class="text-center">
+        <i class="text-xl bi bi-person-circle"></i>
+      </a>
+
 </nav>

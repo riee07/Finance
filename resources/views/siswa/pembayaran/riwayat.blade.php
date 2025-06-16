@@ -342,7 +342,7 @@
   </div>
 
 </body>
-</html> --}}
+</html>
 
 <x-layout-dashboard-siswa>
    <div class="flex space-x-2 px-8 max-w-4xl xl:max-w-5xl mx-auto mt-10">

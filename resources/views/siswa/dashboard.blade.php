@@ -76,71 +76,66 @@
   
     <!-- Tagihan Slider -->
     <section class="px-4 max-w-5xl mx-auto w-full mt-20">
-      <h2 class="text-gray-500 font-semibold mb-2">Tagihan</h2>
-  
-      <!-- Slider -->
-      <div data-hs-carousel='{
-      "loadingClasses": "opacity-0",
-      "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500",
-      "slidesQty": {
-          "xs": 1,
-          "lg": 3
-      }
-      }' class="relative">
-          <div class="hs-carousel w-full overflow-hidden ">
-              <div class="relative min-h-72 -mx-1">
-              <!-- transition-transform duration-700 -->
-                  <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap opacity-0 transition-transform duration-700">
-                    
-                    @foreach ($detail_tagihans as $detail)
-                        <div class="hs-carousel-slide flex items-center justify-center w-fit">
-                            <div class="rounded-xl px-6 py-3 shadow-md bg-primary text-black relative grid grid-cols-2 h-[160px] w-[300px] ">
-                            <div class="space-y-0 z-10">
-                                <h2 class="text-2xl mt-3">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</h2>
-                                <p class="text-[.5rem]  block">Lorem ipsum dolor, sit amet consectetur adipisicing elit</p>                                
-                            </div>
-                            <div class="flex flex-col justify-end items-end ml-auto w-fit relative">
-                                <i class="bi bi-cash-coin text-[110px] text-[#7BED8A] shadow- absolute -translate-x-10 translate-y-5" style="text-shadow: 0px 5px 2px #00000010;"></i>
-                                <div class="flex items-center justify-center space-x-3 rounded-full bg-white px-3 z-10">
-                                <form method="POST" action="{{ route('siswa.pembayaran.bayar') }}">
-                                @csrf
-                                    <input type="hidden" name="detail_tagihan_id" value="{{ $detail->id_detail_tagihan }}">
-                                    <button type="submit">Cek/Bayar Sekarang</button>
-                                </form>
-                                <i class="bi bi-arrow-right-circle-fill text-xl"></i>
-                                </div>
-                            </div>
-                            </div>
-                        </div>    
-                    @endforeach
-                       
-                      
-  
-                      
-                  </div>
-              </div>
-          </div>
-  
-          <button type="button" class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-11.5 h-full ">
-              <span class="text-2xl" aria-hidden="true">
-              <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m15 18-6-6 6-6"></path>
-              </svg>
-              </span>
-              <span class="sr-only">Previous</span>
-          </button>
-          <button type="button" class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-11.5 h-full ">
-              <span class="sr-only">Next</span>
-              <span class="text-2xl" aria-hidden="true">
-              <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m9 18 6-6-6-6"></path>
-              </svg>
-              </span>
-          </button>
-  
-          <div class="hs-carousel-pagination justify-center absolute bottom-3 start-0 end-0 flex gap-x-2"></div>
-      </div>
-      <!-- End Slider -->
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-gray-500 font-semibold mb-2">Tagihan</h2>
+            <a href="{{ route('siswa.pembayaran.index') }}" class="font-semibold mb-2 underline text-primary text-xs">show all</a>
+        </div>
+<div data-hs-carousel='{
+  "loadingClasses": "opacity-0",
+  "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500",
+  "slidesQty": {
+    "xs": 1,
+    "lg": 3
+    }
+    }' class="relative">
+    <div class="hs-carousel w-full overflow-hidden">
+        <div class="relative mx-1">
+        <!-- transition-transform duration-700 -->
+        <div class="hs-carousel-body flex flex-nowrap opacity-0 transition-transform duration-700">
+            @foreach ($detail_tagihans as $detail)
+            <div class="hs-carousel-slide px-1">
+                <div class="gap-y-20 bg-gradient-to-br w-full from-primary to-secondary rounded-xl p-6 flex justify-between shadow-lg text-black font-sans">
+                    <div class="flex flex-col space-y-20 justify-between">
+                        <h2 class="text-3xl font-semibold">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</h2>
+                        <div class="">
+                            <p class="text-gray-600 font-semibold">harga</p>
+                            <p class="text-xl font-bold text-black">Rp{{ number_format($detail->jumlah_tagihan) }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col space-y-20 justify-between">
+                        <div class=" bg-green-200 text-black text-sm px-4 py-1 rounded-full shadow-md">
+                            rabu, 2 jan, 2025
+                        </div>
+                        <form method="POST" action="{{ route('siswa.pembayaran.bayar') }}">
+                            @csrf
+                                <input type="hidden" name="detail_tagihan_id" value="{{ $detail->id_detail_tagihan }}">
+                                <button type="submit" class=" bg-white text-black text-sm px-5 py-2 rounded-full shadow-md hover:bg-gray-100 transition">
+                                    bayar sekarang
+                                </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="hs-carousel-slide px-1 flex items-center justify-center ">
+                <div class="gap-y-20 bg-gradient-to-br w-full bg-[#00ff2220] rounded-xl h-full p-6 flex justify-center items-center shadow-lg text-black font-sans">
+                    <a href="{{ route('siswa.pembayaran.index') }}" class="font-semibold mb-2 underline text-primary text-xs">show all</a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        </div>
+    </div>
+    <div class="w-full flex items-center justify-center gap-x-20 mt-5">
+        <button type="button" class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none">
+            <i class="bi bi-arrow-left-circle-fill text-2xl"></i>
+        </button>
+        <button type="button" class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none">
+            <i class="bi bi-arrow-right-circle-fill text-2xl"></i>
+        </button>
+    </div>
+
+</div>
+<!-- End Slider -->
     </section>
   
     <!-- Semua Produk -->
@@ -168,4 +163,6 @@
 
       </div>
     </section>
+
+<x-footer></x-footer>
 </x-layout-dashboard-siswa>

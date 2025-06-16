@@ -75,9 +75,7 @@
     </table> --}}
     
             <div class="max-w-4xl xl:max-w-5xl mx-auto t">
-    
-            <!-- Bagian Atas: Total Tagihan + Progress -->
-            <div class="grid md:grid-cols-2 gap-6 items-center  p-4 py-10">
+                <div class="grid md:grid-cols-2 gap-6 items-center  p-4 py-10">
                 <div>
                     <p class="text-xs font-semibold text-gray-600">Total tagihan</p>
                     @foreach ($detail_tagihans as $detail)
@@ -85,42 +83,27 @@
                     @endforeach
                 </div>
             </div>
-    
-    
-            <div class="p-4 bg-white " style="box-shadow: -0px -4px 10px 0px #0000001f;">
-                <!-- Judul -->
-                <div class="flex items-center justify-end  space-x-2">
-                <h2 class="text-xs font-semibold">Tampilkan Tagihan</h2>
-                <button class="transform rotate-180 text-gray-600">
-                    <i class="bi bi-chevron-down"></i>
-                </button>
-                </div>
-    
-                <!-- Daftar Tagihan -->
-                @foreach ($detail_tagihans as $detail)
-                    
+            <div class="p-4 bg-white shadow-black/100 shadowss ">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-    
-                    <!-- Tagihan Item -->
-                    <div class="flex justify-between items-center border-b lg:pr-20 py-3">
-                        <div class="flex items-center gap-4">
-                        <i class="bi bi-cash-stack text-[2rem] text-green-600"></i>
-                        <div>
-                            <p class="font-medium text-sm text-gray-600">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</p>
-                            <p class="font-bold ">{{ formatRupiah($detail->tarifTagihan->jumlah_tarif) }}</p>
-                        </div>
-                        </div>
-                        <div class="flex shadow items-center justify-center space-x-3 rounded-full bg-primary pl-3 pr-2 z-10">
-                            <form method="POST" action="{{ route('siswa.pembayaran.bayar') }}">
+                    @foreach ($detail_tagihans as $detail)
+                        <div class="flex justify-between items-center lg:pr-20 py-3 border-b">
+                            <div class="flex items-center gap-4">
+                            <i class="bi bi-cash-stack text-[2rem] text-green-600"></i>
+                            <div>
+                                <p class="font-medium text-sm text-gray-600">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</p>
+                                <p class="font-bold ">{{ formatRupiah($detail->tarifTagihan->jumlah_tarif) }}</p>
+                            </div>
+                            </div>
+                            <form method="POST" action="{{ route('siswa.pembayaran.bayar') }}" >
                                 @csrf
                                 <input type="hidden" name="detail_tagihan_id" value="{{ $detail->id_detail_tagihan }}">
-                                <button type="submit">Cek/Bayar Sekarang</button>
+                                <button type="submit" class="flex text-xs shadow items-center justify-center rounded-full bg-primary py-1 gap-x-2 px-3 z-10">Bayar Sekarang 
+                                        <i class="bi bi-arrow-right-circle-fill text-xl"></i>
+                                </button>
                             </form>
-                            <i class="bi bi-arrow-right-circle-fill text-md"></i>
                         </div>
-                    </div>
-                    
-                @endforeach
+                        
+                    @endforeach
 
                 </div>
             </div>
