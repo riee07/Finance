@@ -76,7 +76,7 @@ class PembayaranController extends Controller
 
         $snapToken = Snap::getSnapToken($params);
 
-        return view('siswa.pembayaran.bayar', compact('snapToken', 'detail',));
+        return view('siswa.pembayaran.bayar', compact('snapToken', 'detail','siswa'));
     }
 
 

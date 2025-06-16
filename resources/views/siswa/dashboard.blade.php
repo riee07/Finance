@@ -96,7 +96,7 @@
             <div class="hs-carousel-slide px-1">
                 <div class="gap-y-20 bg-gradient-to-br w-full from-primary to-secondary rounded-xl p-6 flex justify-between shadow-lg text-black font-sans">
                     <div class="flex flex-col space-y-20 justify-between">
-                        <h2 class="text-3xl font-semibold">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</h2>
+                        <h2 class="text-2xl font-semibold">{{ $detail->tarifTagihan->jenisTagihan->jenis_tagihan }}</h2>
                         <div class="">
                             <p class="text-gray-600 font-semibold">harga</p>
                             <p class="text-xl font-bold text-black">Rp{{ number_format($detail->jumlah_tagihan) }}</p>
@@ -116,12 +116,12 @@
                     </div>
                 </div>
             </div>
+            @endforeach
             <div class="hs-carousel-slide px-1 flex items-center justify-center ">
                 <div class="gap-y-20 bg-gradient-to-br w-full bg-[#00ff2220] rounded-xl h-full p-6 flex justify-center items-center shadow-lg text-black font-sans">
                     <a href="{{ route('siswa.pembayaran.index') }}" class="font-semibold mb-2 underline text-primary text-xs">show all</a>
                 </div>
             </div>
-            @endforeach
         </div>
         </div>
     </div>
@@ -145,7 +145,6 @@
         <!-- Item -->
         @foreach ($detail_tagihans as $detail)
             
-        @endforeach
         <div class="bg-white py-5 px-3 rounded-xl border border-[#e2e2e2]">
           <div class="w-full text-center rounded-md p-5 bg-primary">
             <i class="bi bi-cash-coin text-[#7BED8A] text-[4rem]" style="text-shadow: 0px 5px 2px #00000010;"></i>
@@ -160,6 +159,7 @@
             </span>
           </div>
         </div>
+        @endforeach
 
       </div>
     </section>
