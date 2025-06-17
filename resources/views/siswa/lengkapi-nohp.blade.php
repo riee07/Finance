@@ -260,13 +260,12 @@
             </div>
 
             <form method="POST" action="{{ route('siswa.lengkapi.nohp.submit') }}">
-                <!-- CSRF Token (placeholder for Laravel) -->
-                <input type="hidden" name="_token" value="csrf-token-placeholder">
+                @csrf
 
                 <div class="form-group">
                     <label for="no_hp" class="form-label">Nomor HP</label>
                     <input 
-                        type="tel" 
+                        type="text" 
                         name="no_hp" 
                         id="no_hp" 
                         class="form-input" 

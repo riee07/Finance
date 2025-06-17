@@ -78,9 +78,7 @@
                 <div class="grid md:grid-cols-2 gap-6 items-center  p-4 py-10">
                 <div>
                     <p class="text-xs font-semibold text-gray-600">Total tagihan</p>
-                    @foreach ($detail_tagihans as $detail)
-                        <h1 class="text-xl font-bold">{{ formatRupiah($detail->tagihan->total_tagihan) }}</h1>
-                    @endforeach
+                        <h1 class="text-xl font-bold">{{ formatRupiah($detail_tagihans->first()->tagihan->total_tagihan) }}</h1>
                 </div>
             </div>
             <div class="p-4 bg-white shadow-black/100 shadowss ">

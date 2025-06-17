@@ -51,6 +51,6 @@ Route::post('/get-token', function (Request $request) {
     }
 });
 
-Route::post('/api/midtrans-callback', [PembayaranController::class, 'callback']);
+Route::post('/midtrans-callback', [PembayaranController::class, 'callback']);
 
 

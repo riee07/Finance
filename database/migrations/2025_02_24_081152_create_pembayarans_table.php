@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('tagihan_id')->references('id_tagihan')->on('tagihans')->onDelete('cascade')->onUpdate('cascade'); 
             $table->date('tanggal_pembayaran');
             $table->decimal('jumlah_pembayaran', 10, 2);
-            $table->enum('metode_pembayaran', ['Transfer', 'Tunai']);
+            $table->string('metode_pembayaran');
             $table->timestamps();
         });
     }
