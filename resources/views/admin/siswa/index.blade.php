@@ -8,8 +8,6 @@
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-semibold text-gray-900">Data Siswa</h1>
             <div class="flex items-center space-x-3">
-                
-                
                 <!-- Action Buttons -->
                 <div class="flex items-center space-x-2">
                 <!-- Naikkan Kelas -->

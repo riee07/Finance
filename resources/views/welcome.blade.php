@@ -62,7 +62,7 @@
       Permudah pembayaran Amalaiah Dengan <span class="text-secondary font-medium">Amaliah Finance</span>
       </h1>
       <p class="text-[10px] md:text-sm text-paragraph mb-6 max-w-screen-sm ">
-      amaliah finance adalah sebuah platform digital untuk mempermudah
+      Amaliah Finance adalah sebuah platform digital untuk mempermudah
       pengelolaan dan pembayaran yang ada di smk amaliah
       </p>
       <a href="/login"
@@ -82,16 +82,12 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 mt-32 gap-6">
     <div>
-      <h3 class="text-xl font-semibold mb-4">Apa itu amaliah finance?</h3>
+      <h3 class="text-xl font-semibold mb-4">Apa itu Amaliah Finance?</h3>
     </div>
     <div class="md:col-span-2 text-gray-600 text-xs md:text-sm leading-relaxed space-y-3">
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto, quibusdam quia voluptatibus illo ducimus iure facilis temporibus sit laboriosam, eius odio voluptates libero vero impedit?
-      </p>
-      <br>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto, quibusdam quia voluptatibus illo ducimus iure facilis temporibus sit laboriosam, eius odio voluptates libero vero impedit?
-      </p>
+        Amaliah-Finance adalah aplikasi pembayaran digital yang dirancang untuk memudahkan transaksi keuangan bagi kalangan pelajar. Dengan antarmuka yang intuitif dan fitur keamanan terkini, Amaliah Finance hadir sebagai solusi tepat untuk menjawab kebutuhan transaksi digital di era modern.      </p>
+     
     </div>
   </div>
 </section>
@@ -99,40 +95,29 @@
   <div class="grid md:grid-cols-3 gap-8 items-start">
     <div>
       <h2 class="text-xl font-semibold mb-4">
-        kenapa amaliah<br />finance?
+        Kenapa Amaliah<br />Finance?
       </h2>
-      <p class="text-gray-600 text-xs md:text-sm leading-relaxed">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
-      </p>
     </div>
     <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div>
         <div class="bg-gray-300 rounded-md h-[300px] mb-4" style="background: url('https://smkamaliah.sch.id/wp-content/uploads/2023/03/Picture11-1170x658.png'); background-position: center; background-size: cover"></div>
-        <h3 class="text-sm font-semibold mb-1">memudahkan pembayaran</h3>
-        <p class="text-gray-600 text-xs md:text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
-        </p>
+        <h3 class="text-sm font-semibold mb-1">Memudahkan Proses Pembayaran</h3>
+        
       </div>
       <div>
         <div class="bg-gray-300 rounded-md h-[300px] mb-4" style="background: url('https://i.pinimg.com/736x/b6/f1/91/b6f1919194d0e28760adb97b1f3ee068.jpg'); background-position: center; background-size: cover"></div>
-        <h3 class="text-sm font-semibold mb-1">memudahkan pembayaran</h3>
-        <p class="text-gray-600 text-xs md:text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
-        </p>
+        <h3 class="text-sm font-semibold mb-1">Proses Pembayaran yang Cepat</h3>
+        
       </div>
       <div>
         <div class="bg-gray-300 rounded-md h-[300px] mb-4" style="background: url('https://i.pinimg.com/736x/95/5d/45/955d4559685f05eaf11a401fe92145ed.jpg'); background-position: center; background-size: cover"></div>
-        <h3 class="text-sm font-semibold mb-1">memudahkan pembayaran</h3>
-        <p class="text-gray-600 text-xs md:text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
-        </p>
+        <h3 class="text-sm font-semibold mb-1">Fleksibilitas</h3>
+        
       </div>
       <div>
         <div class="bg-gray-300 rounded-md h-[300px] mb-4" style="background: url('https://i.pinimg.com/736x/1d/15/d0/1d15d006862c8ca7eae68c8fcf57359f.jpg'); background-position: center; background-size: cover"></div>
-        <h3 class="text-sm font-semibold mb-1">memudahkan pembayaran</h3>
-        <p class="text-gray-600 text-xs md:text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem obcaecati corporis esse doloribus architecto.
-        </p>
+        <h3 class="text-sm font-semibold mb-1">Aksebilitas</h3>
+        
       </div>
     </div>
   </div>
